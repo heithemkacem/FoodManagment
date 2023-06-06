@@ -16,6 +16,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import store from "../_actions/store";
 import { Logout } from "./../_actions/logicHandlerActions/authActions";
 import { useSelector } from "react-redux";
+import Dashboard from "../screens/Dashboard";
 
 const Stack = createStackNavigator();
 const { white, black, primary } = colors;
@@ -26,7 +27,7 @@ const RootStack = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Login"
+        initialRouteName="Dashboard"
         screenOptions={{
           headerLeft: (props) => (
             <HeaderBackButton style={{ backgroundColor: primary }} {...props} />
@@ -48,6 +49,13 @@ const RootStack = () => {
         }}
       >
         <>
+          <Stack.Screen
+            name="Dashboard"
+            component={Dashboard}
+            options={{
+              header: () => null,
+            }}
+          />
           {
             //!if the user is connected show the logout button
           }

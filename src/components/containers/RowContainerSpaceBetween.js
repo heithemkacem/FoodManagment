@@ -6,7 +6,7 @@ const StyledView = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-top: 15px;
+  height: 100%;
   @media (min-width: 375px) {
     flex-direction: column;
   }

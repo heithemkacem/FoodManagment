@@ -4,6 +4,7 @@ import styled from "styled-components/native";
 import { ScreenHeight } from "../shared";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "../colors";
+import { moveTo } from "../../util/moveTo";
 const { white, primary } = colors;
 const Container = styled.View`
   position: relative;
@@ -62,7 +63,8 @@ const ListItem = styled.View`
   justify-content: center;
   margin-right: 13px;
 `;
-const SideHeader = () => {
+
+const SideHeader = ({ navigation }) => {
   const [ListItemsList, setListItemList] = useState([
     {
       name: "shopping",
@@ -70,48 +72,56 @@ const SideHeader = () => {
       size: 40,
       active: false,
       primary: true,
+      moveTo: "Main",
     },
     {
       name: "home",
       color: colors.primary,
       size: 25,
       active: false,
+      moveTo: "Home",
     },
     {
       name: "account-star",
       color: colors.primary,
       size: 25,
       active: false,
+      moveTo: "Account",
     },
     {
       name: "chart-pie",
       color: colors.primary,
       size: 25,
       active: false,
+      moveTo: "Chart",
     },
     {
       name: "alarm",
       color: colors.primary,
       size: 25,
       active: false,
+      moveTo: "Notifications",
     },
     {
       name: "bookmark",
       color: colors.primary,
       size: 25,
       active: false,
+      moveTo: "Bookmark",
     },
     {
       name: "account",
       color: colors.primary,
       size: 25,
       active: false,
+      moveTo: "Account",
     },
     {
       name: "archive-settings",
       color: colors.primary,
       size: 25,
       active: false,
+      moveTo: "Settings",
     },
   ]);
   return (
@@ -129,6 +139,8 @@ const SideHeader = () => {
                       if (index === i) {
                         item.active = true;
                         item.color = colors.white;
+                        item.moveTo?.length > 0 &&
+                          moveTo(navigation, item.moveTo);
                       } else {
                         item.active = false;
                         item.color = colors.primary;
@@ -154,7 +166,7 @@ const SideHeader = () => {
           <ListItem>
             <MaterialCommunityIcons
               name="logout"
-              size={40}
+              size={30}
               color={colors.primary}
             />
           </ListItem>

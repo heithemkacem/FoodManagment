@@ -16,7 +16,9 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import store from "../_actions/store";
 import { Logout } from "./../_actions/logicHandlerActions/authActions";
 import { useSelector } from "react-redux";
-import Dashboard from "../screens/Dashboard";
+import Home from "../screens/DashboardScreens/Home";
+import Notifications from "../screens/DashboardScreens/Notifications";
+import Settings from "../screens/DashboardScreens/Settings";
 
 const Stack = createStackNavigator();
 const { white, black, primary } = colors;
@@ -27,7 +29,7 @@ const RootStack = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Dashboard"
+        initialRouteName="Home"
         screenOptions={{
           headerLeft: (props) => (
             <HeaderBackButton style={{ backgroundColor: primary }} {...props} />
@@ -50,8 +52,22 @@ const RootStack = () => {
       >
         <>
           <Stack.Screen
-            name="Dashboard"
-            component={Dashboard}
+            name="Home"
+            component={Home}
+            options={{
+              header: () => null,
+            }}
+          />
+          <Stack.Screen
+            name="Notifications"
+            component={Notifications}
+            options={{
+              header: () => null,
+            }}
+          />
+          <Stack.Screen
+            name="Settings"
+            component={Settings}
             options={{
               header: () => null,
             }}

@@ -7,7 +7,11 @@ const { black } = colors;
 const MainContainer = (props) => {
   return (
     <SafeAreaView
-      style={{ flex: 1, padding: 25, backgroundColor: black }}
+      style={{
+        flex: 1,
+        padding: 25,
+        backgroundColor: props.color ? props.color : black,
+      }}
       {...props}
     >
       {props.children}

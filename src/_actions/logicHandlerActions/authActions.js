@@ -183,3 +183,9 @@ export const setUser = (decode) => ({
   type: SET_USER,
   payload: decode,
 });
+//!Set SideBar Menu
+export const setSideBarMenu = (decode) => ({
+  //?Set the user in the store
+  type: SET_SIDE_BAR_MENU,
+  payload: decode,
+});

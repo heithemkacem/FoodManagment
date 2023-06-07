@@ -24,6 +24,7 @@ const StyledView = styled.View`
   height: 10%;
   background-color: ${colors.lightblack};
   width: 100%;
+  padding: 20px;
 `;
 const MainContainer = styled.View`
   height: 90%;
@@ -33,9 +34,9 @@ const MainContainer = styled.View`
 const MainView = styled.View`
   height: 100%;
   width: 100%;
-  background-color: red;
+  background-color: ${colors.black}};
   border-radius: 10px;
-  padding: 20px;
+  padding: 40px;
 `;
 
 const Layout = ({ navigation, headerTitle, date, children }) => {

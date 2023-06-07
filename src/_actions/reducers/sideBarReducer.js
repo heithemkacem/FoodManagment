@@ -7,7 +7,7 @@ const initialState = {
       name: "shopping",
       color: colors.primary,
       size: 40,
-      active: true,
+      active: false,
       primary: true,
       moveTo: "Main",
     },
@@ -21,9 +21,9 @@ const initialState = {
 
     {
       name: "alarm",
-      color: colors.primary,
+      color: colors.white,
       size: 25,
-      active: false,
+      active: true,
       moveTo: "Notifications",
     },
 

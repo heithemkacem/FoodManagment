@@ -16,6 +16,7 @@ const Container = styled.View`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  border-radius: 25px;
 `;
 const ListContainer = styled.View`
   display: flex;
@@ -47,12 +48,12 @@ const ListItemContainer = styled.Pressable`
 const ListItem = styled.View`
   ${(props) => {
     return props.primary
-      ? `background-color: #EA906C; border-radius: 10px;  `
+      ? `background-color: #3b2a2a; border-radius: 10px;  `
       : null;
   }}
   ${(props) => {
     return !props.primary && props.active
-      ? `background-color: #EA906C; border-radius: 10px; margin-right: 13px;`
+      ? `background-color: ${colors.primary}; border-radius: 10px; margin-right: 13px;`
       : null;
   }}
   width: 60px;

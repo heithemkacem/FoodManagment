@@ -51,7 +51,7 @@ const SearchContainer = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: ${colors.black};
+  background-color: #232530;
   height: 40px;
   width: 100%;
 `;

@@ -1,5 +1,5 @@
 import { SET_SIDE_BAR_MENU } from "../types";
-
+import { colors } from "./../../components/colors";
 //?the initial state of our state management system
 const initialState = {
   SideBarState: [
@@ -15,7 +15,7 @@ const initialState = {
       name: "home",
       color: colors.primary,
       size: 25,
-      active: false,
+      active: true,
       moveTo: "Home",
     },
     {

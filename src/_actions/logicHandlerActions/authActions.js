@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SET_USER } from "../types";
+import { SET_USER, SET_SIDE_BAR_MENU } from "../types";
 import jwt_decode from "jwt-decode";
 import { setAuth } from "../../util/setAuth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -184,8 +184,8 @@ export const setUser = (decode) => ({
   payload: decode,
 });
 //!Set SideBar Menu
-export const setSideBarMenu = (decode) => ({
+export const setSideBarMenu = (menu) => ({
   //?Set the user in the store
   type: SET_SIDE_BAR_MENU,
-  payload: decode,
+  payload: menu,
 });

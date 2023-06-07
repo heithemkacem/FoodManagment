@@ -5,6 +5,8 @@ import { ScreenHeight } from "../shared";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "../colors";
 import { moveTo } from "../../util/moveTo";
+import { useDispatch, useSelector } from "react-redux";
+import { setSideBarMenu } from "../../_actions/logicHandlerActions/authActions";
 const { white, primary } = colors;
 const Container = styled.View`
   background-color: ${colors.black};
@@ -63,89 +65,31 @@ const ListItem = styled.View`
 `;
 
 const SideHeader = ({ navigation }) => {
-  const [ListItemsList, setListItemList] = useState([
-    {
-      name: "shopping",
-      color: colors.primary,
-      size: 40,
-      active: false,
-      primary: true,
-      moveTo: "Main",
-    },
-    {
-      name: "home",
-      color: colors.primary,
-      size: 25,
-      active: false,
-      moveTo: "Home",
-    },
-    {
-      name: "account-star",
-      color: colors.primary,
-      size: 25,
-      active: false,
-      moveTo: "Account",
-    },
-    {
-      name: "chart-pie",
-      color: colors.primary,
-      size: 25,
-      active: false,
-      moveTo: "Chart",
-    },
-    {
-      name: "alarm",
-      color: colors.primary,
-      size: 25,
-      active: false,
-      moveTo: "Notifications",
-    },
-    {
-      name: "bookmark",
-      color: colors.primary,
-      size: 25,
-      active: false,
-      moveTo: "Bookmark",
-    },
-    {
-      name: "account",
-      color: colors.primary,
-      size: 25,
-      active: false,
-      moveTo: "Account",
-    },
-    {
-      name: "archive-settings",
-      color: colors.primary,
-      size: 25,
-      active: false,
-      moveTo: "Settings",
-    },
-  ]);
+  const dispatch = useDispatch();
+  const ListItemsList = useSelector((state) => state.sidebar.SideBarState);
+  console.log("ListItemsList", ListItemsList);
   return (
     <Container>
       <ListContainer>
-        {ListItemsList.map((item, index) => {
+        {ListItemsList?.map((item, index) => {
           return (
             <ListItemContainer key={index} active={item.active}>
               <ListItem
                 active={item.active}
                 primary={item.primary ? true : false}
                 onClick={() => {
-                  setListItemList(
-                    ListItemsList.map((item, i) => {
-                      if (index === i) {
-                        item.active = true;
-                        item.color = colors.white;
-                        item.moveTo?.length > 0 &&
-                          moveTo(navigation, item.moveTo);
-                      } else {
-                        item.active = false;
-                        item.color = colors.primary;
-                      }
-                      return item;
-                    })
-                  );
+                  ListItemsList.map((item, i) => {
+                    if (index === i) {
+                      item.active = true;
+                      item.color = colors.white;
+                      item.moveTo?.length > 0 &&
+                        moveTo(navigation, item.moveTo);
+                    } else {
+                      item.active = false;
+                      item.color = colors.primary;
+                    }
+                    dispatch(setSideBarMenu(ListItemsList));
+                  });
                 }}
                 activeClicked={item.activeClicked}
               >

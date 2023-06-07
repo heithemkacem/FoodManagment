@@ -76,7 +76,7 @@ const Header = ({ headerTitle, date }) => {
             <View style={styles.vwSearch}>
               <MaterialCommunityIcons
                 name="search-web"
-                size={25}
+                size={20}
                 color={colors.white}
               />
             </View>
@@ -94,7 +94,7 @@ const Header = ({ headerTitle, date }) => {
               >
                 <MaterialCommunityIcons
                   name="delete-sweep-outline"
-                  size={25}
+                  size={20}
                   color={colors.white}
                 />
               </TouchableOpacity>

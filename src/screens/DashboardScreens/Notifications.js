@@ -37,7 +37,7 @@ const Notifications = ({ navigation }) => {
           <TouchableOpacity className="border border-lightGray p-2 flex-row justify-between items-center w-40">
             <MaterialCommunityIcons
               name="book-settings"
-              size={24}
+              size={17}
               color="white"
             />
             <Text className="font-bold text-md text-white">Filter Order</Text>

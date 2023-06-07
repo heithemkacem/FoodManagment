@@ -1,14 +1,19 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Animated, { FadeInRight, FadeOutRight } from "react-native-reanimated";
 
 const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
   return (
-    <View className="rounded-2xl absolute top-0 bottom-0 left-0 right-0 z-20 p-4 bg-white">
+    <Animated.View
+      entering={FadeInRight.duration(300)}
+      exiting={FadeOutRight.duration(300)}
+      className="rounded-2xl absolute top-0 bottom-0 left-0 right-0 p-4 bg-white"
+    >
       <View className="flex-row items-center justify-between">
         <Text className="text-2xl font-bold">Orders</Text>
         <TouchableOpacity
-          activeOpacity={0.8}
+          activeOpacity={0.9}
           onPress={() => setIsOrdersViewOpen(false)}
         >
           <MaterialCommunityIcons name="close" size={24} color="black" />
@@ -32,7 +37,7 @@ const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
         </Text>
       </View>
       <TouchableOpacity
-        activeOpacity={0.8}
+        activeOpacity={0.9}
         className="bg-primary mt-4 rounded-lg"
         onPress={() => {
           setIsOrdersViewOpen(false);
@@ -43,7 +48,7 @@ const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
           Checkout
         </Text>
       </TouchableOpacity>
-    </View>
+    </Animated.View>
   );
 };
 

@@ -7,10 +7,8 @@ import { colors } from "../colors";
 import { moveTo } from "../../util/moveTo";
 const { white, primary } = colors;
 const Container = styled.View`
-  position: relative;
-  top: 0;
   background-color: ${colors.black};
-  width: ${ScreenHeight * 0.1}px;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -38,7 +36,7 @@ const ListItemContainer = styled.Pressable`
     return props.active ? `background-color: ${colors.lightblack}; ` : null;
   }}
   height: 80px;
-  width: ${ScreenHeight * 0.1 - 13}px;
+  width: 100%;
   margin-left: 13px;
   display: flex;
   justify-content: center;

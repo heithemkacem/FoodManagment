@@ -59,13 +59,6 @@ const Home = ({ navigation }) => {
 
   return (
     <Layout navigation={navigation} headerTitle="RiverSide Reza" date={true}>
-      {isOrdersViewOpen && (
-        <OrdersView
-          orders={orders}
-          setOrders={setOrders}
-          setIsOrdersViewOpen={setIsOrdersViewOpen}
-        />
-      )}
       <DishCategories
         selectedCategoryId={selectedCategoryId}
         setSelectedCategoryId={setSelectedCategoryId}
@@ -105,6 +98,7 @@ const Home = ({ navigation }) => {
               {dish.numberAvailable} available
             </Text>
             <TouchableOpacity
+              activeOpacity={0.9}
               style={{
                 shadowColor: "rgba(192, 132, 252,0.6)",
                 shadowOffset: {
@@ -124,6 +118,13 @@ const Home = ({ navigation }) => {
           </View>
         ))}
       </View>
+      {isOrdersViewOpen && (
+        <OrdersView
+          orders={orders}
+          setOrders={setOrders}
+          setIsOrdersViewOpen={setIsOrdersViewOpen}
+        />
+      )}
     </Layout>
   );
 };

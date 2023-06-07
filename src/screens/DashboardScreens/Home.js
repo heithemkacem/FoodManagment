@@ -12,28 +12,32 @@ const Home = ({ navigation }) => {
       id: 1,
       name: "Burger",
       price: 10,
-      image: "https://picsum.photos/200/300",
+      image:
+        "https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGlzaHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80",
       numberAvailable: 10,
     },
     {
       id: 2,
       name: "Pizza",
       price: 20,
-      image: "https://picsum.photos/200/300",
+      image:
+        "https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGlzaHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80",
       numberAvailable: 10,
     },
     {
       id: 3,
       name: "Pasta",
       price: 30,
-      image: "https://picsum.photos/200/300",
+      image:
+        "https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGlzaHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80",
       numberAvailable: 10,
     },
     {
       id: 4,
       name: "Salad",
       price: 40,
-      image: "https://picsum.photos/200/300",
+      image:
+        "https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGlzaHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80",
       numberAvailable: 10,
     },
   ]);

@@ -11,8 +11,9 @@ const DishCategories = ({ selectedCategoryId, setSelectedCategoryId }) => {
   ]);
   return (
     <View className="border-gray-100/10 flex-row w-full pb-3 space-x-8 border-b">
-      {categories.map((category) => (
+      {categories.map((category, i) => (
         <TouchableOpacity
+          key={i}
           activeOpacity={0.8}
           onPress={() => setSelectedCategoryId(category.id)}
         >

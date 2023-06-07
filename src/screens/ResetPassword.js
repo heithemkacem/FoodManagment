@@ -25,7 +25,7 @@ const ResetPassword = ({ navigation, route }) => {
             marginTop: 25,
           }}
         >
-          Verify your email
+          Change your password
         </BigText>
 
         <Formik

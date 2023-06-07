@@ -19,6 +19,7 @@ import { useSelector } from "react-redux";
 import Home from "../screens/DashboardScreens/Home";
 import Notifications from "../screens/DashboardScreens/Notifications";
 import Settings from "../screens/DashboardScreens/Settings";
+import Main from "../screens/DashboardScreens/Main";
 
 const Stack = createStackNavigator();
 const { white, black, primary } = colors;
@@ -29,7 +30,7 @@ const RootStack = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Home"
+        initialRouteName="Main"
         screenOptions={{
           headerLeft: (props) => (
             <HeaderBackButton style={{ backgroundColor: primary }} {...props} />
@@ -50,6 +51,13 @@ const RootStack = () => {
         }}
       >
         <>
+          <Stack.Screen
+            name="Main"
+            component={Main}
+            options={{
+              header: () => null,
+            }}
+          />
           <Stack.Screen
             name="Home"
             component={Home}

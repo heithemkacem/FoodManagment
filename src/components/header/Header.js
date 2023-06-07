@@ -106,12 +106,10 @@ const styles = StyleSheet.create({
   },
   textInput: {
     // backgroundColor: 'green',
-    border: "none",
     flex: 1,
     width: "100%",
-    outline: "none",
     color: colors.lightGray,
-    border: "none",
+    outlineStyle: "none",
   },
 
   vwSearch: {

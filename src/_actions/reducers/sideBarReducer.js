@@ -7,7 +7,7 @@ const initialState = {
       name: "shopping",
       color: colors.primary,
       size: 40,
-      active: false,
+      active: true,
       primary: true,
       moveTo: "Main",
     },
@@ -15,23 +15,10 @@ const initialState = {
       name: "home",
       color: colors.primary,
       size: 25,
-      active: true,
+      active: false,
       moveTo: "Home",
     },
-    {
-      name: "account-star",
-      color: colors.primary,
-      size: 25,
-      active: false,
-      moveTo: "Account",
-    },
-    {
-      name: "chart-pie",
-      color: colors.primary,
-      size: 25,
-      active: false,
-      moveTo: "Chart",
-    },
+
     {
       name: "alarm",
       color: colors.primary,
@@ -39,20 +26,7 @@ const initialState = {
       active: false,
       moveTo: "Notifications",
     },
-    {
-      name: "bookmark",
-      color: colors.primary,
-      size: 25,
-      active: false,
-      moveTo: "Bookmark",
-    },
-    {
-      name: "account",
-      color: colors.primary,
-      size: 25,
-      active: false,
-      moveTo: "Account",
-    },
+
     {
       name: "archive-settings",
       color: colors.primary,

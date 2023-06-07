@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     color: colors.lightGray,
-    outlineStyle: "none",
+    //outlineStyle: "none",
   },
 
   vwSearch: {

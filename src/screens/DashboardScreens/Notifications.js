@@ -1,7 +1,8 @@
 import React from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import Layout from "../../components/layout/Layout";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import FilterSelect from "../../components/buttons/FilterSelect";
+
 const CustomerList = [
   {
     id: 1,
@@ -34,14 +35,7 @@ const Notifications = ({ navigation }) => {
       <View>
         <View className="flex-row justify-between items-center">
           <Text className="font-bold text-xl text-white">Orders</Text>
-          <TouchableOpacity className="border border-lightGray p-2 flex-row justify-between items-center w-40">
-            <MaterialCommunityIcons
-              name="book-settings"
-              size={17}
-              color="white"
-            />
-            <Text className="font-bold text-md text-white">Filter Order</Text>
-          </TouchableOpacity>
+          <FilterSelect text="Filter Order" icon="book-settings" />
         </View>
         <View className="flex-row justify-between items-center border-b-2 border-lightGray mt-6 pb-3 mb-6">
           <Text className="font-bold text-lg text-white">Customer</Text>

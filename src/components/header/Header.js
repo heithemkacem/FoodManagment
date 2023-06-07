@@ -26,6 +26,7 @@ const TextContainer = styled.View`
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
+  width: 75%;
 `;
 const TextTitle = styled.Text`
   font-size: 21px;
@@ -40,10 +41,19 @@ const DateContainer = styled.Text`
 `;
 const SearchBarContainer = styled.View`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
+  width: 25%;
+`;
+const SearchContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: ${colors.black};
+  height: 40px;
+  width: 100%;
 `;
 const Header = ({ headerTitle, date }) => {
   const [value, setValue] = React.useState("");
@@ -63,7 +73,7 @@ const Header = ({ headerTitle, date }) => {
       </TextContainer>
       <SearchBarContainer>
         <View style={styles.container}>
-          <View style={styles.searchContainer}>
+          <SearchContainer>
             <View style={styles.vwSearch}>
               <MaterialCommunityIcons
                 name="search-web"
@@ -92,7 +102,7 @@ const Header = ({ headerTitle, date }) => {
             ) : (
               <View style={styles.vwClear} />
             )}
-          </View>
+          </SearchContainer>
         </View>
       </SearchBarContainer>
     </Container>
@@ -118,15 +128,10 @@ const styles = StyleSheet.create({
     // width: 40,
     // backgroundColor: 'red'
   },
-  searchContainer: {
-    backgroundColor: colors.black,
-    width: "90%",
-    height: 40,
-    flexDirection: "row",
-  },
   container: {
     alignItems: "center",
-    // height: '100%', width: '100%'
+    height: "100%",
+    width: "100%",
   },
 });
 export default Header;

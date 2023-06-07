@@ -34,12 +34,12 @@ const MainContainer = styled.View`
 const MainView = styled.View`
   height: 100%;
   width: 100%;
-  background-color: ${colors.black}};
+  background-color: ${colors.black};
   border-radius: 10px;
   padding: 40px;
 `;
 
-const Layout = ({ navigation, headerTitle, date, children }) => {
+const Layout = ({ navigation, headerTitle, date, children, style }) => {
   return (
     <ScreenContainer>
       <SideBarContainer>

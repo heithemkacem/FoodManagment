@@ -45,7 +45,7 @@ const ListItemContainer = styled.Pressable`
   justify-content: center;
   align-items: center;
 `;
-const ListItem = styled.View`
+const ListItem = styled.Pressable`
   ${(props) => {
     return props.primary
       ? `background-color: #3b2a2a; border-radius: 10px;  `
@@ -75,17 +75,17 @@ const SideHeader = ({ navigation }) => {
               <ListItem
                 active={item.active}
                 primary={item.primary ? true : false}
-                onClick={() => {
+                onPress={() => {
                   ListItemsList.map((item, i) => {
                     if (index === i) {
                       item.active = true;
                       item.color = colors.white;
-                      item.moveTo?.length > 0 &&
-                        moveTo(navigation, item.moveTo);
+                      moveTo(navigation, item.moveTo);
                     } else {
                       item.active = false;
                       item.color = colors.primary;
                     }
+                    console.log(ListItemsList);
                     dispatch(setSideBarMenu(ListItemsList));
                   });
                 }}

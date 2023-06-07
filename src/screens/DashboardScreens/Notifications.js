@@ -36,7 +36,7 @@ const Notifications = ({ navigation }) => {
           <Text className="font-bold text-xl text-white">Orders</Text>
           <TouchableOpacity className="border border-lightGray p-2 flex-row justify-between items-center w-40">
             <MaterialCommunityIcons
-              name="settings-outline"
+              name="book-settings"
               size={24}
               color="white"
             />

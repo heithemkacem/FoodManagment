@@ -59,7 +59,6 @@ const Header = ({ headerTitle, date }) => {
   const [value, setValue] = React.useState("");
   const handleOnChangeText = (text) => {
     setValue(text);
-    console.log(text);
     //Filter the data here
   };
 

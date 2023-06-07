@@ -51,6 +51,7 @@ const RootStack = () => {
           headerRightContainerStyle: {
             paddingRight: 25,
           },
+          animationEnabled: false,
         }}
       >
         <>

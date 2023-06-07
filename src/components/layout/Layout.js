@@ -33,7 +33,6 @@ const MainContainer = styled.View`
 const MainView = styled.View`
   height: 100%;
   width: 100%;
-  background-color: red;
   border-radius: 10px;
   padding: 20px;
 `;

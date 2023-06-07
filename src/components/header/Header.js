@@ -105,7 +105,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   textInput: {
-    // backgroundColor: 'green',
     flex: 1,
     width: "100%",
     color: colors.lightGray,

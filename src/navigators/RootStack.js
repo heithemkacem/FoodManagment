@@ -22,7 +22,7 @@ import Settings from "../screens/DashboardScreens/Settings";
 import Main from "../screens/DashboardScreens/Main";
 
 const Stack = createStackNavigator();
-const { white, black, primary } = colors;
+const { white, black, primary, lightblack } = colors;
 
 const RootStack = () => {
   const isConnected = useSelector((state) => state.auth.isConnected);
@@ -30,14 +30,17 @@ const RootStack = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Main"
+        initialRouteName="Notifications"
         screenOptions={{
           headerLeft: (props) => (
             <HeaderBackButton style={{ backgroundColor: primary }} {...props} />
           ),
+          cardStyle: {
+            backgroundColor: lightblack,
+          },
           headerTintColor: black,
           headerStyle: {
-            backgroundColor: black,
+            backgroundColor: lightblack,
             shadowColor: "transparent",
             height: 100,
             elevation: 0,
@@ -48,6 +51,7 @@ const RootStack = () => {
           headerRightContainerStyle: {
             paddingRight: 25,
           },
+          animationEnabled: false,
         }}
       >
         <>

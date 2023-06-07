@@ -1,12 +1,11 @@
 //!All the colors of our app
 export const colors = {
-  primary: "#f75200",
+  primary: "#ea736d",
   secondary: "#808080",
-  lightGray: "#6B7280",
+  lightGray: "#8d9195",
   white: "#FFFFFF",
-  black: "#343434",
-  lightblack: "#36454F",
+  black: "#1f1d2b",
+  lightblack: "#252836",
   success: "#00b200",
   fail: "#e50000",
-  avearge: "#FDA50F",
 };

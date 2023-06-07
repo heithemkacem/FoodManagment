@@ -51,7 +51,7 @@ const SearchContainer = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: ${colors.black};
+  background-color: #232530;
   height: 40px;
   width: 100%;
 `;
@@ -59,7 +59,6 @@ const Header = ({ headerTitle, date }) => {
   const [value, setValue] = React.useState("");
   const handleOnChangeText = (text) => {
     setValue(text);
-    console.log(text);
     //Filter the data here
   };
 
@@ -77,7 +76,7 @@ const Header = ({ headerTitle, date }) => {
             <View style={styles.vwSearch}>
               <MaterialCommunityIcons
                 name="search-web"
-                size={25}
+                size={20}
                 color={colors.white}
               />
             </View>
@@ -95,7 +94,7 @@ const Header = ({ headerTitle, date }) => {
               >
                 <MaterialCommunityIcons
                   name="delete-sweep-outline"
-                  size={25}
+                  size={20}
                   color={colors.white}
                 />
               </TouchableOpacity>

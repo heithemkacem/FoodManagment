@@ -16,6 +16,7 @@ const Container = styled.View`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  border-radius: 25px;
 `;
 const ListContainer = styled.View`
   display: flex;
@@ -44,15 +45,15 @@ const ListItemContainer = styled.Pressable`
   justify-content: center;
   align-items: center;
 `;
-const ListItem = styled.View`
+const ListItem = styled.Pressable`
   ${(props) => {
     return props.primary
-      ? `background-color: #EA906C; border-radius: 10px;  `
+      ? `background-color: #3b2a2a; border-radius: 10px;  `
       : null;
   }}
   ${(props) => {
     return !props.primary && props.active
-      ? `background-color: #EA906C; border-radius: 10px; margin-right: 13px;`
+      ? `background-color: ${colors.primary}; border-radius: 10px; margin-right: 13px;`
       : null;
   }}
   width: 60px;
@@ -74,17 +75,17 @@ const SideHeader = ({ navigation }) => {
               <ListItem
                 active={item.active}
                 primary={item.primary ? true : false}
-                onClick={() => {
+                onPress={() => {
                   ListItemsList.map((item, i) => {
                     if (index === i) {
                       item.active = true;
                       item.color = colors.white;
-                      item.moveTo?.length > 0 &&
-                        moveTo(navigation, item.moveTo);
+                      moveTo(navigation, item.moveTo);
                     } else {
                       item.active = false;
                       item.color = colors.primary;
                     }
+                    console.log(ListItemsList);
                     dispatch(setSideBarMenu(ListItemsList));
                   });
                 }}

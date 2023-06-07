@@ -66,7 +66,7 @@ const StyledTextInput = ({ icon, label, isPassword, errors, ...props }) => {
         style={{
           backgroundColor: lightblack,
           ...props?.style,
-          borderRadius: "20px",
+          borderRadius: 20,
           borderColor: errors ? "red" : secondary,
         }}
         secureTextEntry={isPassword && hidePassword}

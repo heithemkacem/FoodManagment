@@ -30,7 +30,7 @@ const RootStack = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Notifications"
+        initialRouteName="Home"
         screenOptions={{
           headerLeft: (props) => (
             <HeaderBackButton style={{ backgroundColor: primary }} {...props} />

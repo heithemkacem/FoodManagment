@@ -28,13 +28,12 @@ const StyledView = styled.View`
 const MainContainer = styled.View`
   height: 90%;
   width: 100%;
-  background-color: red;
   padding: 20px;
 `;
 const MainView = styled.View`
   height: 100%;
   width: 100%;
-  background-color: ${colors.white};
+  background-color: ${colors.lightblack};
   border-radius: 10px;
   padding: 20px;
 `;

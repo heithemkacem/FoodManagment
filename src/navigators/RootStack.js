@@ -37,7 +37,6 @@ const RootStack = () => {
           headerTintColor: black,
           headerStyle: {
             backgroundColor: black,
-            borderBottomWidth: 0,
             shadowColor: "transparent",
             height: 100,
             elevation: 0,

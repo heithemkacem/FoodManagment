@@ -43,8 +43,6 @@ const ListItemContainer = styled.Pressable`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top-left-radius: 30%;
-  border-bottom-left-radius: 30%;
 `;
 const ListItem = styled.View`
   ${(props) => {
@@ -67,7 +65,6 @@ const ListItem = styled.View`
 const SideHeader = ({ navigation }) => {
   const dispatch = useDispatch();
   const ListItemsList = useSelector((state) => state.sidebar.SideBarState);
-  console.log("ListItemsList", ListItemsList);
   return (
     <Container>
       <ListContainer>

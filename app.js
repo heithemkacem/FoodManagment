@@ -4,11 +4,13 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
 
 //Import Routes
 const Client = require('./routes/client');
 const Categories = require('./routes/categories');
 const tables = require('./routes/table');
+const dish = require('./routes/dish');
 
 // CONNECT DATABASE
 mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
@@ -20,6 +22,7 @@ mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopolo
 //Middlewares
 app.use(morgan('dev'));
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 
 //Routes Middlewares
@@ -29,6 +32,7 @@ app.get('/', (req, res) => {
 app.use("/api", Client);
 app.use("/api", Categories);
 app.use("/api", tables);
+app.use("/api", dish);
 
 
 

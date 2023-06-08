@@ -43,7 +43,7 @@ exports.login = async(req, res) => {
             return next(new ErrorResponse('Invalid credentials', 400))
         }
 
-        return res.status(200).json({ success: true, user });
+        generateToken(user, 200, res);
 
 
     } catch (error) {
@@ -51,3 +51,24 @@ exports.login = async(req, res) => {
         return res.status(400).json({ success: false, message: error.message });
     }
 };
+
+
+const generateToken = async(user, statusCode, res) => {
+
+    const token = await user.jwtGenerateToken();
+
+    res
+        .status(statusCode)
+        .cookie('token', token)
+        .json({ success: true, token })
+}
+
+
+//LOG OUT USER
+exports.logout = (req, res, next) => {
+    res.clearCookie('token');
+    res.status(200).json({
+        success: true,
+        message: "Logged out"
+    })
+}

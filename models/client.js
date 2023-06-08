@@ -1,6 +1,7 @@
 // const Sequelize = require("sequelize");
 const mongoose = require("mongoose");
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const ClientSchema = new mongoose.Schema({
     nom_prenom: {
@@ -91,4 +92,10 @@ ClientSchema.methods.comparePassword = async function(yourPassword) {
     return await bcrypt.compare(yourPassword, this.password);
 }
 
+// get the token
+ClientSchema.methods.jwtGenerateToken = function() {
+    return jwt.sign({ id: this.id }, process.env.JWT_SECRET, {
+        expiresIn: 3600
+    });
+}
 module.exports = mongoose.model("qr_clients", ClientSchema);

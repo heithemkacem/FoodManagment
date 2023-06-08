@@ -31,7 +31,12 @@ const CustomerList = [
 ];
 const Notifications = ({ navigation }) => {
   return (
-    <Layout navigation={navigation} headerTitle="Notfocation " date={true}>
+    <Layout
+      navigation={navigation}
+      headerTitle="Notfocation "
+      date={true}
+      searchBar={true}
+    >
       <View>
         <View className="flex-row justify-between items-center">
           <Text className="font-bold text-xl text-white">Orders</Text>

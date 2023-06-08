@@ -59,7 +59,12 @@ const Home = ({ navigation }) => {
 
   return (
     <>
-      <Layout navigation={navigation} headerTitle="RiverSide Reza" date={true}>
+      <Layout
+        navigation={navigation}
+        headerTitle="RiverSide Reza"
+        date={true}
+        searchBar={true}
+      >
         <DishCategories
           selectedCategoryId={selectedCategoryId}
           setSelectedCategoryId={setSelectedCategoryId}

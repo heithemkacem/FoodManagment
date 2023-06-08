@@ -30,7 +30,7 @@ const RootStack = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Login"
+        initialRouteName="Settings"
         screenOptions={{
           headerLeft: (props) => (
             <Pressable

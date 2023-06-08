@@ -39,7 +39,14 @@ const MainView = styled.View`
   padding: 40px;
 `;
 
-const Layout = ({ navigation, headerTitle, date, children, style }) => {
+const Layout = ({
+  navigation,
+  headerTitle,
+  date,
+  children,
+  searchBar,
+  style,
+}) => {
   return (
     <ScreenContainer>
       <SideBarContainer>
@@ -47,7 +54,7 @@ const Layout = ({ navigation, headerTitle, date, children, style }) => {
       </SideBarContainer>
       <Container>
         <StyledView>
-          <Header headerTitle={headerTitle} date={date} />
+          <Header headerTitle={headerTitle} date={date} searchBar={searchBar} />
         </StyledView>
         <MainContainer>
           <MainView>{children}</MainView>

@@ -6,6 +6,7 @@ export const colors = {
   white: "#FFFFFF",
   black: "#1f1d2b",
   lightblack: "#252836",
+  input: "#2d303e",
   success: "#00b200",
   fail: "#e50000",
 };

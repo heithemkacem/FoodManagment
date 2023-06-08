@@ -9,7 +9,7 @@ const DishCategories = ({
   const [categories, setCategories] = useState([
     { id: 456456, name: "Burger" },
     { id: 456456456, name: "Pizza" },
-    { id: 45645645645645645, name: "Pasta" },
+    { id: 2364561, name: "Pasta" },
     { id: 78787544, name: "Salad" },
     { id: 54545454, name: "Dessert" },
   ]);

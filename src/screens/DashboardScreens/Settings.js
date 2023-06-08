@@ -77,8 +77,8 @@ const Settings = ({ navigation }) => {
 
   return (
     <Layout navigation={navigation} headerTitle="Settings" searchBar={false}>
-      <View className=" flex-row h-full gap-8 bg-black">
-        <View className="bg-lightblack max-w-[200px]">
+      <View className=" flex-row gap-8  bg-black">
+        <View className="bg-lightblack max-w-[200px]  h-full">
           {items.map((item, index) => (
             <Pressable
               key={index}
@@ -105,7 +105,7 @@ const Settings = ({ navigation }) => {
             </Pressable>
           ))}
         </View>
-        <View className="bg-lightblack flex-1 h-full">
+        <View className="bg-lightblack flex-1 h-full ">
           {items[selectedItemIndex].component}
         </View>
       </View>
@@ -142,29 +142,31 @@ const OrdersView = () => {
     },
   ];
   return (
-    <View className="p-6">
+    <View className="p-3  h-[86%] ">
       <View className="flex-row items-center justify-between">
         <Text className="text-xl font-bold text-white">Orders</Text>
         <FilterSelect text="Filter Order" icon="book-settings" />
       </View>
       <View className="border-lightGray flex-row items-center justify-between pb-3 mt-6 mb-6 border-b-2">
-        <Text className="text-lg font-bold text-white">Customer</Text>
-        <Text className="text-lg font-bold text-white">Status</Text>
+        <Text className="text-md font-bold text-white">Customer</Text>
+        <Text className="text-md font-bold text-white">Status</Text>
       </View>
 
       {CustomerList.map((item, index) => (
         <View
-          className=" flex-row items-center justify-between mb-6"
+          className=" flex-row items-center justify-between mb-6 w-full "
           key={index}
         >
-          <Text className="font-bold text-white">Customer#{item.id}</Text>
+          <Text className="font-bold text-sm text-white">
+            Customer#{item.id}
+          </Text>
 
           {item.status === "Pending" ? (
-            <TouchableOpacity className="font-bold text-lg text-yellow bg-[#503A3A] px-7 py-1 rounded-full w-36">
+            <TouchableOpacity className="font-bold text-sm text-yellow bg-[#503A3A] px-5 py-1 rounded-full w-fit">
               <Text className="text-center text-[#FFB572]">Pending</Text>
             </TouchableOpacity>
           ) : (
-            <TouchableOpacity className="font-bold text-lg text-yellow bg-[#324C4F] px-7 py-1 rounded-full w-36 ">
+            <TouchableOpacity className="font-bold text-lg text-yellow bg-[#324C4F] px-5 py-1 rounded-full w-fit ">
               <Text className="text-center text-[#50D1AA] ">Completed</Text>
             </TouchableOpacity>
           )}
@@ -310,32 +312,35 @@ const ProductManagementView = () => {
   return (
     <View className={`p-6 flex`}>
       <View className="flex-row items-center justify-between">
-        <Text className="text-xl font-bold text-white">Orders</Text>
-        <FilterSelect text="Product Management" icon="filter" />
+        <Text className="text-lg font-bold text-white">Orders</Text>
+        <FilterSelect text="Add Category" icon="filter" />
       </View>
-      <View className="w-full mt-6">
+      <View className="w-full  mt-6">
         <DishCategories
           selectedCategoryId={selectedCategoryId}
           setSelectedCategoryId={setSelectedCategoryId}
           smallText={true}
         />
       </View>
-      <ScrollView
-        contentContainerStyle={{
-          justifyContent: "space-between",
-          alignItems: "center",
-          flexWrap: "wrap",
-          flexDirection: "row",
-          width: "100%",
-          height: "95%",
-          marginTop: 6,
-        }}
-      >
-        <AddNewDish />
-        {dishes.map((dish, i) => (
-          <DishConfig dish={dish} key={i} />
-        ))}
-      </ScrollView>
+      <View className="h-[86%]">
+        <ScrollView
+          contentContainerStyle={{
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexWrap: "wrap",
+            flexDirection: "row",
+            marginTop: 6,
+            width: "100%",
+            //adjust the height of the scrollview to the content
+            height: "auto",
+          }}
+        >
+          <AddNewDish />
+          {dishes.map((dish, i) => (
+            <DishConfig dish={dish} key={i} />
+          ))}
+        </ScrollView>
+      </View>
     </View>
   );
 };
@@ -344,13 +349,13 @@ const AboutUsView = () => {
   return (
     <>
       <View className={`flex-col justify-between pl-8 gap-2 mt-8 flex`}>
-        <Text className=" text-xl font-bold text-white">
+        <Text className=" text-lg font-bold text-white">
           Welcome to our managment system
         </Text>
-        <Text className="text-primary self-start text-lg font-bold text-center">
+        <Text className="text-primary self-start text-md font-bold text-center">
           About Us:
         </Text>
-        <Text className="text-md self-start text-left text-white">
+        <Text className="text-sm self-start text-left text-white">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
           voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit.
           Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur
@@ -367,17 +372,10 @@ const AboutUsView = () => {
           source={{
             uri: "https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGlzaHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80",
           }}
-          className="w-60 h-60 rounded-md"
+          className="w-32 h-32 rounded-md"
         />
-        <Text className="text-md self-start pl-8 mt-8 text-left text-white">
+        <Text className="text-sm self-start pl-8 mt-8 text-left text-white">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-          voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor
-          sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem
-          ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-          voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing
         </Text>
       </View>
     </>
@@ -387,10 +385,10 @@ const AboutUsView = () => {
 const SecurityView = () => {
   return (
     <View className={`flex-col justify-between pl-8 gap-2 mt-8 $flex`}>
-      <Text className=" text-xl font-bold text-white">
+      <Text className=" text-lg font-bold text-white">
         Welcome to our security system
       </Text>
-      <Text className="text-primary self-start text-lg font-bold text-center">
+      <Text className="text-primary self-start text-md font-bold text-center">
         Change your password:
       </Text>
       <View className="w-[80%] ">

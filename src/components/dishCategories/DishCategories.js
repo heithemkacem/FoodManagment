@@ -14,7 +14,7 @@ const DishCategories = ({
     { id: 54545454, name: "Dessert" },
   ]);
   return (
-    <View className="border-gray-100/10 flex-row w-full pb-3 space-x-8 border-b">
+    <View className="border-gray-100/10 flex-row flex-wrap  w-full pb-3 space-x-3 border-b ">
       {categories.map((category, i) => (
         <TouchableOpacity
           key={i}
@@ -22,7 +22,7 @@ const DishCategories = ({
           onPress={() => setSelectedCategoryId(category.id)}
         >
           <Text
-            className={`${smallText ? "text-md" : "text-xl"} ${
+            className={`${smallText ? "text-md" : "text-lg"} ${
               selectedCategoryId == category.id ? "text-primary" : "text-white"
             }`}
           >

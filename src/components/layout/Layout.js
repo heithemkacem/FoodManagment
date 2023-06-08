@@ -17,7 +17,7 @@ const Container = styled.View`
 `;
 const SideBarContainer = styled.View`
   height: 100%;
-  width: 15%;
+  width: 100px;
 `;
 
 const StyledView = styled.View`

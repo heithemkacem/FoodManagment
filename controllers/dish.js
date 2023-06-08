@@ -7,11 +7,7 @@ exports.createDish = async(req, res, next) => {
     const { name, description, price, category, cat_id } = req.body;
     console.log(req.body, name, description, price, category, cat_id);
     try {
-        // const result = await cloudinary.uploader.upload(image, {
-        //     folder: "dishs",
-        //     // width: 300,
-        //     // crop: "scale"
-        // })
+
         const cat = await Category.findOne({ category });
         console.log("category", cat);
         const dish = await Dish.create(req.body);

@@ -5,7 +5,7 @@ const initialState = {
   SideBarState: [
     {
       name: "shopping",
-      color: colors.primary,
+      color: colors.white,
       size: 40,
       active: true,
       primary: true,

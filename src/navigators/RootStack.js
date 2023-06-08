@@ -10,7 +10,7 @@ import { colors } from "../components/colors";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { HeaderBackButton } from "@react-navigation/elements";
-import { Pressable } from "react-native";
+import { Pressable, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 //!Redux modules import
 import store from "../_actions/store";
@@ -30,10 +30,19 @@ const RootStack = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Home"
+        initialRouteName="Settings"
         screenOptions={{
           headerLeft: (props) => (
-            <HeaderBackButton style={{ backgroundColor: primary }} {...props} />
+            <Pressable
+              {...props}
+              className="w-10 h-10 bg-primary flex-row justify-center items-center ml-4"
+            >
+              <MaterialCommunityIcons
+                name="arrow-left"
+                size={25}
+                color="white"
+              />
+            </Pressable>
           ),
           cardStyle: {
             backgroundColor: lightblack,
@@ -108,6 +117,9 @@ const RootStack = () => {
             options={{
               headerTitle: "",
               headerLeft: null,
+              headerStyle: {
+                backgroundColor: black,
+              },
             }}
           />
           <Stack.Screen

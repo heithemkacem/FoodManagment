@@ -22,7 +22,7 @@ const ListContainer = styled.View`
   display: flex;
   flex-direction: column;
   top: 5%;
-  justify-content: space-between;
+  gap: 25px;
   align-items: center;
   height: 80%;
   width: 100%;

@@ -81,7 +81,7 @@ const ForgotPassword = ({ navigation }) => {
               </PressableText>
               <PressableText onPress={() => moveTo(navigation, "Login")}>
                 Have an account? Login
-              </PressableText>{" "}
+              </PressableText>
             </>
           )}
         </Formik>

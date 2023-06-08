@@ -5,25 +5,25 @@ import FilterSelect from "../../components/buttons/FilterSelect";
 
 const CustomerList = [
   {
-    id: 1,
+    id: 564564564567,
     menu: "Chicken Burger",
     totalPayment: "100",
     status: "Pending",
   },
   {
-    id: 2,
+    id: 8797897897,
     menu: "Chicken Burger",
     totalPayment: "100",
     status: "Pending",
   },
   {
-    id: 3,
+    id: 8979789756,
     menu: "Chicken Burger",
     totalPayment: "100",
     status: "Completed",
   },
   {
-    id: 4,
+    id: 4646456464,
     menu: "Chicken Burger",
     totalPayment: "100",
     status: "Pending",
@@ -31,7 +31,12 @@ const CustomerList = [
 ];
 const Notifications = ({ navigation }) => {
   return (
-    <Layout navigation={navigation} headerTitle="Notfocation " date={true}>
+    <Layout
+      navigation={navigation}
+      headerTitle="Notfocation "
+      date={true}
+      searchBar={true}
+    >
       <View>
         <View className="flex-row justify-between items-center">
           <Text className="font-bold text-xl text-white">Orders</Text>

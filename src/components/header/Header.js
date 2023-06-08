@@ -51,11 +51,11 @@ const SearchContainer = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: #232530;
+  background-color: ${colors.input};
   height: 40px;
   width: 100%;
 `;
-const Header = ({ headerTitle, date }) => {
+const Header = ({ headerTitle, date, searchBar }) => {
   const [value, setValue] = React.useState("");
   const handleOnChangeText = (text) => {
     setValue(text);
@@ -70,40 +70,42 @@ const Header = ({ headerTitle, date }) => {
           <DateContainer>{new Date().toDateString()}</DateContainer>
         ) : null}
       </TextContainer>
-      <SearchBarContainer>
-        <View style={styles.container}>
-          <SearchContainer>
-            <View style={styles.vwSearch}>
-              <MaterialCommunityIcons
-                name="search-web"
-                size={20}
-                color={colors.white}
-              />
-            </View>
-
-            <TextInput
-              value={value}
-              placeholder="Search"
-              style={styles.textInput}
-              onChangeText={handleOnChangeText}
-            />
-            {value ? (
-              <TouchableOpacity
-                onPress={() => setValue("")}
-                style={styles.vwClear}
-              >
+      {searchBar ? (
+        <SearchBarContainer>
+          <View style={styles.container}>
+            <SearchContainer>
+              <View style={styles.vwSearch}>
                 <MaterialCommunityIcons
-                  name="delete-sweep-outline"
+                  name="search-web"
                   size={20}
                   color={colors.white}
                 />
-              </TouchableOpacity>
-            ) : (
-              <View style={styles.vwClear} />
-            )}
-          </SearchContainer>
-        </View>
-      </SearchBarContainer>
+              </View>
+
+              <TextInput
+                value={value}
+                placeholder="Search"
+                style={styles.textInput}
+                onChangeText={handleOnChangeText}
+              />
+              {value ? (
+                <TouchableOpacity
+                  onPress={() => setValue("")}
+                  style={styles.vwClear}
+                >
+                  <MaterialCommunityIcons
+                    name="delete-sweep-outline"
+                    size={20}
+                    color={colors.white}
+                  />
+                </TouchableOpacity>
+              ) : (
+                <View style={styles.vwClear} />
+              )}
+            </SearchContainer>
+          </View>
+        </SearchBarContainer>
+      ) : null}
     </Container>
   );
 };

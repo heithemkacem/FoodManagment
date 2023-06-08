@@ -17,7 +17,7 @@ const Container = styled.View`
 `;
 const SideBarContainer = styled.View`
   height: 100%;
-  width: 15%;
+  width: 100px;
 `;
 
 const StyledView = styled.View`
@@ -34,12 +34,19 @@ const MainContainer = styled.View`
 const MainView = styled.View`
   height: 100%;
   width: 100%;
-  background-color: ${colors.black}};
+  background-color: ${colors.black};
   border-radius: 10px;
   padding: 40px;
 `;
 
-const Layout = ({ navigation, headerTitle, date, children }) => {
+const Layout = ({
+  navigation,
+  headerTitle,
+  date,
+  children,
+  searchBar,
+  style,
+}) => {
   return (
     <ScreenContainer>
       <SideBarContainer>
@@ -47,7 +54,7 @@ const Layout = ({ navigation, headerTitle, date, children }) => {
       </SideBarContainer>
       <Container>
         <StyledView>
-          <Header headerTitle={headerTitle} date={date} />
+          <Header headerTitle={headerTitle} date={date} searchBar={searchBar} />
         </StyledView>
         <MainContainer>
           <MainView>{children}</MainView>

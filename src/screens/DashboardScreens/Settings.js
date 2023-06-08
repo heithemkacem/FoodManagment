@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { ActivityIndicator, Image, Pressable, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  Image,
+  Pressable,
+  ScrollView,
+  Text,
+  View,
+} from "react-native";
 import Layout from "../../components/layout/Layout";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "../../components/colors";
@@ -63,7 +70,7 @@ const Settings = ({ navigation }) => {
   ]);
   const [dishes, setDishes] = useState([
     {
-      id: 1,
+      id: 6456767,
       name: "Burger",
       price: 10,
       image:
@@ -71,7 +78,7 @@ const Settings = ({ navigation }) => {
       numberAvailable: 10,
     },
     {
-      id: 2,
+      id: 76786876,
       name: "Pizza",
       price: 20,
       image:
@@ -79,7 +86,7 @@ const Settings = ({ navigation }) => {
       numberAvailable: 10,
     },
     {
-      id: 3,
+      id: 456456456,
       name: "Pasta",
       price: 30,
       image:
@@ -87,7 +94,55 @@ const Settings = ({ navigation }) => {
       numberAvailable: 10,
     },
     {
-      id: 4,
+      id: 45664564,
+      name: "Salad",
+      price: 40,
+      image:
+        "https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGlzaHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80",
+      numberAvailable: 10,
+    },
+    {
+      id: 45645645677,
+      name: "Pasta",
+      price: 30,
+      image:
+        "https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGlzaHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80",
+      numberAvailable: 10,
+    },
+    {
+      id: 9575757,
+      name: "Salad",
+      price: 40,
+      image:
+        "https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGlzaHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80",
+      numberAvailable: 10,
+    },
+    {
+      id: 6456464,
+      name: "Pasta",
+      price: 30,
+      image:
+        "https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGlzaHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80",
+      numberAvailable: 10,
+    },
+    {
+      id: 646456457897,
+      name: "Salad",
+      price: 40,
+      image:
+        "https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGlzaHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80",
+      numberAvailable: 10,
+    },
+    {
+      id: 35645645,
+      name: "Pasta",
+      price: 30,
+      image:
+        "https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGlzaHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80",
+      numberAvailable: 10,
+    },
+    {
+      id: 64564564,
       name: "Salad",
       price: 40,
       image:
@@ -190,16 +245,22 @@ const Settings = ({ navigation }) => {
                           smallText={true}
                         />
                       </View>
-                      <View className="w-full h-full mt-6 flex-row justify-between items-start ">
-                        <View className="w-[44%] ">
-                          <AddNewDish />
-                        </View>
-                        <View className="w-[44%] ">
-                          {dishes.map((dish, i) => (
-                            <DishConfig dish={dish} index={i} />
-                          ))}
-                        </View>
-                      </View>
+                      <ScrollView
+                        contentContainerStyle={{
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          flexWrap: "wrap",
+                          flexDirection: "row",
+                          width: "100%",
+                          height: "95%",
+                          marginTop: 6,
+                        }}
+                      >
+                        <AddNewDish />
+                        {dishes.map((dish, i) => (
+                          <DishConfig dish={dish} index={i} />
+                        ))}
+                      </ScrollView>
                     </View>
                   );
                 case "Security":

@@ -9,7 +9,7 @@ import OrdersView from "../../components/ordersView/OrdersView";
 const Home = ({ navigation }) => {
   const [dishes, setDishes] = useState([
     {
-      id: 1,
+      id: 54542424,
       name: "Burger",
       price: 10,
       image:
@@ -17,7 +17,7 @@ const Home = ({ navigation }) => {
       numberAvailable: 10,
     },
     {
-      id: 2,
+      id: 456456757,
       name: "Pizza",
       price: 20,
       image:
@@ -25,7 +25,7 @@ const Home = ({ navigation }) => {
       numberAvailable: 10,
     },
     {
-      id: 3,
+      id: 767654467,
       name: "Pasta",
       price: 30,
       image:
@@ -33,7 +33,7 @@ const Home = ({ navigation }) => {
       numberAvailable: 10,
     },
     {
-      id: 4,
+      id: 645645456,
       name: "Salad",
       price: 40,
       image:

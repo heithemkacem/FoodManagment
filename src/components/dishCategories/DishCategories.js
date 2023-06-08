@@ -7,11 +7,11 @@ const DishCategories = ({
   smallText,
 }) => {
   const [categories, setCategories] = useState([
-    { id: 1, name: "Burger" },
-    { id: 2, name: "Pizza" },
-    { id: 3, name: "Pasta" },
-    { id: 4, name: "Salad" },
-    { id: 5, name: "Dessert" },
+    { id: 456456, name: "Burger" },
+    { id: 456456456, name: "Pizza" },
+    { id: 45645645645645645, name: "Pasta" },
+    { id: 78787544, name: "Salad" },
+    { id: 54545454, name: "Dessert" },
   ]);
   return (
     <View className="border-gray-100/10 flex-row w-full pb-3 space-x-8 border-b">

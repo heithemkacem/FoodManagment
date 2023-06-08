@@ -5,6 +5,7 @@ import {
   Pressable,
   ScrollView,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 import Layout from "../../components/layout/Layout";
@@ -21,7 +22,6 @@ import AddNewDish from "../../components/buttons/AddNewDish";
 import DishConfig from "../../components/dishConfiguration/DishConfig";
 
 const Settings = ({ navigation }) => {
-  const [selectedCategoryId, setSelectedCategoryId] = useState(1);
   const [items, setItems] = React.useState([
     {
       name: "Orders",
@@ -30,6 +30,7 @@ const Settings = ({ navigation }) => {
       textColor: colors.lightGray,
       iconColor: colors.primary,
       active: true,
+      component: <OrdersView />,
     },
     {
       name: "Notifications",
@@ -39,6 +40,7 @@ const Settings = ({ navigation }) => {
       textColor: colors.lightGray,
       iconColor: colors.lightGray,
       active: false,
+      component: <NotificationsView />,
     },
     {
       name: "Product Management",
@@ -48,6 +50,7 @@ const Settings = ({ navigation }) => {
       textColor: colors.lightGray,
       iconColor: colors.lightGray,
       active: false,
+      component: <ProductManagementView />,
     },
     {
       name: "Security",
@@ -57,6 +60,7 @@ const Settings = ({ navigation }) => {
       textColor: colors.lightGray,
       iconColor: colors.lightGray,
       active: false,
+      component: <SecurityView />,
     },
     {
       name: "About us",
@@ -66,8 +70,161 @@ const Settings = ({ navigation }) => {
       textColor: colors.lightGray,
       iconColor: colors.lightGray,
       active: false,
+      component: <AboutUsView />,
     },
   ]);
+  const [selectedItemIndex, setSelectedItemIndex] = useState(0);
+
+  return (
+    <Layout navigation={navigation} headerTitle="Settings" searchBar={false}>
+      <View className=" flex-row h-full gap-8 bg-black">
+        <View className="bg-lightblack max-w-[200px]">
+          {items.map((item, index) => (
+            <Pressable
+              key={index}
+              className={`flex-row space-x-2 py-4 pl-4 pr-2 bg-red-400 ${
+                selectedItemIndex == index ? "bg-[#54353B]" : "bg-transparent "
+              } `}
+              onPress={() => setSelectedItemIndex(index)}
+            >
+              <MaterialCommunityIcons
+                name={item.icon}
+                size={18}
+                color={selectedItemIndex == index ? colors.primary : "white"}
+              />
+              <View className="">
+                <Text
+                  className={`font-bold text-md ${
+                    selectedItemIndex == index ? "text-primary" : "text-white "
+                  }`}
+                >
+                  {item.name}
+                </Text>
+                <Text className="text-lightGray text-sm">{item.text}</Text>
+              </View>
+            </Pressable>
+          ))}
+        </View>
+        <View className="bg-lightblack flex-1 h-full">
+          {items[selectedItemIndex].component}
+        </View>
+      </View>
+    </Layout>
+  );
+};
+export default Settings;
+
+const OrdersView = () => {
+  const CustomerList = [
+    {
+      id: 564564564567,
+      menu: "Chicken Burger",
+      totalPayment: "100",
+      status: "Pending",
+    },
+    {
+      id: 8797897897,
+      menu: "Chicken Burger",
+      totalPayment: "100",
+      status: "Pending",
+    },
+    {
+      id: 8979789756,
+      menu: "Chicken Burger",
+      totalPayment: "100",
+      status: "Completed",
+    },
+    {
+      id: 4646456464,
+      menu: "Chicken Burger",
+      totalPayment: "100",
+      status: "Pending",
+    },
+  ];
+  return (
+    <View className="p-6">
+      <View className="flex-row items-center justify-between">
+        <Text className="text-xl font-bold text-white">Orders</Text>
+        <FilterSelect text="Filter Order" icon="book-settings" />
+      </View>
+      <View className="border-lightGray flex-row items-center justify-between pb-3 mt-6 mb-6 border-b-2">
+        <Text className="text-lg font-bold text-white">Customer</Text>
+        <Text className="text-lg font-bold text-white">Status</Text>
+      </View>
+
+      {CustomerList.map((item, index) => (
+        <View
+          className=" flex-row items-center justify-between mb-6"
+          key={index}
+        >
+          <Text className="font-bold text-white">Customer#{item.id}</Text>
+
+          {item.status === "Pending" ? (
+            <TouchableOpacity className="font-bold text-lg text-yellow bg-[#503A3A] px-7 py-1 rounded-full w-36">
+              <Text className="text-center text-[#FFB572]">Pending</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity className="font-bold text-lg text-yellow bg-[#324C4F] px-7 py-1 rounded-full w-36 ">
+              <Text className="text-center text-[#50D1AA] ">Completed</Text>
+            </TouchableOpacity>
+          )}
+        </View>
+      ))}
+    </View>
+  );
+};
+
+const NotificationsView = () => {
+  return (
+    <View className="p-6 space-y-4">
+      <View className="bg-black/40 items-center justify-between p-4 rounded-md">
+        <View className="flex-row justify-between w-full">
+          <View>
+            <Text className="text-primary text-lg font-bold">New Order</Text>
+            <Text className="text-lightGray text-xs font-bold">12:00 PM</Text>
+          </View>
+
+          <TouchableOpacity>
+            <MaterialCommunityIcons
+              name="close"
+              size={30}
+              color={colors.primary}
+            />
+          </TouchableOpacity>
+        </View>
+
+        <Text className="mt-2 text-white">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+          voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </Text>
+      </View>
+      <View className="bg-black/40 items-center justify-between p-4 rounded-md">
+        <View className="flex-row justify-between w-full">
+          <View>
+            <Text className="text-primary text-lg font-bold">New Order</Text>
+            <Text className="text-lightGray text-xs font-bold">12:00 PM</Text>
+          </View>
+
+          <TouchableOpacity>
+            <MaterialCommunityIcons
+              name="close"
+              size={30}
+              color={colors.primary}
+            />
+          </TouchableOpacity>
+        </View>
+
+        <Text className="mt-2 text-white">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+          voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </Text>
+      </View>
+    </View>
+  );
+};
+
+const ProductManagementView = () => {
+  const [selectedCategoryId, setSelectedCategoryId] = useState(1);
   const [dishes, setDishes] = useState([
     {
       id: 6456767,
@@ -151,280 +308,166 @@ const Settings = ({ navigation }) => {
     },
   ]);
   return (
-    <Layout navigation={navigation} headerTitle="Settings" searchBar={false}>
-      <View className="bg-black w-full h-full flex-row justify-between ">
-        <View className="bg-lightblack w-[33%] h-full">
-          {items.map((item, index) => (
-            <View
-              className="flex-col justify-between items-center  mt-6 pb-3 mb-6"
-              key={index}
-            >
-              <Pressable
-                className={`w-full h-16  flex-row  justify-start items-start p-6 rounded-tr-lg  ${
-                  item.active ? "bg-[#54353B]" : "bg-transparent "
-                }`}
-                onPress={() => {
-                  //copy the state of the items array to a new array and change the active state of the item and the bg color of the item and set the new array as the state  of the items array
-                  let newItems = [...items];
-                  newItems.map((item, i) => {
-                    if (index === i) {
-                      item.iconColor = colors.primary;
-                      item.active = true;
-                    } else {
-                      item.active = false;
-                      item.iconColor = colors.white;
-                    }
-                  });
-                  setItems(newItems);
-                }}
-              >
-                <MaterialCommunityIcons
-                  name={item.icon}
-                  size={18}
-                  color={item.iconColor}
-                />
-                <View className="ml-4 flex-col items-start justify-center">
-                  <Text
-                    className={`font-bold text-md ${
-                      item.active ? "text-primary" : "text-white "
-                    }`}
-                  >
-                    {item.name}
-                  </Text>
-                  <Text className="text-sm text-lightGray">{item.text}</Text>
-                </View>
-              </Pressable>
-            </View>
-          ))}
-        </View>
-        <View className="bg-lightblack w-[60%] h-full">
-          {
-            //show the content of the active item by name for example if the name is About us show the content of the about us item and so on
-            items.map((item, index) => {
-              switch (item.name) {
-                case "Orders":
-                  return (
-                    <View
-                      className={`flex-col justify-between items-center  mt-6 pb-3 mb-6 ${
-                        item.active ? "flex" : "hidden"
-                      }`}
-                      key={index}
-                    >
-                      <Text className="text-white">Orders</Text>
-                    </View>
-                  );
-                case "Notifications":
-                  return (
-                    <View
-                      className={`flex-col justify-between items-center  mt-6 pb-3 mb-6 ${
-                        item.active ? "flex" : "hidden"
-                      }`}
-                      key={index}
-                    >
-                      <Text className="text-white">Notifications</Text>
-                    </View>
-                  );
-                case "Product Management":
-                  return (
-                    <View
-                      className={`mt-6 pb-3 mb-6 pl-6 pr-6 ${
-                        item.active ? "flex" : "hidden"
-                      }`}
-                      key={index}
-                    >
-                      <View className="flex-row justify-between items-center">
-                        <Text className="font-bold text-xl text-white">
-                          Orders
-                        </Text>
-                        <FilterSelect text="Product Management" icon="filter" />
-                      </View>
-                      <View className="w-full mt-6">
-                        <DishCategories
-                          selectedCategoryId={selectedCategoryId}
-                          setSelectedCategoryId={setSelectedCategoryId}
-                          smallText={true}
-                        />
-                      </View>
-                      <ScrollView
-                        contentContainerStyle={{
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                          flexWrap: "wrap",
-                          flexDirection: "row",
-                          width: "100%",
-                          height: "95%",
-                          marginTop: 6,
-                        }}
-                      >
-                        <AddNewDish />
-                        {dishes.map((dish, i) => (
-                          <DishConfig dish={dish} index={i} />
-                        ))}
-                      </ScrollView>
-                    </View>
-                  );
-                case "Security":
-                  return (
-                    <View
-                      className={`flex-col justify-between pl-8 gap-2 mt-8 ${
-                        item.active ? "flex" : "hidden"
-                      }`}
-                      key={index}
-                    >
-                      <Text className="text-white font-bold text-xl ">
-                        Welcome to our security system
-                      </Text>
-                      <Text className="text-primary font-bold text-lg text-center self-start ">
-                        Change your password:
-                      </Text>
-                      <View className="w-[80%] ">
-                        <Formik
-                          initialValues={{
-                            newPassword: "",
-                            confirmNewPassword: "",
-                          }}
-                          validationSchema={ResetSchema}
-                          onSubmit={(values, { setSubmitting }) => {
-                            dispatch(
-                              ResetPasswordAction(
-                                values,
-                                setSubmitting,
-                                moveTo,
-                                route,
-                                navigation
-                              )
-                            );
-                          }}
-                        >
-                          {({
-                            handleChange,
-                            handleBlur,
-                            handleSubmit,
-                            values,
-                            isSubmitting,
-                            errors,
-                            touched,
-                          }) => (
-                            <>
-                              <StyledTextInput
-                                icon="lock-open-variant"
-                                label={"New Password"}
-                                placeholder="**********"
-                                secureTextEntry={true}
-                                isPassword={true}
-                                autoCapitalize="none"
-                                autoCorrect={false}
-                                onChangeText={handleChange("newPassword")}
-                                value={values.newPassword}
-                                onBlur={handleBlur("newPassword")}
-                                style={{ marginBottom: 25 }}
-                                errors={
-                                  touched.newPassword && errors.newPassword
-                                }
-                              />
-                              <StyledTextInput
-                                icon="lock-open-variant"
-                                label={"Confirm New Password"}
-                                placeholder="**********"
-                                secureTextEntry={true}
-                                isPassword={true}
-                                autoCapitalize="none"
-                                autoCorrect={false}
-                                onChangeText={handleChange(
-                                  "confirmNewPassword"
-                                )}
-                                value={values.confirmNewPassword}
-                                onBlur={handleBlur("confirmNewPassword")}
-                                style={{ marginBottom: 25 }}
-                                errors={
-                                  touched.confirmNewPassword &&
-                                  errors.confirmNewPassword
-                                }
-                              />
-
-                              {!isSubmitting && (
-                                <RegularButton onPress={handleSubmit}>
-                                  Change Password
-                                </RegularButton>
-                              )}
-                              {isSubmitting && (
-                                <RegularButton disabled={true}>
-                                  <ActivityIndicator
-                                    size="small"
-                                    color={white}
-                                  ></ActivityIndicator>
-                                </RegularButton>
-                              )}
-                            </>
-                          )}
-                        </Formik>
-                      </View>
-                    </View>
-                  );
-                case "About us":
-                  return (
-                    <>
-                      <View
-                        className={`flex-col justify-between pl-8 gap-2 mt-8 ${
-                          item.active ? "flex" : "hidden"
-                        }`}
-                        key={index}
-                      >
-                        <Text className="text-white font-bold text-xl ">
-                          Welcome to our managment system
-                        </Text>
-                        <Text className="text-primary font-bold text-lg text-center self-start ">
-                          About Us:
-                        </Text>
-                        <Text className="text-white text-md text-left self-start ">
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet
-                          consectetur adipisicing elit. Quisquam, voluptatum.
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet
-                          consectetur adipisicing elit. Quisquam, voluptatum.
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet
-                          consectetur adipisicing elit. Quisquam, voluptatum.
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                        </Text>
-                      </View>
-
-                      <View
-                        className={`flex-col justify-center items-center   mt-8  ${
-                          item.active ? "flex" : "hidden"
-                        }`}
-                        key={index}
-                      >
-                        <Image
-                          source={{
-                            uri: "https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGlzaHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80",
-                          }}
-                          className="w-60 h-60   rounded-md"
-                        />
-                        <Text className="text-white text-md text-left self-start pl-8 mt-8 ">
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet
-                          consectetur adipisicing elit. Quisquam, voluptatum.
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet
-                          consectetur adipisicing elit. Quisquam, voluptatum.
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet
-                          consectetur adipisicing elit. Quisquam, voluptatum.
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                        </Text>
-                      </View>
-                    </>
-                  );
-                default:
-                  return null;
-              }
-            })
-          }
-        </View>
+    <View className={`p-6 flex`}>
+      <View className="flex-row items-center justify-between">
+        <Text className="text-xl font-bold text-white">Orders</Text>
+        <FilterSelect text="Product Management" icon="filter" />
       </View>
-    </Layout>
+      <View className="w-full mt-6">
+        <DishCategories
+          selectedCategoryId={selectedCategoryId}
+          setSelectedCategoryId={setSelectedCategoryId}
+          smallText={true}
+        />
+      </View>
+      <ScrollView
+        contentContainerStyle={{
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexWrap: "wrap",
+          flexDirection: "row",
+          width: "100%",
+          height: "95%",
+          marginTop: 6,
+        }}
+      >
+        <AddNewDish />
+        {dishes.map((dish, i) => (
+          <DishConfig dish={dish} key={i} />
+        ))}
+      </ScrollView>
+    </View>
   );
 };
-export default Settings;
+
+const AboutUsView = () => {
+  return (
+    <>
+      <View className={`flex-col justify-between pl-8 gap-2 mt-8 flex`}>
+        <Text className=" text-xl font-bold text-white">
+          Welcome to our managment system
+        </Text>
+        <Text className="text-primary self-start text-lg font-bold text-center">
+          About Us:
+        </Text>
+        <Text className="text-md self-start text-left text-white">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+          voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur
+          adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet
+          consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor
+          sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem
+          ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+          voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing
+        </Text>
+      </View>
+
+      <View className={`flex-col justify-center items-center mt-8 `}>
+        <Image
+          source={{
+            uri: "https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGlzaHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80",
+          }}
+          className="w-60 h-60 rounded-md"
+        />
+        <Text className="text-md self-start pl-8 mt-8 text-left text-white">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+          voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Quisquam, voluptatum. Lorem ipsum dolor sit amet consectetur
+          adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor sit amet
+          consectetur adipisicing elit. Quisquam, voluptatum. Lorem ipsum dolor
+          sit amet consectetur adipisicing elit. Quisquam, voluptatum. Lorem
+          ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+          voluptatum. Lorem ipsum dolor sit amet consectetur adipisicing
+        </Text>
+      </View>
+    </>
+  );
+};
+
+const SecurityView = () => {
+  return (
+    <View className={`flex-col justify-between pl-8 gap-2 mt-8 $flex`}>
+      <Text className=" text-xl font-bold text-white">
+        Welcome to our security system
+      </Text>
+      <Text className="text-primary self-start text-lg font-bold text-center">
+        Change your password:
+      </Text>
+      <View className="w-[80%] ">
+        <Formik
+          initialValues={{
+            newPassword: "",
+            confirmNewPassword: "",
+          }}
+          validationSchema={ResetSchema}
+          onSubmit={(values, { setSubmitting }) => {
+            dispatch(
+              ResetPasswordAction(
+                values,
+                setSubmitting,
+                moveTo,
+                route,
+                navigation
+              )
+            );
+          }}
+        >
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            values,
+            isSubmitting,
+            errors,
+            touched,
+          }) => (
+            <>
+              <StyledTextInput
+                icon="lock-open-variant"
+                label={"New Password"}
+                placeholder="**********"
+                secureTextEntry={true}
+                isPassword={true}
+                autoCapitalize="none"
+                autoCorrect={false}
+                onChangeText={handleChange("newPassword")}
+                value={values.newPassword}
+                onBlur={handleBlur("newPassword")}
+                style={{ marginBottom: 25 }}
+                errors={touched.newPassword && errors.newPassword}
+              />
+              <StyledTextInput
+                icon="lock-open-variant"
+                label={"Confirm New Password"}
+                placeholder="**********"
+                secureTextEntry={true}
+                isPassword={true}
+                autoCapitalize="none"
+                autoCorrect={false}
+                onChangeText={handleChange("confirmNewPassword")}
+                value={values.confirmNewPassword}
+                onBlur={handleBlur("confirmNewPassword")}
+                style={{ marginBottom: 25 }}
+                errors={touched.confirmNewPassword && errors.confirmNewPassword}
+              />
+
+              {!isSubmitting && (
+                <RegularButton onPress={handleSubmit}>
+                  Change Password
+                </RegularButton>
+              )}
+              {isSubmitting && (
+                <RegularButton disabled={true}>
+                  <ActivityIndicator
+                    size="small"
+                    color={white}
+                  ></ActivityIndicator>
+                </RegularButton>
+              )}
+            </>
+          )}
+        </Formik>
+      </View>
+    </View>
+  );
+};

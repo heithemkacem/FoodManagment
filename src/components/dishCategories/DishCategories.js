@@ -1,7 +1,11 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 
-const DishCategories = ({ selectedCategoryId, setSelectedCategoryId }) => {
+const DishCategories = ({
+  selectedCategoryId,
+  setSelectedCategoryId,
+  smallText,
+}) => {
   const [categories, setCategories] = useState([
     { id: 1, name: "Burger" },
     { id: 2, name: "Pizza" },
@@ -18,7 +22,7 @@ const DishCategories = ({ selectedCategoryId, setSelectedCategoryId }) => {
           onPress={() => setSelectedCategoryId(category.id)}
         >
           <Text
-            className={`text-xl ${
+            className={`${smallText ? "text-md" : "text-xl"} ${
               selectedCategoryId == category.id ? "text-primary" : "text-white"
             }`}
           >

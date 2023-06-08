@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ActivityIndicator, Image, Pressable, Text, View } from "react-native";
 import Layout from "../../components/layout/Layout";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -8,8 +8,13 @@ import { ResetSchema } from "../../util/validationSchemas";
 import StyledTextInput from "../../components/inputs/StyledTextInput";
 import { Formik } from "formik";
 import RegularButton from "../../components/buttons/RegularButton";
+import FilterSelect from "../../components/buttons/FilterSelect";
+import DishCategories from "../../components/dishCategories/DishCategories";
+import AddNewDish from "../../components/buttons/AddNewDish";
+import DishConfig from "../../components/dishConfiguration/DishConfig";
 
 const Settings = ({ navigation }) => {
+  const [selectedCategoryId, setSelectedCategoryId] = useState(1);
   const [items, setItems] = React.useState([
     {
       name: "Orders",
@@ -54,6 +59,40 @@ const Settings = ({ navigation }) => {
       textColor: colors.lightGray,
       iconColor: colors.lightGray,
       active: false,
+    },
+  ]);
+  const [dishes, setDishes] = useState([
+    {
+      id: 1,
+      name: "Burger",
+      price: 10,
+      image:
+        "https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGlzaHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80",
+      numberAvailable: 10,
+    },
+    {
+      id: 2,
+      name: "Pizza",
+      price: 20,
+      image:
+        "https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGlzaHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80",
+      numberAvailable: 10,
+    },
+    {
+      id: 3,
+      name: "Pasta",
+      price: 30,
+      image:
+        "https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGlzaHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80",
+      numberAvailable: 10,
+    },
+    {
+      id: 4,
+      name: "Salad",
+      price: 40,
+      image:
+        "https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGlzaHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80",
+      numberAvailable: 10,
     },
   ]);
   return (
@@ -133,12 +172,34 @@ const Settings = ({ navigation }) => {
                 case "Product Management":
                   return (
                     <View
-                      className={`flex-col justify-between items-center  mt-6 pb-3 mb-6 ${
+                      className={`mt-6 pb-3 mb-6 pl-6 pr-6 ${
                         item.active ? "flex" : "hidden"
                       }`}
                       key={index}
                     >
-                      <Text className="text-white">Product Management</Text>
+                      <View className="flex-row justify-between items-center">
+                        <Text className="font-bold text-xl text-white">
+                          Orders
+                        </Text>
+                        <FilterSelect text="Product Management" icon="filter" />
+                      </View>
+                      <View className="w-full mt-6">
+                        <DishCategories
+                          selectedCategoryId={selectedCategoryId}
+                          setSelectedCategoryId={setSelectedCategoryId}
+                          smallText={true}
+                        />
+                      </View>
+                      <View className="w-full h-full mt-6 flex-row justify-between items-start ">
+                        <View className="w-[44%] ">
+                          <AddNewDish />
+                        </View>
+                        <View className="w-[44%] ">
+                          {dishes.map((dish, i) => (
+                            <DishConfig dish={dish} index={i} />
+                          ))}
+                        </View>
+                      </View>
                     </View>
                   );
                 case "Security":

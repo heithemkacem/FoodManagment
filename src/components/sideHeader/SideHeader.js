@@ -6,8 +6,8 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "../colors";
 import { moveTo } from "../../util/moveTo";
 import { useDispatch, useSelector } from "react-redux";
-import { setSideBarMenu } from "../../_actions/logicHandlerActions/authActions";
-import { Logout } from "../../_actions/logicHandlerActions/authActions";
+import { setSideBarMenu } from "../../_actions/logicHandlerActions/Actions";
+import { Logout } from "../../_actions/logicHandlerActions/Actions";
 const { white, primary } = colors;
 const Container = styled.View`
   background-color: ${colors.black};

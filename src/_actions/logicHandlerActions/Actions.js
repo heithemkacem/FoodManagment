@@ -152,6 +152,35 @@ export const ResetPasswordAction =
       });
     }
   };
+//!Get Categories
+export const getCategories = (setCategories) => async (dispatch) => {
+  try {
+    const response = await axios.post(
+      "http://192.168.1.93:8000/api/getcategory"
+    );
+    setCategories(response.data.categories);
+  } catch (error) {
+    Toast.show({
+      type: "error",
+      text1: "Erreur",
+      text2: error.message,
+    });
+  }
+};
+
+export const getOrders = (setOrders) => async (dispatch) => {
+  try {
+    const response = await axios.post("http://192.168.1.93:8000/api/getOrders");
+    setOrders(response.data.order);
+  } catch (error) {
+    Toast.show({
+      type: "error",
+      text1: "Erreur",
+      text2: error.message,
+    });
+  }
+};
+
 //?Redux Actions
 //!Logout User
 export const Logout = () => async (dispatch) => {

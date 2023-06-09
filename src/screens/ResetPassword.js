@@ -6,7 +6,7 @@ import RegularButton from "../components/buttons/RegularButton";
 import { ActivityIndicator, ScrollView } from "react-native";
 import { colors } from "../components/colors";
 import { useDispatch } from "react-redux";
-import { ResetPasswordAction } from "./../_actions/logicHandlerActions/authActions";
+import { ResetPasswordAction } from "../_actions/logicHandlerActions/Actions";
 import BigText from "../components/texts/BigText";
 import { ResetSchema } from "../util/validationSchemas";
 import { moveTo } from "../util/moveTo";

@@ -14,7 +14,7 @@ import { Pressable, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 //!Redux modules import
 import store from "../_actions/store";
-import { Logout } from "./../_actions/logicHandlerActions/authActions";
+import { Logout } from "../_actions/logicHandlerActions/Actions";
 import { useSelector } from "react-redux";
 import Home from "../screens/DashboardScreens/Home";
 import Orders from "../screens/DashboardScreens/Orders";

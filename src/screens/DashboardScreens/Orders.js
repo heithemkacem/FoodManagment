@@ -3,17 +3,14 @@ import { Text, View, TouchableOpacity } from "react-native";
 import Layout from "../../components/layout/Layout";
 import FilterSelect from "../../components/buttons/FilterSelect";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { getOrders } from "../../_actions/logicHandlerActions/Actions";
 
 const Orders = ({ navigation }) => {
   const [orders, setOrders] = useState([]);
+  const dispatch = useDispatch();
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.post(
-        "http://192.168.1.93:8000/api/getOrders"
-      );
-      setOrders(response.data.order);
-    };
-    fetchData();
+    dispatch(getOrders(setOrders));
   }, []);
   return (
     <Layout navigation={navigation} headerTitle="Notfocation " date={true}>

@@ -6,7 +6,7 @@ import RegularButton from "../components/buttons/RegularButton";
 import { ActivityIndicator, ScrollView } from "react-native";
 import { colors } from "../components/colors";
 import PressableText from "../components/texts/PressableText";
-import { SignupAction } from "../_actions/logicHandlerActions/authActions";
+import { SignupAction } from "../_actions/logicHandlerActions/Actions";
 import { useDispatch } from "react-redux";
 import BigText from "../components/texts/BigText";
 import { moveTo } from "../util/moveTo";

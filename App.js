@@ -5,14 +5,10 @@ import RootStack from "./src/navigators/RootStack";
 import { Provider } from "react-redux";
 import store from "./src/_actions/store";
 import { setAuth } from "./src/util/setAuth";
-import {
-  setUser,
-  Logout,
-} from "./src/_actions/logicHandlerActions/authActions";
+import { setUser, Logout } from "./src/_actions/logicHandlerActions/Actions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import jwt_decode from "jwt-decode";
 import Toast from "react-native-toast-message";
-import ResetPassword from "./src/screens/ResetPassword";
 export default function App() {
   //logout user if token is expired
   AsyncStorage.getItem("jwt").then((token) => {

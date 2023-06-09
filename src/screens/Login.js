@@ -8,7 +8,7 @@ import { colors } from "../components/colors";
 import BigText from "../components/texts/BigText";
 import PressableText from "../components/texts/PressableText";
 import { useDispatch } from "react-redux";
-import { LoginAction } from "../_actions/logicHandlerActions/authActions";
+import { LoginAction } from "../_actions/logicHandlerActions/Actions";
 import { moveTo } from "../util/moveTo";
 import { LoginSchema } from "../util/validationSchemas";
 const Login = ({ navigation, route }) => {

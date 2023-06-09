@@ -78,7 +78,9 @@ const Home = ({ navigation }) => {
         <ScrollView className="">
           <View className="gap-x-8 gap-y-24 flex-row flex-wrap mt-10">
             {isLoading ? (
-              <ActivityIndicator size="large" color={colors.primary} />
+              <View className="flex-1 justify-center items-center">
+                <ActivityIndicator size="large" color={colors.primary} />
+              </View>
             ) : (
               dishes.map((dish, i) => (
                 <View

@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Pressable, Text, View } from "react-native";
 import Layout from "../../components/layout/Layout";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import { colors } from "../../components/colors";
 import AboutUsView from "./SettingsScreens/AboutUs";
 import NotificationsView from "./SettingsScreens/NotificationScreen";
 import OrdersView from "./SettingsScreens/Orders";
 import SecurityView from "./SettingsScreens/SecuirityView";
 import ProductManagementView from "../../components/ProductManagement/ProductManagementView";
-
+//translate all the text to french
 const Settings = ({ navigation }) => {
   const [items, setItems] = React.useState([
     {
-      name: "Orders",
-      text: "Preview your orders",
-      icon: "account-circle",
+      name: "Les commandes",
+      text: "Gérer vos commandes",
+      icon: "tag",
       textColor: colors.lightGray,
       iconColor: colors.primary,
       active: true,
@@ -22,8 +22,8 @@ const Settings = ({ navigation }) => {
     },
     {
       name: "Notifications",
-      text: "Customize your notifications",
-      icon: "account-circle",
+      text: "Gérer vos notifications",
+      icon: "notification",
       bgColor: colors.lightblack,
       textColor: colors.lightGray,
       iconColor: colors.lightGray,
@@ -31,9 +31,9 @@ const Settings = ({ navigation }) => {
       component: <NotificationsView />,
     },
     {
-      name: "Product Management",
-      text: "Manage your product pricing",
-      icon: "account-circle",
+      name: "Gestion des produits",
+      text: "Gérer vos produits",
+      icon: "folderopen",
       bgColor: colors.lightblack,
       textColor: colors.lightGray,
       iconColor: colors.lightGray,
@@ -41,9 +41,9 @@ const Settings = ({ navigation }) => {
       component: <ProductManagementView />,
     },
     {
-      name: "Security",
-      text: "Configuire password , etc ",
-      icon: "account-circle",
+      name: "Sécurité",
+      text: "Gérer vos informations de sécurité ",
+      icon: "USB",
       bgColor: colors.lightblack,
       textColor: colors.lightGray,
       iconColor: colors.lightGray,
@@ -51,9 +51,9 @@ const Settings = ({ navigation }) => {
       component: <SecurityView />,
     },
     {
-      name: "About us",
-      text: "Find more about us",
-      icon: "account-circle",
+      name: "A propos de nous",
+      text: "Gérer vos informations",
+      icon: "idcard",
       bgColor: colors.lightblack,
       textColor: colors.lightGray,
       iconColor: colors.lightGray,
@@ -64,7 +64,11 @@ const Settings = ({ navigation }) => {
   const [selectedItemIndex, setSelectedItemIndex] = useState(0);
 
   return (
-    <Layout navigation={navigation} headerTitle="Settings" searchBar={false}>
+    <Layout
+      navigation={navigation}
+      headerTitle="Paramètres General"
+      searchBar={false}
+    >
       <View className=" flex-row flex-1 space-x-8">
         <View className="bg-lightblack max-w-[200px]  h-full">
           {items.map((item, index) => (
@@ -75,7 +79,7 @@ const Settings = ({ navigation }) => {
               } `}
               onPress={() => setSelectedItemIndex(index)}
             >
-              <MaterialCommunityIcons
+              <AntDesign
                 name={item.icon}
                 size={18}
                 color={selectedItemIndex == index ? colors.primary : "white"}

@@ -45,7 +45,7 @@ const Home = ({ navigation }) => {
     <>
       <Layout
         navigation={navigation}
-        headerTitle="RiverSide Reza"
+        headerTitle="Choisissez des plats"
         date={true}
         searchBar={true}
         setQuery={setQuery}
@@ -56,7 +56,9 @@ const Home = ({ navigation }) => {
         />
         <View className="flex-row justify-between mt-10">
           <View className="flex-row items-center">
-            <Text className="text-3xl font-bold text-white">Choose Dishes</Text>
+            <Text className="text-3xl font-bold text-white">
+              Choisissez des plats
+            </Text>
             <TouchableOpacity
               activeOpacity={0.9}
               className="bg-primary flex items-center justify-center w-8 h-8 ml-4 rounded-lg"
@@ -76,7 +78,9 @@ const Home = ({ navigation }) => {
         <ScrollView className="">
           <View className="gap-x-8 gap-y-24 flex-row flex-wrap mt-10">
             {isLoading ? (
-              <ActivityIndicator size="large" color={colors.primary} />
+              <View className="flex-1 justify-center items-center">
+                <ActivityIndicator size="large" color={colors.primary} />
+              </View>
             ) : (
               dishes.map((dish, i) => (
                 <View
@@ -111,7 +115,7 @@ const Home = ({ navigation }) => {
                     onPress={() => handleOrderNow(dish)}
                   >
                     <Text className="font-semibold text-center text-white">
-                      Order Now
+                      Commandez
                     </Text>
                   </TouchableOpacity>
                 </View>

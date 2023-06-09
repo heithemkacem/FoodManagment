@@ -4,7 +4,7 @@ import { colors } from "./../../components/colors";
 const initialState = {
   SideBarState: [
     {
-      name: "shopping",
+      name: "fork",
       color: colors.white,
       size: 40,
       active: true,
@@ -12,7 +12,7 @@ const initialState = {
       moveTo: "Main",
     },
     {
-      name: "home",
+      name: "customerservice",
       color: colors.primary,
       size: 25,
       active: false,
@@ -20,7 +20,7 @@ const initialState = {
     },
 
     {
-      name: "alarm",
+      name: "flag",
       color: colors.primary,
       size: 25,
       active: false,
@@ -28,7 +28,7 @@ const initialState = {
     },
 
     {
-      name: "archive-settings",
+      name: "sharealt",
       color: colors.primary,
       size: 25,
       active: false,

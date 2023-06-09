@@ -31,9 +31,9 @@ const ProductManagementView = () => {
 
   return (
     <View className={`p-6 flex-1`}>
-      <View className="flex-row items-center justify-between">
-        <Text className="text-lg font-bold text-white">Orders</Text>
-        <FilterSelect text="Add Category" icon="filter" />
+      <View className="flex-row items-center justify-between w-full">
+        <Text className="text-md font-bold text-white">Commandes</Text>
+        <FilterSelect text="Ajouter une catégorie" icon="plus" />
       </View>
       <View className="w-full mt-6">
         <DishCategories
@@ -46,11 +46,13 @@ const ProductManagementView = () => {
         <View className="flex-row flex-wrap justify-between mt-10">
           <AddNewDish setIsNewDishModalOpen={setIsNewDishModalOpen} />
           {isLoading ? (
-            <ActivityIndicator
-              className="mx-auto"
-              size="large"
-              color={colors.primary}
-            />
+            <View className="flex-1 justify-center items-center">
+              <ActivityIndicator
+                className="mx-auto"
+                size="large"
+                color={colors.primary}
+              />
+            </View>
           ) : (
             dishes.map((dish, i) => <DishConfig dish={dish} key={dish._id} />)
           )}

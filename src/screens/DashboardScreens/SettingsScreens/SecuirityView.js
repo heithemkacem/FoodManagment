@@ -6,14 +6,14 @@ import StyledTextInput from "../../../components/inputs/StyledTextInput";
 import RegularButton from "../../../components/buttons/RegularButton";
 const SecurityView = () => {
   return (
-    <View className={`flex-col justify-between pl-8 gap-2 mt-8 $flex`}>
-      <Text className=" text-lg font-bold text-white">
-        Welcome to our security system
+    <View className={`flex-col justify-between    flex`}>
+      <Text className=" text-lg font-bold text-white self-start p-5">
+        Bienvenue dans notre système de sécurité
       </Text>
-      <Text className="text-primary self-start text-md font-bold text-center">
-        Change your password:
+      <Text className="text-primary self-start text-md font-bold text-center p-5">
+        Changez votre mot de passe:
       </Text>
-      <View className="w-[80%] ">
+      <View className="w-[90%] pl-5 ">
         <Formik
           initialValues={{
             password: "",
@@ -45,7 +45,7 @@ const SecurityView = () => {
             <>
               <StyledTextInput
                 icon="lock-open-variant"
-                label={"Old Password"}
+                label={"Ancien mot de passe"}
                 placeholder="**********"
                 secureTextEntry={true}
                 isPassword={true}
@@ -59,7 +59,7 @@ const SecurityView = () => {
               />
               <StyledTextInput
                 icon="lock-open-variant"
-                label={"New Password"}
+                label={"Nouveau mot de passe"}
                 placeholder="**********"
                 secureTextEntry={true}
                 isPassword={true}
@@ -73,7 +73,7 @@ const SecurityView = () => {
               />
               <StyledTextInput
                 icon="lock-open-variant"
-                label={"Confirm New Password"}
+                label={"Confirmer le nouveau MDP"}
                 placeholder="**********"
                 secureTextEntry={true}
                 isPassword={true}
@@ -88,7 +88,7 @@ const SecurityView = () => {
 
               {!isSubmitting && (
                 <RegularButton onPress={handleSubmit}>
-                  Change Password
+                  Changer le mot de passe
                 </RegularButton>
               )}
               {isSubmitting && (

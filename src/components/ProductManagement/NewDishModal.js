@@ -92,7 +92,9 @@ const NewDishModal = ({
         }}
       >
         <View className="flex-row items-center justify-between">
-          <Text className="text-3xl font-bold text-white">Add New Dish</Text>
+          <Text className="text-3xl font-bold text-white">
+            Ajouter un nouveau plat
+          </Text>
           <TouchableOpacity
             activeOpacity={0.9}
             onPress={() => setIsNewDishModalOpen(false)}

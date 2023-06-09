@@ -10,7 +10,9 @@ const AddNewDish = ({ setIsNewDishModalOpen }) => {
     >
       <View className="flex flex-col items-center justify-center">
         <MaterialCommunityIcons name="plus" size={30} color={colors.primary} />
-        <Text className="text-primary text-center">Add New Dish</Text>
+        <Text className="text-primary text-center">
+          Ajouter un nouveau plat
+        </Text>
       </View>
     </Pressable>
   );

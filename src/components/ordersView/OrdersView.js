@@ -34,7 +34,7 @@ const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
         }}
       >
         <View className="flex-row items-center justify-between">
-          <Text className="text-3xl font-bold text-white">Orders</Text>
+          <Text className="text-3xl font-bold text-white">Commandes</Text>
           <TouchableOpacity
             activeOpacity={0.9}
             onPress={() => setIsOrdersViewOpen(false)}
@@ -152,7 +152,7 @@ const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
             }}
           >
             <Text className="text-lg font-bold text-center text-white">
-              Checkout
+              Vérifier
             </Text>
           </TouchableOpacity>
         </View>

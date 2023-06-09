@@ -4,12 +4,12 @@ import { View, Text, Image } from "react-native";
 const AboutUsView = () => {
   return (
     <>
-      <View className={`flex-col justify-between pl-8 gap-2 mt-8 flex`}>
+      <View className={`flex-col justify-between p-5 flex`}>
         <Text className=" text-lg font-bold text-white">
-          Welcome to our managment system
+          Bienvenue dans notre système de gestion de restaurant
         </Text>
         <Text className="text-primary self-start text-md font-bold text-center">
-          About Us:
+          À propos de nous:
         </Text>
         <Text className="text-sm self-start text-left text-white">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,

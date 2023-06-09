@@ -16,7 +16,24 @@ const DishCategories = ({
   }, []);
 
   return (
-    <View className="border-gray-100/10 flex-row flex-wrap  w-full pb-3 space-x-3 border-b ">
+    <View className="border-gray-100/10 flex-row flex-wrap w-full pb-3 space-x-6 border-b">
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onPress={() => setSelectedCategoryId(null)}
+      >
+        <Text
+          className={`${smallText ? "text-md" : "text-lg"} ${
+            selectedCategoryId == null ? "text-primary" : "text-white"
+          }`}
+        >
+          Tous
+        </Text>
+        <View
+          className={`w-full h-1 absolute -bottom-[14px] ${
+            selectedCategoryId == null ? "bg-primary" : "bg-transparent"
+          }`}
+        />
+      </TouchableOpacity>
       {categories?.map((category, i) => (
         <TouchableOpacity
           key={category._id}
@@ -25,7 +42,7 @@ const DishCategories = ({
         >
           <Text
             className={`${smallText ? "text-md" : "text-lg"} ${
-              selectedCategoryId == category.id ? "text-primary" : "text-white"
+              selectedCategoryId == category._id ? "text-primary" : "text-white"
             }`}
           >
             {category.cat_name}

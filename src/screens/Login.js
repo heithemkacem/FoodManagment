@@ -11,9 +11,10 @@ import { useDispatch } from "react-redux";
 import { LoginAction } from "../_actions/logicHandlerActions/authActions";
 import { moveTo } from "../util/moveTo";
 import { LoginSchema } from "../util/validationSchemas";
-const Login = ({ navigation }) => {
+const Login = ({ navigation, route }) => {
   const { white } = colors;
   const dispatch = useDispatch();
+  console.log(route.params);
   return (
     <MainContainer>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -22,14 +23,16 @@ const Login = ({ navigation }) => {
             marginBottom: 25,
           }}
         >
-          Login to check your menu
+          Connecter vous à votre compte !
         </BigText>
         <Formik
-          initialValues={{ email: "", password: "" }}
+          initialValues={{
+            email: route.params ? route.params.email : "",
+            password: "",
+          }}
           validationSchema={LoginSchema}
           onSubmit={(values, { setSubmitting }) => {
-            //dispatch(LoginAction(values, setSubmitting, moveTo, navigation));
-            moveTo(navigation, "Main");
+            dispatch(LoginAction(values, setSubmitting, moveTo, navigation));
           }}
         >
           {({
@@ -44,8 +47,8 @@ const Login = ({ navigation }) => {
             <>
               <StyledTextInput
                 icon="email"
-                label={"Email"}
-                placeholder={"Enter Your Email"}
+                label={"Adresse Email"}
+                placeholder={"Entrer votre adresse email"}
                 keyboardType="email-address"
                 autoCapitalize="none"
                 onChangeText={handleChange("email")}
@@ -56,8 +59,8 @@ const Login = ({ navigation }) => {
               />
               <StyledTextInput
                 icon="lock"
-                label={"Password"}
-                placeholder={"Enter Your Password"}
+                label={"Mot de passe"}
+                placeholder={"Entrer votre mot de passe"}
                 secureTextEntry={true}
                 autoCapitalize="none"
                 autoCorrect={false}
@@ -70,7 +73,7 @@ const Login = ({ navigation }) => {
               />
 
               {!isSubmitting && (
-                <RegularButton onPress={handleSubmit}>Login</RegularButton>
+                <RegularButton onPress={handleSubmit}>Connecter</RegularButton>
               )}
               {isSubmitting && (
                 <RegularButton disabled={true}>
@@ -85,12 +88,12 @@ const Login = ({ navigation }) => {
                 onPress={() => moveTo(navigation, "Signup")}
                 style={{ marginBottom: 7 }}
               >
-                Dont have an account ? Signup
+                Vous n'avez pas de compte ? S'inscrire
               </PressableText>
               <PressableText
                 onPress={() => moveTo(navigation, "ForgotPassword")}
               >
-                Forgot password ?
+                Mot de passe oublié ?
               </PressableText>
             </>
           )}

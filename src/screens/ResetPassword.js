@@ -5,7 +5,6 @@ import { Formik } from "formik";
 import RegularButton from "../components/buttons/RegularButton";
 import { ActivityIndicator, ScrollView } from "react-native";
 import { colors } from "../components/colors";
-import styled from "styled-components/native";
 import { useDispatch } from "react-redux";
 import { ResetPasswordAction } from "./../_actions/logicHandlerActions/authActions";
 import BigText from "../components/texts/BigText";
@@ -25,7 +24,7 @@ const ResetPassword = ({ navigation, route }) => {
             marginTop: 25,
           }}
         >
-          Change your password
+          Changer votre mot de passe
         </BigText>
 
         <Formik
@@ -55,7 +54,7 @@ const ResetPassword = ({ navigation, route }) => {
             <>
               <StyledTextInput
                 icon="lock-open-variant"
-                label={"New Password"}
+                label={"Nouveau mot de passe"}
                 placeholder="**********"
                 secureTextEntry={true}
                 isPassword={true}
@@ -69,7 +68,7 @@ const ResetPassword = ({ navigation, route }) => {
               />
               <StyledTextInput
                 icon="lock-open-variant"
-                label={"Confirm New Password"}
+                label={"Confirmer votre mot de passe"}
                 placeholder="**********"
                 secureTextEntry={true}
                 isPassword={true}
@@ -83,7 +82,7 @@ const ResetPassword = ({ navigation, route }) => {
               />
 
               {!isSubmitting && (
-                <RegularButton onPress={handleSubmit}>Submit</RegularButton>
+                <RegularButton onPress={handleSubmit}>Valider</RegularButton>
               )}
               {isSubmitting && (
                 <RegularButton disabled={true}>

@@ -31,14 +31,22 @@ const Home = ({ navigation }) => {
 
   useEffect(() => {
     getDishes();
-  }, [selectedCategoryId]);
+  }, []);
 
   useEffect(() => {
-    const newDishes = allDishes.filter((dish) =>
-      dish?.name?.toLowerCase().trim().includes(query.toLowerCase().trim())
-    );
+    const newDishes = allDishes.filter((dish) => {
+      if (!selectedCategoryId)
+        return dish?.name
+          ?.toLowerCase()
+          .trim()
+          .includes(query.toLowerCase().trim());
+      return (
+        dish?.name?.toLowerCase().trim().includes(query.toLowerCase().trim()) &&
+        dish.cat_id == selectedCategoryId
+      );
+    });
     setDishes(newDishes);
-  }, [query]);
+  }, [selectedCategoryId, query]);
 
   const getDishes = async () => {
     setIsLoading(true);

@@ -4,43 +4,40 @@ import jwt_decode from "jwt-decode";
 import { setAuth } from "../../util/setAuth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Toast from "react-native-toast-message";
-const localUrl = "http://localhost:3000";
+const localUrl = "http://localhost:8000";
 const currentUrl = localUrl;
 //!Signup Admin
 export const SignupAction =
   (credentials, setSubmitting, moveTo, navigation) => async (dispatch) => {
-    const API_ENDPOINT = `${currentUrl}/auth/signup`;
-    const ERROR_MESSAGE =
-      "An error occurred while signing up. Please try again later.";
-    const SUCCESS_MESSAGE = "You have received an email to verify your account";
     try {
-      const { data } = await axios.post(API_ENDPOINT, credentials);
-      const { status, message, user } = data;
+      const { data } = await axios.post(
+        `${currentUrl}/api/signup`,
+        credentials
+      );
+      const { success, message } = data;
 
-      if (status === "Failed") {
+      if (success === false) {
         setSubmitting(false);
         Toast.show({
           type: "error",
-          text1: "Error",
+          text1: "Erreur",
           text2: message,
         });
-      } else if (status === "Success") {
+      } else if (success === true) {
         setSubmitting(false);
         Toast.show({
           type: "success",
-          text1: "Success",
-          text2: SUCCESS_MESSAGE,
+          text1: "Succès",
+          text2: message,
         });
-        moveTo(navigation, "EmailVerification", {
-          id: user._id,
-        });
+        moveTo(navigation, "Login", { email: credentials.email });
       }
     } catch (error) {
       setSubmitting(false);
       Toast.show({
         type: "error",
-        text1: "Error",
-        text2: ERROR_MESSAGE,
+        text1: "Erreur",
+        text2: error.message,
       });
     }
   };
@@ -64,7 +61,7 @@ export const LoginAction =
         setSubmitting(false);
         Toast.show({
           type: "error",
-          text1: "Error",
+          text1: "Erreur",
           text2: message,
         });
       } else if (status === "Success") {
@@ -75,7 +72,7 @@ export const LoginAction =
         setSubmitting(false);
         Toast.show({
           type: "success",
-          text1: "Success",
+          text1: "Succès",
           text2: `${SUCCESS_MESSAGE} ${decode.fullName}`,
         });
         moveTo(navigation, "MainScreen");
@@ -89,7 +86,7 @@ export const LoginAction =
       setSubmitting(false);
       Toast.show({
         type: "error",
-        text1: "Error",
+        text1: "Erreur",
         text2: ERROR_MESSAGE,
       });
     }
@@ -107,13 +104,13 @@ export const ForgotPasswordAction =
         setSubmitting(false);
         Toast.show({
           type: "error",
-          text1: "Error",
+          text1: "Erreur",
           text2: response.data.message,
         });
       } else if (response.data.status === "Success") {
         Toast.show({
           type: "success",
-          text1: "Success",
+          text1: "Succès",
           text2: response.data.message,
         });
         setSubmitting(false);
@@ -125,7 +122,7 @@ export const ForgotPasswordAction =
       setSubmitting(false);
       Toast.show({
         type: "error",
-        text1: "Error",
+        text1: "Erreur",
         text2: error.message,
       });
     }
@@ -146,14 +143,14 @@ export const ResetPasswordAction =
         setSubmitting(false);
         Toast.show({
           type: "error",
-          text1: "Error",
+          text1: "Erreur",
           text2: response.data.message,
         });
       } else if (response.data.status === "Success") {
         setSubmitting(false);
         Toast.show({
           type: "success",
-          text1: "Success",
+          text1: "Succès",
           text2: "You have successfully changed your password",
         });
         moveTo(navigation, "Login");
@@ -162,7 +159,7 @@ export const ResetPasswordAction =
       setSubmitting(false);
       Toast.show({
         type: "error",
-        text1: "Error",
+        text1: "Erreur",
         text2: error.message,
       });
     }

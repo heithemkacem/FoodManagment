@@ -46,6 +46,7 @@ const Layout = ({
   children,
   searchBar,
   style,
+  setQuery,
 }) => {
   return (
     <ScreenContainer>
@@ -54,7 +55,12 @@ const Layout = ({
       </SideBarContainer>
       <Container>
         <StyledView>
-          <Header headerTitle={headerTitle} date={date} searchBar={searchBar} />
+          <Header
+            headerTitle={headerTitle}
+            date={date}
+            setQuery={setQuery}
+            searchBar={searchBar}
+          />
         </StyledView>
         <MainContainer>
           <MainView>{children}</MainView>

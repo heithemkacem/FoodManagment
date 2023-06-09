@@ -4,16 +4,12 @@ import jwt_decode from "jwt-decode";
 import { setAuth } from "../../util/setAuth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Toast from "react-native-toast-message";
-const localUrl = "http://192.168.1.93:8000";
-const currentUrl = localUrl;
+import { API_URL } from "../../util/consts";
 //!Signup Admin
 export const SignupAction =
   (credentials, setSubmitting, moveTo, navigation) => async (dispatch) => {
     try {
-      const { data } = await axios.post(
-        `${currentUrl}/api/signup`,
-        credentials
-      );
+      const { data } = await axios.post(`${API_URL}/signup`, credentials);
       const { success, message } = data;
 
       if (success === false) {
@@ -45,7 +41,7 @@ export const SignupAction =
 export const LoginAction =
   (credentials, setSubmitting, moveTo, navigation) => async (dispatch) => {
     try {
-      const { data } = await axios.post(`${currentUrl}/api/login`, credentials);
+      const { data } = await axios.post(`${API_URL}/login`, credentials);
       const { success, message } = data;
 
       if (success === false) {
@@ -83,10 +79,7 @@ export const LoginAction =
 export const ForgotPasswordAction =
   (credentials, setSubmitting, moveTo, navigation) => async (dispatch) => {
     try {
-      const { data } = await axios.post(
-        `${currentUrl}/api/sendMail`,
-        credentials
-      );
+      const { data } = await axios.post(`${API_URL}/sendMail`, credentials);
       const { success, message } = data;
       if (success === false) {
         setSubmitting(false);
@@ -122,10 +115,7 @@ export const ResetPasswordAction =
   (values, setSubmitting, moveTo, route, navigation) => async (dispatch) => {
     console.log(values);
     try {
-      const { data } = await axios.post(
-        `${currentUrl}/api/resetPassword`,
-        values
-      );
+      const { data } = await axios.post(`${API_URL}/resetPassword`, values);
       const { success, message } = data;
       if (success === false) {
         setSubmitting(false);
@@ -155,9 +145,7 @@ export const ResetPasswordAction =
 //!Get Categories
 export const getCategories = (setCategories) => async (dispatch) => {
   try {
-    const response = await axios.post(
-      "http://192.168.1.93:8000/api/getcategory"
-    );
+    const response = await axios.post(`${API_URL}/getcategory`);
     setCategories(response.data.categories);
   } catch (error) {
     Toast.show({
@@ -170,7 +158,7 @@ export const getCategories = (setCategories) => async (dispatch) => {
 
 export const getOrders = (setOrders) => async (dispatch) => {
   try {
-    const response = await axios.post("http://192.168.1.93:8000/api/getOrders");
+    const response = await axios.post(`${API_URL}/getOrders`);
     setOrders(response.data.order);
   } catch (error) {
     Toast.show({

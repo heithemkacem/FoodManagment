@@ -6,8 +6,8 @@ import { colors } from "../../components/colors";
 import AboutUsView from "./SettingsScreens/AboutUs";
 import NotificationsView from "./SettingsScreens/NotificationScreen";
 import OrdersView from "./SettingsScreens/Orders";
-import ProductManagementView from "./SettingsScreens/ProductManagementView";
 import SecurityView from "./SettingsScreens/SecuirityView";
+import ProductManagementView from "../../components/ProductManagement/ProductManagementView";
 
 const Settings = ({ navigation }) => {
   const [items, setItems] = React.useState([
@@ -65,7 +65,7 @@ const Settings = ({ navigation }) => {
 
   return (
     <Layout navigation={navigation} headerTitle="Settings" searchBar={false}>
-      <View className=" flex-row gap-8  bg-black">
+      <View className=" flex-row flex-1 space-x-8">
         <View className="bg-lightblack max-w-[200px]  h-full">
           {items.map((item, index) => (
             <Pressable
@@ -93,7 +93,7 @@ const Settings = ({ navigation }) => {
             </Pressable>
           ))}
         </View>
-        <View className="bg-lightblack flex-1 h-full ">
+        <View className="bg-lightblack flex-1 h-full">
           {items[selectedItemIndex].component}
         </View>
       </View>

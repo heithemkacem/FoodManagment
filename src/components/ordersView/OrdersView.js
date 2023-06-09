@@ -14,10 +14,11 @@ import { colors } from "../colors";
 
 const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
   return (
-    <Pressable
-      onPress={() => setIsOrdersViewOpen(false)}
-      className="absolute top-0 bottom-0 left-0 right-0"
-    >
+    <>
+      <Pressable
+        onPress={() => setIsOrdersViewOpen(false)}
+        className="absolute top-0 bottom-0 left-0 right-0"
+      />
       <Animated.View
         entering={FadeInRight.duration(300)}
         exiting={FadeOutRight.duration(300)}
@@ -52,7 +53,7 @@ const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
         <ScrollView>
           <View className="mt-4 space-y-8">
             {orders.map((order, i) => (
-              <View key={order.id} className="flex-row justify-between">
+              <View key={order._id} className="flex-row justify-between">
                 <View className="flex-1 space-y-4">
                   <View className="flex-row justify-between">
                     <View className="flex-row gap-4">
@@ -156,7 +157,7 @@ const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
           </TouchableOpacity>
         </View>
       </Animated.View>
-    </Pressable>
+    </>
   );
 };
 

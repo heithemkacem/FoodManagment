@@ -55,11 +55,11 @@ const SearchContainer = styled.View`
   height: 40px;
   width: 100%;
 `;
-const Header = ({ headerTitle, date, searchBar }) => {
+const Header = ({ headerTitle, date, searchBar, setQuery }) => {
   const [value, setValue] = React.useState("");
   const handleOnChangeText = (text) => {
     setValue(text);
-    //Filter the data here
+    setQuery(text);
   };
 
   return (

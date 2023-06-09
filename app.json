@@ -35,6 +35,14 @@
     },
     "updates": {
       "url": "https://u.expo.dev/297e836e-dec9-4416-ab48-8596da68a610"
-    }
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos."
+        }
+      ]
+    ]
   }
 }

@@ -15,9 +15,13 @@ const ProductManagementView = () => {
     setQuery,
     selectedCategoryId,
     setSelectedCategoryId,
+    getDishes,
   } = useDishes();
 
   const [isNewDishModalOpen, setIsNewDishModalOpen] = useState(false);
+  useEffect(() => {
+    if (isNewDishModalOpen === false) getDishes();
+  }, [isNewDishModalOpen]);
 
   const [currentDish, setCurrentDish] = useState({
     name: "",

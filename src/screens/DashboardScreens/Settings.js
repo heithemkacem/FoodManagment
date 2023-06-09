@@ -8,6 +8,7 @@ import NotificationsView from "./SettingsScreens/NotificationScreen";
 import OrdersView from "./SettingsScreens/Orders";
 import SecurityView from "./SettingsScreens/SecuirityView";
 import ProductManagementView from "../../components/ProductManagement/ProductManagementView";
+import CategoryManagementView from "../../components/CategoryManagementView/CategoryManagementView";
 //translate all the text to french
 const Settings = ({ navigation }) => {
   const [items, setItems] = React.useState([
@@ -39,6 +40,16 @@ const Settings = ({ navigation }) => {
       iconColor: colors.lightGray,
       active: false,
       component: <ProductManagementView />,
+    },
+    {
+      name: "Gestion des catégories",
+      text: "Gérer vos catégories",
+      icon: "folderopen",
+      bgColor: colors.lightblack,
+      textColor: colors.lightGray,
+      iconColor: colors.lightGray,
+      active: false,
+      component: <CategoryManagementView />,
     },
     {
       name: "Sécurité",

@@ -10,9 +10,10 @@ const DishCategories = ({
   smallText,
 }) => {
   const [categories, setCategories] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getCategories(setCategories));
+    dispatch(getCategories(setCategories, setIsLoading));
   }, []);
 
   return (

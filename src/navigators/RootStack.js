@@ -17,7 +17,7 @@ import store from "../_actions/store";
 import { Logout } from "./../_actions/logicHandlerActions/authActions";
 import { useSelector } from "react-redux";
 import Home from "../screens/DashboardScreens/Home";
-import Notifications from "../screens/DashboardScreens/Notifications";
+import Orders from "../screens/DashboardScreens/Orders";
 import Settings from "../screens/DashboardScreens/Settings";
 import Main from "../screens/DashboardScreens/Main";
 
@@ -80,8 +80,8 @@ const RootStack = () => {
               }}
             />
             <Stack.Screen
-              name="Notifications"
-              component={Notifications}
+              name="Orders"
+              component={Orders}
               options={{
                 header: () => null,
               }}

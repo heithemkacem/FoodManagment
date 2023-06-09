@@ -3,33 +3,8 @@ import { Text, View, TouchableOpacity } from "react-native";
 import Layout from "../../components/layout/Layout";
 import FilterSelect from "../../components/buttons/FilterSelect";
 import axios from "axios";
-const CustomerList = [
-  {
-    id: 564564564567,
-    menu: "Chicken Burger",
-    totalPayment: "100",
-    status: "Pending",
-  },
-  {
-    id: 8797897897,
-    menu: "Chicken Burger",
-    totalPayment: "100",
-    status: "Pending",
-  },
-  {
-    id: 8979789756,
-    menu: "Chicken Burger",
-    totalPayment: "100",
-    status: "Completed",
-  },
-  {
-    id: 4646456464,
-    menu: "Chicken Burger",
-    totalPayment: "100",
-    status: "Pending",
-  },
-];
-const Notifications = ({ navigation }) => {
+
+const Orders = ({ navigation }) => {
   const [orders, setOrders] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -63,7 +38,7 @@ const Notifications = ({ navigation }) => {
               {item.client_name}
             </Text>
             <Text className="font-bold text-sm text-lightGray ">
-              {item.id_dishes}
+              {item.dishes_info.name}
             </Text>
             <Text className="font-bold text-sm text-lightGray">
               {item.total_price}$
@@ -83,4 +58,4 @@ const Notifications = ({ navigation }) => {
     </Layout>
   );
 };
-export default Notifications;
+export default Orders;

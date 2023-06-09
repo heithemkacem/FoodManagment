@@ -379,6 +379,7 @@ const SecurityView = () => {
       <View className="w-[80%] ">
         <Formik
           initialValues={{
+            oldPassword: "",
             newPassword: "",
             confirmNewPassword: "",
           }}

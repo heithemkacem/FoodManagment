@@ -1,6 +1,6 @@
 //!This is the input coponents of all forms
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, TextInput } from "react-native";
 import styled from "styled-components/native";
 import { colors } from "../colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -14,14 +14,6 @@ const RowContainer = styled.View`
   justify-content: space-between;
   position: relative;
   top: -10px;
-`;
-const InputField = styled.TextInput`
-  padding-left: 65px;
-  padding-right: 65px;
-  font-size: 16px;
-  height: 60px;
-  color: ${white};
-  border-width: 2px;
 `;
 
 const LeftIcon = styled.View`
@@ -60,16 +52,17 @@ const StyledTextInput = ({ icon, label, isPassword, errors, ...props }) => {
         {label}
       </SmallText>
 
-      <InputField
-        {...props}
+      <TextInput
+        className={`px-[65px] text-white border-2 py-3 border-gray-400 rounded-md`}
         placeholderTextColor={lightGray}
         style={{
+          textAlignVertical: "top",
           backgroundColor: lightblack,
           ...props?.style,
-          borderRadius: 20,
           borderColor: errors ? "red" : secondary,
         }}
         secureTextEntry={isPassword && hidePassword}
+        {...props}
       />
 
       {

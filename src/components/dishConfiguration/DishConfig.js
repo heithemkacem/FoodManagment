@@ -6,17 +6,17 @@ import { colors } from "../colors";
 const DishConfig = ({ dish, index }) => {
   return (
     <Pressable className=" w-[44%] h-60  border-lightGray border rounded-lg mb-5">
-      <View key={index} className="  w-full h-full items-center ">
+      <View key={index} className=" items-center w-full h-full">
         <Image
           source={{ uri: dish.image }}
-          className="mt-2 w-20 h-20  rounded-md "
+          className=" w-20 h-20 mt-2 rounded-md"
         />
-        <Text className="text-md font-bold text-center text-white mt-2">
+        <Text className="text-md mt-2 font-bold text-center text-white">
           {dish.name}
         </Text>
         <View className="flex-row   items-center justify-between w-[80%] mt-2">
-          <Text className="text-md  text-lightGray">${dish.price}</Text>
-          <Text className="text-lightGray  ">{dish.numberAvailable} Bowls</Text>
+          <Text className="text-md text-lightGray">${dish.price}</Text>
+          <Text className="text-lightGray ">{dish.numberAvailable} Bowls</Text>
         </View>
         <TouchableOpacity
           activeOpacity={0.9}
@@ -38,7 +38,7 @@ const DishConfig = ({ dish, index }) => {
             color={colors.primary}
           />
 
-          <Text className="font-semibold text-sm text-center text-primary">
+          <Text className="text-primary text-sm font-semibold text-center">
             Edit dish
           </Text>
         </TouchableOpacity>

@@ -16,55 +16,20 @@ import { API_URL } from "../../util/consts";
 import axios from "axios";
 import Toast from "react-native-toast-message";
 import { colors } from "../../components/colors";
+import useDishes from "../../util/hooks/useDishes";
 
 const Home = ({ navigation }) => {
-  const [dishes, setDishes] = useState([]);
-  const [selectedCategoryId, setSelectedCategoryId] = useState(null);
+  const {
+    dishes,
+    isLoading,
+    setQuery,
+    selectedCategoryId,
+    setSelectedCategoryId,
+  } = useDishes();
 
   const [orders, setOrders] = useState([]);
   const [isOrdersViewOpen, setIsOrdersViewOpen] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  const [query, setQuery] = useState("");
-  const [allDishes, setAllDishes] = useState([]);
-
-  useEffect(() => {
-    getDishes();
-  }, []);
-
-  useEffect(() => {
-    const newDishes = allDishes.filter((dish) => {
-      if (!selectedCategoryId)
-        return dish?.name
-          ?.toLowerCase()
-          .trim()
-          .includes(query.toLowerCase().trim());
-      return (
-        dish?.name?.toLowerCase().trim().includes(query.toLowerCase().trim()) &&
-        dish.cat_id == selectedCategoryId
-      );
-    });
-    setDishes(newDishes);
-  }, [selectedCategoryId, query]);
-
-  const getDishes = async () => {
-    setIsLoading(true);
-    try {
-      const res = await axios.post(`${API_URL}/getDishes`, {
-        cat_id: selectedCategoryId,
-      });
-      setDishes(res.data.dish);
-      setAllDishes(res.data.dish);
-    } catch (error) {
-      Toast.show({
-        type: "error",
-        text1: "Erreur",
-        text2: error.message,
-      });
-    }
-    setIsLoading(false);
-  };
   const handleOrderNow = (dish) => {
     const newOrders = [...orders];
     const index = newOrders.findIndex((order) => order.id == dish.id);
@@ -111,7 +76,7 @@ const Home = ({ navigation }) => {
         <ScrollView className="">
           <View className="gap-x-8 gap-y-24 flex-row flex-wrap mt-10">
             {isLoading ? (
-              <ActivityIndicator size="small" color={colors.primary} />
+              <ActivityIndicator size="large" color={colors.primary} />
             ) : (
               dishes.map((dish, i) => (
                 <View

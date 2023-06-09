@@ -11,13 +11,13 @@ const OrdersView = () => {
   }, []);
 
   return (
-    <View className="p-3  h-[86%] ">
+    <View className=" h-[86%] p-5">
       <View className="flex-row items-center justify-between">
-        <Text className="text-xl font-bold text-white">Orders</Text>
-        <FilterSelect text="Filter Order" icon="book-settings" />
+        <Text className="text-xl font-bold text-white">Commandes</Text>
+        <FilterSelect text="Filtre " icon="filter" />
       </View>
       <View className="border-lightGray flex-row items-center justify-between pb-3 mt-6 mb-6 border-b-2">
-        <Text className="text-md font-bold text-white">Customer</Text>
+        <Text className="text-md font-bold text-white">Client</Text>
         <Text className="text-md font-bold text-white">Status</Text>
       </View>
 

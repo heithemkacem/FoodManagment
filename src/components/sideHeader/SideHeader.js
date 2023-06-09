@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Pressable, Text } from "react-native";
 import styled from "styled-components/native";
 import { ScreenHeight } from "../shared";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import { colors } from "../colors";
 import { moveTo } from "../../util/moveTo";
 import { useDispatch, useSelector } from "react-redux";
@@ -91,7 +91,7 @@ const SideHeader = ({ navigation }) => {
                 }}
                 activeClicked={item.activeClicked}
               >
-                <MaterialCommunityIcons
+                <AntDesign
                   name={item.name}
                   size={item.size}
                   color={item.color}
@@ -105,11 +105,7 @@ const SideHeader = ({ navigation }) => {
         <ListItemContainer>
           <ListItem>
             <Pressable onPress={() => dispatch(Logout())}>
-              <MaterialCommunityIcons
-                name="logout"
-                size={30}
-                color={colors.primary}
-              />
+              <AntDesign name="logout" size={30} color={colors.primary} />
             </Pressable>
           </ListItem>
         </ListItemContainer>

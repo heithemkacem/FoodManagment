@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text } from "react-native";
+import { Pressable, Text } from "react-native";
 import styled from "styled-components/native";
 import { ScreenHeight } from "../shared";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -7,6 +7,7 @@ import { colors } from "../colors";
 import { moveTo } from "../../util/moveTo";
 import { useDispatch, useSelector } from "react-redux";
 import { setSideBarMenu } from "../../_actions/logicHandlerActions/authActions";
+import { Logout } from "../../_actions/logicHandlerActions/authActions";
 const { white, primary } = colors;
 const Container = styled.View`
   background-color: ${colors.black};
@@ -85,7 +86,6 @@ const SideHeader = ({ navigation }) => {
                       item.active = false;
                       item.color = colors.primary;
                     }
-                    console.log(ListItemsList);
                     dispatch(setSideBarMenu(ListItemsList));
                   });
                 }}
@@ -104,11 +104,13 @@ const SideHeader = ({ navigation }) => {
       <LogoutContainer>
         <ListItemContainer>
           <ListItem>
-            <MaterialCommunityIcons
-              name="logout"
-              size={30}
-              color={colors.primary}
-            />
+            <Pressable onPress={() => dispatch(Logout())}>
+              <MaterialCommunityIcons
+                name="logout"
+                size={30}
+                color={colors.primary}
+              />
+            </Pressable>
           </ListItem>
         </ListItemContainer>
       </LogoutContainer>

@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import Layout from "../../components/layout/Layout";
 import FilterSelect from "../../components/buttons/FilterSelect";
-
+import axios from "axios";
 const CustomerList = [
   {
     id: 564564564567,
@@ -30,13 +30,14 @@ const CustomerList = [
   },
 ];
 const Notifications = ({ navigation }) => {
+  const [orders, setOrders] = useState([]);
+  const fetchData = async () => {
+    const response = await axios.post("http://192.168.1.93:8000/api/getOrders");
+    setOrders(response.data.order);
+  };
+  fetchData();
   return (
-    <Layout
-      navigation={navigation}
-      headerTitle="Notfocation "
-      date={true}
-      searchBar={true}
-    >
+    <Layout navigation={navigation} headerTitle="Notfocation " date={true}>
       <View>
         <View className="flex-row justify-between items-center">
           <Text className="font-bold text-xl text-white">Orders</Text>
@@ -49,19 +50,19 @@ const Notifications = ({ navigation }) => {
           <Text className="font-bold text-lg text-white">Status</Text>
         </View>
 
-        {CustomerList.map((item, index) => (
+        {orders?.map((item, index) => (
           <View
             className="flex-row justify-between items-center mb-6 "
-            key={index}
+            key={item._id}
           >
             <Text className="font-bold text-xl text-white">
-              Customer#{item.id}
+              {item.client_name}
             </Text>
             <Text className="font-bold text-sm text-lightGray ">
-              {item.menu}
+              {item.id_dishes}
             </Text>
             <Text className="font-bold text-sm text-lightGray">
-              {item.totalPayment}$
+              {item.total_price}$
             </Text>
             {item.status === "Pending" ? (
               <TouchableOpacity className="font-bold text-lg text-yellow bg-[#503A3A] px-7 py-1 rounded-full w-36">

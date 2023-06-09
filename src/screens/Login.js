@@ -14,7 +14,6 @@ import { LoginSchema } from "../util/validationSchemas";
 const Login = ({ navigation, route }) => {
   const { white } = colors;
   const dispatch = useDispatch();
-  console.log(route.params);
   return (
     <MainContainer>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -27,7 +26,7 @@ const Login = ({ navigation, route }) => {
         </BigText>
         <Formik
           initialValues={{
-            email: route.params ? route.params.email : "",
+            email: route.params?.email ? route.params.email : "",
             password: "",
           }}
           validationSchema={LoginSchema}

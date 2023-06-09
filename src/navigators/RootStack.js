@@ -30,7 +30,7 @@ const RootStack = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Login"
+        initialRouteName={isConnected ? "Main" : "Login"}
         screenOptions={{
           headerLeft: (props) => (
             <Pressable
@@ -63,87 +63,73 @@ const RootStack = () => {
           animationEnabled: false,
         }}
       >
-        <>
-          <Stack.Screen
-            name="Main"
-            component={Main}
-            options={{
-              header: () => null,
-            }}
-          />
-          <Stack.Screen
-            name="Home"
-            component={Home}
-            options={{
-              header: () => null,
-            }}
-          />
-          <Stack.Screen
-            name="Notifications"
-            component={Notifications}
-            options={{
-              header: () => null,
-            }}
-          />
-          <Stack.Screen
-            name="Settings"
-            component={Settings}
-            options={{
-              header: () => null,
-            }}
-          />
-          {
-            //!if the user is connected show the logout button
-          }
-          {/*   headerRight: () =>
-                isConnected ? (
-                  <Pressable
-                    onPress={() => {
-                      //logout
-                      store.dispatch(Logout());
-                    }}
-                  >
-                    <MaterialCommunityIcons
-                      name="logout"
-                      size={25}
-                      color="black"
-                    />
-                  </Pressable>
-                ) : null, */}
-
-          <Stack.Screen
-            name="Login"
-            component={Login}
-            options={{
-              headerTitle: "",
-              headerLeft: null,
-              headerStyle: {
-                backgroundColor: black,
-              },
-            }}
-          />
-          <Stack.Screen
-            name="Signup"
-            component={Signup}
-            options={{
-              headerTitle: "",
-            }}
-          />
-          <Stack.Screen
-            name="ForgotPassword"
-            component={ForgotPassword}
-            options={{
-              headerTitle: "",
-            }}
-          />
-          <Stack.Screen
-            name="ResetPassword"
-            component={ResetPassword}
-            options={{
-              headerTitle: "",
-            }}
-          />
-        </>
+        {isConnected ? (
+          <>
+            <Stack.Screen
+              name="Main"
+              component={Main}
+              options={{
+                header: () => null,
+              }}
+            />
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              options={{
+                header: () => null,
+              }}
+            />
+            <Stack.Screen
+              name="Notifications"
+              component={Notifications}
+              options={{
+                header: () => null,
+              }}
+            />
+            <Stack.Screen
+              name="Settings"
+              component={Settings}
+              options={{
+                header: () => null,
+              }}
+            />
+          </>
+        ) : (
+          <>
+            <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{
+                headerTitle: "",
+                headerLeft: null,
+                headerStyle: {
+                  backgroundColor: black,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="Signup"
+              component={Signup}
+              options={{
+                headerTitle: "",
+              }}
+            />
+            <Stack.Screen
+              name="ForgotPassword"
+              component={ForgotPassword}
+              options={{
+                headerTitle: "",
+              }}
+            />
+            <Stack.Screen
+              name="ResetPassword"
+              component={ResetPassword}
+              options={{
+                headerTitle: "",
+              }}
+            />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

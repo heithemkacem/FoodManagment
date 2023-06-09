@@ -4,7 +4,7 @@ import jwt_decode from "jwt-decode";
 import { setAuth } from "../../util/setAuth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Toast from "react-native-toast-message";
-const localUrl = "http://localhost:8000";
+const localUrl = "http://192.168.1.93:8000";
 const currentUrl = localUrl;
 //!Signup Admin
 export const SignupAction =

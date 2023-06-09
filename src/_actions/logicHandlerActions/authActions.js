@@ -84,7 +84,7 @@ export const ForgotPasswordAction =
   (credentials, setSubmitting, moveTo, navigation) => async (dispatch) => {
     try {
       const { data } = await axios.post(
-        `${currentUrl}/auth/forget-password`,
+        `${currentUrl}/api/sendMail`,
         credentials
       );
       const { success, message } = data;
@@ -120,9 +120,10 @@ export const ForgotPasswordAction =
 
 export const ResetPasswordAction =
   (values, setSubmitting, moveTo, route, navigation) => async (dispatch) => {
+    console.log(values);
     try {
       const { data } = await axios.post(
-        `${currentUrl}/auth/reset-password`,
+        `${currentUrl}/api/resetPassword`,
         values
       );
       const { success, message } = data;

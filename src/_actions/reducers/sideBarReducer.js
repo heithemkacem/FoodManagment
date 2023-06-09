@@ -24,7 +24,7 @@ const initialState = {
       color: colors.primary,
       size: 25,
       active: false,
-      moveTo: "Notifications",
+      moveTo: "Orders",
     },
 
     {

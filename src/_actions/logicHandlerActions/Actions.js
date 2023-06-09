@@ -143,18 +143,21 @@ export const ResetPasswordAction =
     }
   };
 //!Get Categories
-export const getCategories = (setCategories) => async (dispatch) => {
-  try {
-    const response = await axios.post(`${API_URL}/getcategory`);
-    setCategories(response.data.categories);
-  } catch (error) {
-    Toast.show({
-      type: "error",
-      text1: "Erreur",
-      text2: error.message,
-    });
-  }
-};
+export const getCategories =
+  (setCategories, setIsLoading) => async (dispatch) => {
+    setIsLoading(true);
+    try {
+      const response = await axios.post(`${API_URL}/getcategory`);
+      setCategories(response.data.categories);
+    } catch (error) {
+      Toast.show({
+        type: "error",
+        text1: "Erreur",
+        text2: error.message,
+      });
+    }
+    setIsLoading(false);
+  };
 
 export const getOrders = (setOrders) => async (dispatch) => {
   try {

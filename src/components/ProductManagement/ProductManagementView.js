@@ -19,19 +19,19 @@ const ProductManagementView = () => {
   } = useDishes();
 
   const [isNewDishModalOpen, setIsNewDishModalOpen] = useState(false);
-  useEffect(() => {
-    if (isNewDishModalOpen === false) getDishes();
-  }, [isNewDishModalOpen]);
 
-  const [currentDish, setCurrentDish] = useState({
-    name: "",
-    price: 0,
-    description: "",
-  });
+  const [dishToUpdate, setDishToUpdate] = useState({});
+
+  useEffect(() => {
+    if (isNewDishModalOpen === false) {
+      getDishes();
+      setDishToUpdate({});
+    }
+  }, [isNewDishModalOpen]);
 
   return (
     <View className={`p-6 flex-1`}>
-      <View className="flex-row justify-between items-center">
+      <View className="flex-row items-center justify-between">
         <Text className="text-lg font-bold text-white">Commandes</Text>
         <FilterSelect text="Ajouter une catégorie" icon="plus" />
       </View>
@@ -46,7 +46,7 @@ const ProductManagementView = () => {
         <View className="flex-row flex-wrap justify-between mt-10">
           <AddNewDish setIsNewDishModalOpen={setIsNewDishModalOpen} />
           {isLoading ? (
-            <View className="flex-1 justify-center items-center">
+            <View className="items-center justify-center flex-1">
               <ActivityIndicator
                 className="mx-auto"
                 size="large"
@@ -54,7 +54,16 @@ const ProductManagementView = () => {
               />
             </View>
           ) : (
-            dishes.map((dish, i) => <DishConfig dish={dish} key={dish._id} />)
+            dishes.map((dish, i) => (
+              <DishConfig
+                handleClick={(_dish) => {
+                  setIsNewDishModalOpen(true);
+                  setDishToUpdate(_dish);
+                }}
+                dish={dish}
+                key={dish._id}
+              />
+            ))
           )}
         </View>
       </ScrollView>
@@ -62,8 +71,8 @@ const ProductManagementView = () => {
       {/* Modals */}
       {isNewDishModalOpen && (
         <NewDishModal
-          currentDish={currentDish}
-          setCurrentDish={setCurrentDish}
+          dishToUpdate={dishToUpdate}
+          setDishToUpdate={setDishToUpdate}
           setIsNewDishModalOpen={setIsNewDishModalOpen}
         />
       )}

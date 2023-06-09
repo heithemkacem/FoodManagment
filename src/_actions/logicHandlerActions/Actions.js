@@ -172,6 +172,33 @@ export const getOrders = (setOrders) => async (dispatch) => {
   }
 };
 
+export const CreateOrder =
+  (setIsOrdersViewOpen, setOrders, orders, total) => async (dispatch) => {
+    try {
+      const { data } = await axios.post(`${API_URL}/createOrder`, {
+        id_dishes: orders,
+        total: total,
+      });
+      const { success, message } = data;
+      if (success === true) {
+        setSubmitting(false);
+        Toast.show({
+          type: "success",
+          text1: "Succès",
+          text2: message,
+        });
+      }
+      setIsOrdersViewOpen(false);
+      setOrders([]);
+    } catch (error) {
+      Toast.show({
+        type: "error",
+        text1: "Erreur",
+        text2: error.message,
+      });
+    }
+  };
+
 //?Redux Actions
 //!Logout User
 export const Logout = () => async (dispatch) => {

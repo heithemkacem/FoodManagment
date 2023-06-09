@@ -114,7 +114,7 @@ const NewDishModal = ({
       >
         <View className="flex-row items-center justify-between">
           <View className="flex-row items-center space-x-2">
-            <Text className="text-3xl font-bold text-white">
+            <Text className="text-lg font-bold text-white">
               {dishToUpdate?._id ? "Modifier" : "Ajouter un nouveau"} plat
             </Text>
             {dishToUpdate?._id && (

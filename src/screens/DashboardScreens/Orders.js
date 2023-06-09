@@ -39,7 +39,7 @@ const Orders = ({ navigation }) => {
             <Text className="font-bold text-sm text-lightGray">
               {item.total_price}$
             </Text>
-            {item.status === "Pending" ? (
+            {item.status === 1 ? (
               <TouchableOpacity className="font-bold text-lg text-yellow bg-[#503A3A] px-7 py-1 rounded-full w-36">
                 <Text className="text-center text-[#FFB572]">En attente</Text>
               </TouchableOpacity>

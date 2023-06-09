@@ -11,8 +11,14 @@ import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Animated, { FadeInRight, FadeOutRight } from "react-native-reanimated";
 import { colors } from "../colors";
+import { CreateOrder } from "../../_actions/logicHandlerActions/Actions";
+import { useDispatch } from "react-redux";
 
 const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
+  const dispatch = useDispatch();
+  const total = orders
+    .reduce((acc, order) => acc + order.price * order.quantity, 0)
+    .toFixed(2);
   return (
     <>
       <Pressable
@@ -136,19 +142,15 @@ const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
         <View className="mt-auto">
           <View className="flex-row items-center justify-between mt-4">
             <Text className="text-lg font-bold text-white">Total</Text>
-            <Text className="text-lg font-bold text-white">
-              $
-              {orders
-                .reduce((acc, order) => acc + order.price * order.quantity, 0)
-                .toFixed(2)}
-            </Text>
+            <Text className="text-lg font-bold text-white">${total}</Text>
           </View>
           <TouchableOpacity
             activeOpacity={0.9}
             className="bg-primary p-4 mt-4 rounded-lg"
             onPress={() => {
-              setIsOrdersViewOpen(false);
-              setOrders([]);
+              dispatch(
+                CreateOrder(setIsOrdersViewOpen, setOrders, orders, total)
+              );
             }}
           >
             <Text className="text-lg font-bold text-center text-white">

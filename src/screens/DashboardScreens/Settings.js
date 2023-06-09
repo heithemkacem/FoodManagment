@@ -108,7 +108,7 @@ const Settings = ({ navigation }) => {
             </Pressable>
           ))}
         </View>
-        <View className="bg-lightblack flex-1 h-full">
+        <View className="bg-lightblack flex-1 ">
           {items[selectedItemIndex].component}
         </View>
       </View>

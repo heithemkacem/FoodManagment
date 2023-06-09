@@ -53,6 +53,7 @@ export const useDishes = () => {
     setQuery,
     selectedCategoryId,
     setSelectedCategoryId,
+    getDishes,
   };
 };
 

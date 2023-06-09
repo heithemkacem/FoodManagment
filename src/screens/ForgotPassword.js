@@ -26,16 +26,15 @@ const ForgotPassword = ({ navigation }) => {
             marginBottom: 25,
           }}
         >
-          Provide your email to reset your password
+          Entrer votre adresse email
         </BigText>
         <Formik
           initialValues={{ email: "" }}
           validationSchema={ForgetPassSchema}
           onSubmit={(values, { setSubmitting }) => {
-            /*dispatch(
+            dispatch(
               ForgotPasswordAction(values, setSubmitting, moveTo, navigation)
-            ); */
-            moveTo(navigation, "ResetPassword");
+            );
           }}
         >
           {({
@@ -50,8 +49,8 @@ const ForgotPassword = ({ navigation }) => {
             <>
               <StyledTextInput
                 icon="email"
-                label={"Email"}
-                placeholder={"Enter Your Email"}
+                label={"Adresse Email"}
+                placeholder={"Entrer votre adresse email"}
                 keyboardType="email-address"
                 autoCapitalize="none"
                 onChangeText={handleChange("email")}
@@ -61,9 +60,7 @@ const ForgotPassword = ({ navigation }) => {
                 errors={touched.email && errors.email}
               />
               {!isSubmitting && (
-                <RegularButton onPress={handleSubmit}>
-                  Reset Password
-                </RegularButton>
+                <RegularButton onPress={handleSubmit}>Valider</RegularButton>
               )}
               {isSubmitting && (
                 <RegularButton disabled={true}>
@@ -77,10 +74,10 @@ const ForgotPassword = ({ navigation }) => {
                 onPress={() => moveTo(navigation, "Signup")}
                 style={{ marginBottom: 7 }}
               >
-                Dont have an account? Sign Up
+                Vous n'avez pas de compte ? S'inscrire
               </PressableText>
               <PressableText onPress={() => moveTo(navigation, "Login")}>
-                Have an account? Login
+                Mot de passe oublié ?
               </PressableText>
             </>
           )}

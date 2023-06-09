@@ -20,16 +20,17 @@ const SignUp = ({ navigation }) => {
   return (
     <MainContainer>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <BigText style={{ marginBottom: 25 }}>
-          Signup to enjoy your meal
-        </BigText>
+        <BigText style={{ marginBottom: 25 }}>Créer un compte</BigText>
         <Formik
           initialValues={{
-            fullName: "",
-            phone: "",
+            nom_prenom: "",
+            telephone: "",
             email: "",
             password: "",
             confirmPassword: "",
+            adresse: "",
+            code_postal: "",
+            ville: "",
           }}
           validationSchema={SignupSchema}
           onSubmit={(values, { setSubmitting }) => {
@@ -48,20 +49,20 @@ const SignUp = ({ navigation }) => {
             <>
               <StyledTextInput
                 icon="account"
-                label={"Full Name"}
-                placeholder={"Enter Your Full Name"}
+                label={"Nom et Prenom"}
+                placeholder={"Entrer votre nom et prenom"}
                 autoCapitalize="none"
-                onChangeText={handleChange("fullName")}
-                onBlur={handleBlur("fullName")}
+                onChangeText={handleChange("nom_prenom")}
+                onBlur={handleBlur("nom_prenom")}
                 style={{ marginBottom: 15 }}
-                value={values.fullName}
-                errors={touched.fullName && errors.fullName}
+                value={values.nom_prenom}
+                errors={touched.nom_prenom && errors.nom_prenom}
               />
 
               <StyledTextInput
                 icon="email"
-                label={"Your Email"}
-                placeholder={"Enter Your Email Address"}
+                label={"Addresse Email"}
+                placeholder={"Entrer votre addresse email"}
                 keyboardType="email-address"
                 autoCapitalize="none"
                 onChangeText={handleChange("email")}
@@ -72,18 +73,52 @@ const SignUp = ({ navigation }) => {
               />
               <StyledTextInput
                 icon="phone"
-                label={"Phone Number"}
-                placeholder={"Enter Your Phone Number"}
+                label={"Numéro de téléphone"}
+                placeholder={"Entrer votre numéro de téléphone"}
                 autoCapitalize="none"
-                onChangeText={handleChange("phone")}
-                onBlur={handleBlur("phone")}
+                onChangeText={handleChange("telephone")}
+                onBlur={handleBlur("telephone")}
                 style={{ marginBottom: 15 }}
-                value={values.phone}
-                errors={touched.phone && errors.phone}
+                value={values.telephone}
+                errors={touched.telephone && errors.telephone}
               />
               <StyledTextInput
+                icon="account"
+                label={"Adresse"}
+                placeholder={"Entrer votre adresse"}
+                autoCapitalize="none"
+                onChangeText={handleChange("adresse")}
+                onBlur={handleBlur("adresse")}
+                style={{ marginBottom: 15 }}
+                value={values.adresse}
+                errors={touched.adresse && errors.adresse}
+              />
+              <StyledTextInput
+                icon="account"
+                label={"Nom de ville"}
+                placeholder={"Entrer votre nom de ville"}
+                autoCapitalize="none"
+                onChangeText={handleChange("ville")}
+                onBlur={handleBlur("ville")}
+                style={{ marginBottom: 15 }}
+                value={values.ville}
+                errors={touched.ville && errors.ville}
+              />
+              <StyledTextInput
+                icon="account"
+                label={"Code Postal"}
+                placeholder={"Entrer votre code postal"}
+                autoCapitalize="none"
+                onChangeText={handleChange("code_postal")}
+                onBlur={handleBlur("code_postal")}
+                style={{ marginBottom: 15 }}
+                value={values.code_postal}
+                errors={touched.code_postal && errors.code_postal}
+              />
+
+              <StyledTextInput
                 icon="lock"
-                label={"Password"}
+                label={"Mot de passe"}
                 placeholder="**********"
                 isPassword={true}
                 secureTextEntry={true}
@@ -97,7 +132,7 @@ const SignUp = ({ navigation }) => {
               />
               <StyledTextInput
                 icon="lock"
-                label={"Confirm Your Password"}
+                label={"Confirmer le mot de passe"}
                 isPassword={true}
                 placeholder="**********"
                 secureTextEntry={true}
@@ -112,7 +147,7 @@ const SignUp = ({ navigation }) => {
 
               {!isSubmitting && (
                 <RegularButton onPress={handleSubmit}>
-                  Create Account
+                  Créer votre compte
                 </RegularButton>
               )}
               {isSubmitting && (
@@ -125,7 +160,7 @@ const SignUp = ({ navigation }) => {
               )}
 
               <PressableText onPress={() => moveTo(navigation, "Login")}>
-                Have an account? Login
+                Vous avez un compte ? Se connecter
               </PressableText>
             </>
           )}

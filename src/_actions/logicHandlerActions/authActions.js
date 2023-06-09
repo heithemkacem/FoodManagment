@@ -4,70 +4,59 @@ import jwt_decode from "jwt-decode";
 import { setAuth } from "../../util/setAuth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Toast from "react-native-toast-message";
-const localUrl = "http://localhost:3000";
+const localUrl = "http://192.168.1.93:8000";
 const currentUrl = localUrl;
 //!Signup Admin
 export const SignupAction =
   (credentials, setSubmitting, moveTo, navigation) => async (dispatch) => {
-    const API_ENDPOINT = `${currentUrl}/auth/signup`;
-    const ERROR_MESSAGE =
-      "An error occurred while signing up. Please try again later.";
-    const SUCCESS_MESSAGE = "You have received an email to verify your account";
     try {
-      const { data } = await axios.post(API_ENDPOINT, credentials);
-      const { status, message, user } = data;
+      const { data } = await axios.post(
+        `${currentUrl}/api/signup`,
+        credentials
+      );
+      const { success, message } = data;
 
-      if (status === "Failed") {
+      if (success === false) {
         setSubmitting(false);
         Toast.show({
           type: "error",
-          text1: "Error",
+          text1: "Erreur",
           text2: message,
         });
-      } else if (status === "Success") {
+      } else if (success === true) {
         setSubmitting(false);
         Toast.show({
           type: "success",
-          text1: "Success",
-          text2: SUCCESS_MESSAGE,
+          text1: "Succès",
+          text2: message,
         });
-        moveTo(navigation, "EmailVerification", {
-          id: user._id,
-        });
+        moveTo(navigation, "Login", { email: credentials.email });
       }
     } catch (error) {
       setSubmitting(false);
       Toast.show({
         type: "error",
-        text1: "Error",
-        text2: ERROR_MESSAGE,
+        text1: "Erreur",
+        text2: error.message,
       });
     }
   };
 //!Login Admin
 export const LoginAction =
   (credentials, setSubmitting, moveTo, navigation) => async (dispatch) => {
-    const ERROR_MESSAGE =
-      "An error occurred while logging in. Please try again later.";
-    const SUCCESS_MESSAGE = "Welcome";
-
-    const { email, password } = credentials;
-
     try {
-      const { data } = await axios.post(`${currentUrl}/auth/login`, {
-        email,
-        password,
-      });
-      const { status, message, token, userID } = data;
+      const { data } = await axios.post(`${currentUrl}/api/login`, credentials);
+      const { success, message } = data;
 
-      if (status === "Failed") {
+      if (success === false) {
         setSubmitting(false);
         Toast.show({
           type: "error",
-          text1: "Error",
+          text1: "Erreur",
           text2: message,
         });
-      } else if (status === "Success") {
+      } else if (success === true) {
+        const { token } = data;
         setAuth(token);
         const decode = jwt_decode(token);
         dispatch(setUser(decode));
@@ -75,22 +64,17 @@ export const LoginAction =
         setSubmitting(false);
         Toast.show({
           type: "success",
-          text1: "Success",
-          text2: `${SUCCESS_MESSAGE} ${decode.fullName}`,
+          text1: "Succès",
+          text2: `Bienvenu ${decode.nom_prenom}`,
         });
-        moveTo(navigation, "MainScreen");
-      } else if (status === "Verify") {
-        setSubmitting(false);
-        moveTo(navigation, "EmailVerification", {
-          id: userID,
-        });
+        moveTo(navigation, "Main");
       }
     } catch (error) {
       setSubmitting(false);
       Toast.show({
         type: "error",
-        text1: "Error",
-        text2: ERROR_MESSAGE,
+        text1: "Erreur",
+        text2: error.message,
       });
     }
   };
@@ -99,33 +83,34 @@ export const LoginAction =
 export const ForgotPasswordAction =
   (credentials, setSubmitting, moveTo, navigation) => async (dispatch) => {
     try {
-      const response = await axios.post(
+      const { data } = await axios.post(
         `${currentUrl}/auth/forget-password`,
         credentials
       );
-      if (response.data.status === "Failed") {
+      const { success, message } = data;
+      if (success === false) {
         setSubmitting(false);
         Toast.show({
           type: "error",
-          text1: "Error",
-          text2: response.data.message,
+          text1: "Erreur",
+          text2: message,
         });
-      } else if (response.data.status === "Success") {
+      } else if (success === true) {
         Toast.show({
           type: "success",
-          text1: "Success",
-          text2: response.data.message,
+          text1: "Succès",
+          text2: message,
         });
         setSubmitting(false);
-        moveTo(navigation, "ResetPassword", {
-          id: response.data.userID,
+        moveTo(navigation, "Login", {
+          email: credentials.email,
         });
       }
     } catch (error) {
       setSubmitting(false);
       Toast.show({
         type: "error",
-        text1: "Error",
+        text1: "Erreur",
         text2: error.message,
       });
     }
@@ -136,25 +121,24 @@ export const ForgotPasswordAction =
 export const ResetPasswordAction =
   (values, setSubmitting, moveTo, route, navigation) => async (dispatch) => {
     try {
-      const { newPassword, confirmNewPassword } = values;
-      const response = await axios.post(`${currentUrl}/auth/reset-password`, {
-        id: route.params.id,
-        password: newPassword,
-        confirmPassword: confirmNewPassword,
-      });
-      if (response.data.status === "Failed") {
+      const { data } = await axios.post(
+        `${currentUrl}/auth/reset-password`,
+        values
+      );
+      const { success, message } = data;
+      if (success === false) {
         setSubmitting(false);
         Toast.show({
           type: "error",
-          text1: "Error",
-          text2: response.data.message,
+          text1: "Erreur",
+          text2: message,
         });
-      } else if (response.data.status === "Success") {
+      } else if (success === true) {
         setSubmitting(false);
         Toast.show({
           type: "success",
-          text1: "Success",
-          text2: "You have successfully changed your password",
+          text1: "Succès",
+          text2: message,
         });
         moveTo(navigation, "Login");
       }
@@ -162,12 +146,12 @@ export const ResetPasswordAction =
       setSubmitting(false);
       Toast.show({
         type: "error",
-        text1: "Error",
+        text1: "Erreur",
         text2: error.message,
       });
     }
   };
-
+//?Redux Actions
 //!Logout User
 export const Logout = () => async (dispatch) => {
   //?Remove the token from the header and from the async storage and set the user to an empty object (so when we check if the user is logged in we will check if the user object is empty or not )

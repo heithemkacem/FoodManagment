@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ActivityIndicator,
   Image,
@@ -20,7 +20,7 @@ import FilterSelect from "../../components/buttons/FilterSelect";
 import DishCategories from "../../components/dishCategories/DishCategories";
 import AddNewDish from "../../components/buttons/AddNewDish";
 import DishConfig from "../../components/dishConfiguration/DishConfig";
-
+import axios from "axios";
 const Settings = ({ navigation }) => {
   const [items, setItems] = React.useState([
     {
@@ -115,32 +115,17 @@ const Settings = ({ navigation }) => {
 export default Settings;
 
 const OrdersView = () => {
-  const CustomerList = [
-    {
-      id: 564564564567,
-      menu: "Chicken Burger",
-      totalPayment: "100",
-      status: "Pending",
-    },
-    {
-      id: 8797897897,
-      menu: "Chicken Burger",
-      totalPayment: "100",
-      status: "Pending",
-    },
-    {
-      id: 8979789756,
-      menu: "Chicken Burger",
-      totalPayment: "100",
-      status: "Completed",
-    },
-    {
-      id: 4646456464,
-      menu: "Chicken Burger",
-      totalPayment: "100",
-      status: "Pending",
-    },
-  ];
+  const [orders, setOrders] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.post(
+        "http://192.168.1.93:8000/api/getOrders"
+      );
+      setOrders(response.data.order);
+    };
+    fetchData();
+  }, []);
+
   return (
     <View className="p-3  h-[86%] ">
       <View className="flex-row items-center justify-between">
@@ -152,13 +137,13 @@ const OrdersView = () => {
         <Text className="text-md font-bold text-white">Status</Text>
       </View>
 
-      {CustomerList.map((item, index) => (
+      {orders.map((item, index) => (
         <View
           className=" flex-row items-center justify-between mb-6 w-full "
-          key={index}
+          key={item._id}
         >
           <Text className="font-bold text-sm text-white">
-            Customer#{item.id}
+            {item.client_name}
           </Text>
 
           {item.status === "Pending" ? (

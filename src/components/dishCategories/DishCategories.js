@@ -1,6 +1,8 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { getCategories } from "../../_actions/logicHandlerActions/Actions";
 
 const DishCategories = ({
   selectedCategoryId,
@@ -8,15 +10,9 @@ const DishCategories = ({
   smallText,
 }) => {
   const [categories, setCategories] = useState([]);
-
+  const dispatch = useDispatch();
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.post(
-        "http://192.168.1.93:8000/api/getcategory"
-      );
-      setCategories(response.data.categories);
-    };
-    fetchData();
+    dispatch(getCategories(setCategories));
   }, []);
 
   return (

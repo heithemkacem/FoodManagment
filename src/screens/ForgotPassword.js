@@ -9,7 +9,7 @@ import IconHeader from "../components/icons/IconHeader";
 import BigText from "../components/texts/BigText";
 import PressableText from "../components/texts/PressableText";
 import { useDispatch } from "react-redux";
-import { ForgotPasswordAction } from "../_actions/logicHandlerActions/authActions";
+import { ForgotPasswordAction } from "../_actions/logicHandlerActions/Actions";
 import { moveTo } from "../util/moveTo";
 import { ForgetPassSchema } from "../util/validationSchemas";
 const ForgotPassword = ({ navigation }) => {

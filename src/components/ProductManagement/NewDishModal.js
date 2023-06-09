@@ -37,22 +37,25 @@ const newDishSchema = Yup.object().shape({
 
 const NewDishModal = ({
   setIsNewDishModalOpen,
-  currentDish,
-  setCurrentDish,
+  dishToUpdate,
+  setDishToUpdate,
 }) => {
-  const createNewDish = async (values, setSubmitting) => {
+  const [image, setImage] = useState(null);
+  console.log(dishToUpdate);
+
+  const createUpdateDish = async (values, setSubmitting) => {
     try {
       const formData = new FormData();
       formData.append("name", values.name);
       formData.append("price", values.price);
       formData.append("description", values.description);
+      if (dishToUpdate?._id) formData.append("id", dishToUpdate._id);
       // formData.append("image", image);
 
-      const res = await axios.post(`${API_URL}/createDish`, {
-        name: values.name,
-        price: values.price,
-        description: values.description,
-      });
+      const res = await axios.post(
+        `${API_URL}/${dishToUpdate?._id ? "UpdateDish" : `createDish`}`,
+        formData
+      );
       Toast.show({
         type: "success",
         text1: "Succès",
@@ -69,8 +72,26 @@ const NewDishModal = ({
     setSubmitting(false);
   };
 
-  const [image, setImage] = useState(null);
-
+  const deleteDish = async () => {
+    try {
+      const res = await axios.post(`${API_URL}/DeleteDish`, {
+        id: dishToUpdate._id,
+        ...dishToUpdate,
+      });
+      Toast.show({
+        type: "success",
+        text1: "Succès",
+        text2: "Plat supprimé avec succès",
+      });
+      setIsNewDishModalOpen(false);
+    } catch (error) {
+      Toast.show({
+        type: "error",
+        text1: "Erreur",
+        text2: error.message,
+      });
+    }
+  };
   return (
     <>
       <Pressable
@@ -92,9 +113,24 @@ const NewDishModal = ({
         }}
       >
         <View className="flex-row items-center justify-between">
-          <Text className="text-3xl font-bold text-white">
-            Ajouter un nouveau plat
-          </Text>
+          <View className="flex-row items-center space-x-2">
+            <Text className="text-3xl font-bold text-white">
+              {dishToUpdate?._id ? "Modifier" : "Ajouter un nouveau"} plat
+            </Text>
+            {dishToUpdate?._id && (
+              <TouchableOpacity
+                activeOpacity={0.9}
+                onPress={() => deleteDish()}
+              >
+                <MaterialCommunityIcons
+                  name="delete"
+                  size={30}
+                  color={colors.primary}
+                />
+              </TouchableOpacity>
+            )}
+          </View>
+
           <TouchableOpacity
             activeOpacity={0.9}
             onPress={() => setIsNewDishModalOpen(false)}
@@ -105,10 +141,14 @@ const NewDishModal = ({
 
         <View className="flex-1 mt-10">
           <Formik
-            initialValues={currentDish}
+            initialValues={
+              dishToUpdate._id
+                ? dishToUpdate
+                : { name: "", price: 0, description: "" }
+            }
             validationSchema={newDishSchema}
             onSubmit={(values, { setSubmitting }) => {
-              createNewDish(values, setSubmitting);
+              createUpdateDish(values, setSubmitting);
             }}
           >
             {({

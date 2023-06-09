@@ -3,7 +3,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { View, Text, Pressable, Image, TouchableOpacity } from "react-native";
 import { colors } from "../colors";
 
-const DishConfig = ({ dish, index }) => {
+const DishConfig = ({ dish, index, handleClick }) => {
   return (
     <Pressable className=" w-[44%] h-60  border-lightGray border rounded-lg mb-5">
       <View key={index} className=" items-center w-full h-full">
@@ -30,7 +30,7 @@ const DishConfig = ({ dish, index }) => {
             elevation: 8,
           }}
           className="bg-[#50323B] w-full rounded-lg flex-row justify-evenly items-center p-2 bottom-0 absolute "
-          onPress={() => null}
+          onPress={() => handleClick(dish)}
         >
           <MaterialCommunityIcons
             name="cart"

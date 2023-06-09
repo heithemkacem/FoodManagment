@@ -5,7 +5,7 @@ import { colors } from "../../../components/colors";
 
 const NotificationsView = () => {
   return (
-    <View className="p-6 space-y-4">
+    <View className="p-5 space-y-4">
       <View className="bg-black/40 items-center justify-between p-4 rounded-md">
         <View className="flex-row justify-between w-full">
           <View>

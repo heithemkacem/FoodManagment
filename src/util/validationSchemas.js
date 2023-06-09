@@ -29,8 +29,8 @@ export const SignupSchema = Yup.object().shape({
 //!Login Schema
 export const LoginSchema = Yup.object().shape({
   email: Yup.string()
-    .email("Enter a valid email address")
-    .required("Enter your email address"),
+    .email("Entrer une adresse email valide")
+    .required("Entrer votre adresse email"),
   password: Yup.string().required("Mot de passe requis"),
 });
 //!Reset Password Schema
@@ -48,12 +48,12 @@ export const ResetSchema = Yup.object().shape({
 export const ResetSchemaDashboard = Yup.object().shape({
   password: Yup.string()
     .required("Mot de passe requis")
-    .min(8, "Mot de pass")
-    .max(24, "Your password must be at most 24 characters"),
+    .min(8, "Votre Mot de pass doit ontenir au moins 8 caractères ")
+    .max(24, "Votre mot de passe doit contenir au plus 24 caractères"),
   newpassword: Yup.string()
     .required("Mot de passe requis")
-    .min(8, "Your password must be at least 8 characters")
-    .max(24, "Your password must be at most 24 characters"),
+    .min(8, "Votre mot de passe doit contenir au moins 8 caractères")
+    .max(24, "Votre mot de passe doit contenir au plus 24 caractères"),
   confirmNewPassword: Yup.string().oneOf(
     [Yup.ref("newPassword"), null],
     "Mot de passe non identique"

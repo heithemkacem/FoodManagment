@@ -84,7 +84,8 @@ const Header = ({ headerTitle, date, searchBar, setQuery }) => {
 
               <TextInput
                 value={value}
-                placeholder="Search"
+                placeholder="Chercher"
+                placeholderTextColor={colors.lightGray}
                 style={styles.textInput}
                 onChangeText={handleOnChangeText}
               />
@@ -119,7 +120,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     color: colors.lightGray,
-    //outlineStyle: "none",
+    //change the color of the placeholder text
   },
 
   vwSearch: {

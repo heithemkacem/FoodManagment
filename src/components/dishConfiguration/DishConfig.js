@@ -16,7 +16,7 @@ const DishConfig = ({ dish, index }) => {
         </Text>
         <View className="flex-row   items-center justify-between w-[80%] mt-2">
           <Text className="text-md text-lightGray">${dish.price}</Text>
-          <Text className="text-lightGray ">{dish.numberAvailable} Bowls</Text>
+          <Text className="text-lightGray ">{dish.numberAvailable} Boules</Text>
         </View>
         <TouchableOpacity
           activeOpacity={0.9}
@@ -39,7 +39,7 @@ const DishConfig = ({ dish, index }) => {
           />
 
           <Text className="text-primary text-sm font-semibold text-center">
-            Edit dish
+            Modifier le plat
           </Text>
         </TouchableOpacity>
       </View>

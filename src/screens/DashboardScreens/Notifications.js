@@ -31,11 +31,15 @@ const CustomerList = [
 ];
 const Notifications = ({ navigation }) => {
   const [orders, setOrders] = useState([]);
-  const fetchData = async () => {
-    const response = await axios.post("http://192.168.1.93:8000/api/getOrders");
-    setOrders(response.data.order);
-  };
-  fetchData();
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.post(
+        "http://192.168.1.93:8000/api/getOrders"
+      );
+      setOrders(response.data.order);
+    };
+    fetchData();
+  }, []);
   return (
     <Layout navigation={navigation} headerTitle="Notfocation " date={true}>
       <View>

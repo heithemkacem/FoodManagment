@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   ActivityIndicator,
   Image,
@@ -12,9 +12,6 @@ import DishCategories from "../../components/dishCategories/DishCategories";
 import FilterSelect from "../../components/buttons/FilterSelect";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import OrdersView from "../../components/ordersView/OrdersView";
-import { API_URL } from "../../util/consts";
-import axios from "axios";
-import Toast from "react-native-toast-message";
 import { colors } from "../../components/colors";
 import useDishes from "../../util/hooks/useDishes";
 

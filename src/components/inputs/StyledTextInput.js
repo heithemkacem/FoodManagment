@@ -18,14 +18,14 @@ const RowContainer = styled.View`
 const InputField = styled.TextInput`
   padding-left: 65px;
   padding-right: 65px;
-  font-size: 16px;
+  font-size: 14;
   color: ${white};
   border-width: 2px;
 `;
 
 const LeftIcon = styled.View`
   position: absolute;
-  top: 37px;
+  top: 45px;
   left: 15px;
   z-index: 1;
   border-right-width: 2px;
@@ -34,7 +34,7 @@ const LeftIcon = styled.View`
 `;
 const RightIcon = styled.TouchableOpacity`
   position: absolute;
-  top: 37px;
+  top: 45px;
   right: 15px;
   z-index: 1;
 `;
@@ -45,7 +45,7 @@ const StyledTextInput = ({ icon, label, isPassword, errors, ...props }) => {
   return (
     <View>
       <LeftIcon>
-        <MaterialCommunityIcons name={icon} size={30} color={primary} />
+        <MaterialCommunityIcons name={icon} size={18} color={primary} />
       </LeftIcon>
 
       <SmallText
@@ -54,6 +54,7 @@ const StyledTextInput = ({ icon, label, isPassword, errors, ...props }) => {
           marginBottom: 5,
           color: white,
           textAlign: "left",
+          fontSize: 13,
         }}
       >
         {label}
@@ -79,8 +80,8 @@ const StyledTextInput = ({ icon, label, isPassword, errors, ...props }) => {
         errors && (
           //show text that contain the error message
           <RowContainer>
-            <Text style={{ color: "red", fontWeight: 500 }}>{errors}</Text>
-            <MaterialCommunityIcons name="alert-circle" size={25} color="red" />
+            <Text className="font-semibold text-red-600 text-sm">{errors}</Text>
+            <MaterialCommunityIcons name="alert-circle" size={18} color="red" />
           </RowContainer>
         )
       }
@@ -93,7 +94,7 @@ const StyledTextInput = ({ icon, label, isPassword, errors, ...props }) => {
         >
           <MaterialCommunityIcons
             name={hidePassword ? "eye-off" : "eye"}
-            size={30}
+            size={18}
             color={primary}
           ></MaterialCommunityIcons>
         </RightIcon>

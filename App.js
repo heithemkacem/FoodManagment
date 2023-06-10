@@ -9,10 +9,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import jwt_decode from "jwt-decode";
 import Toast from "react-native-toast-message";
 import React, { useState, useEffect, useRef } from "react";
-import { Platform } from "react-native";
+/*import { Platform } from "react-native";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
-import * as Application from "expo-application";
+import * as Application from "expo-application"; */
+/*
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -72,15 +73,15 @@ async function registerForPushNotificationsAsync() {
   }
 
   return token;
-}
+} */
 
 export default function App() {
-  const [expoPushToken, setExpoPushToken] = useState("");
+  /* const [expoPushToken, setExpoPushToken] = useState("");
   const [notification, setNotification] = useState(false);
   const notificationListener = useRef();
-  const responseListener = useRef();
+  const responseListener = useRef(); */
 
-  useEffect(() => {
+  /*useEffect(() => {
     registerForPushNotificationsAsync().then((token) => {
       setExpoPushToken(token);
     });
@@ -101,7 +102,7 @@ export default function App() {
       );
       Notifications.removeNotificationSubscription(responseListener.current);
     };
-  }, []);
+  }, []); */
 
   //logout user if token is expired
   AsyncStorage.getItem("jwt").then((token) => {

@@ -161,8 +161,9 @@ export const getCategories =
 
 export const getOrders = (setOrders) => async (dispatch) => {
   try {
-    const response = await axios.post(`${API_URL}/getOrders`);
-    setOrders(response.data.order);
+    const { data } = await axios.post(`${API_URL}/getOrders`);
+    console.log(data.order);
+    setOrders(data.order);
   } catch (error) {
     Toast.show({
       type: "error",
@@ -171,7 +172,21 @@ export const getOrders = (setOrders) => async (dispatch) => {
     });
   }
 };
-
+export const getOrdersWithStatus =
+  (setOrdersLength, status) => async (dispatch) => {
+    try {
+      const { data } = await axios.post(`${API_URL}/getOrdersStatus`, {
+        status: status,
+      });
+      setOrdersLength(data.orderlength);
+    } catch (error) {
+      Toast.show({
+        type: "error",
+        text1: "Erreur",
+        text2: error.message,
+      });
+    }
+  };
 export const CreateOrder =
   (setIsOrdersViewOpen, setOrders, orders, total) => async (dispatch) => {
     try {

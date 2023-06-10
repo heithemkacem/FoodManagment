@@ -30,7 +30,7 @@ const OrdersView = () => {
             {item.client_name}
           </Text>
 
-          {item.status === "Pending" ? (
+          {item.status === 1 ? (
             <TouchableOpacity className="font-bold text-sm text-yellow bg-[#503A3A] px-5 py-1 rounded-full w-fit">
               <Text className="text-center text-[#FFB572]">Pending</Text>
             </TouchableOpacity>

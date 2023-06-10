@@ -34,7 +34,11 @@ const Orders = ({ navigation }) => {
               {item.client_name}
             </Text>
             <Text className="font-bold text-sm text-lightGray ">
-              {item.dishes_info.name}
+              {item.id_dishes?.map((dish) => (
+                <Text className="font-bold text-sm text-lightGray   ">
+                  {dish.name} ,
+                </Text>
+              ))}
             </Text>
             <Text className="font-bold text-sm text-lightGray">
               {item.total_price}$

@@ -33,7 +33,6 @@ const ProductManagementView = () => {
     <View className={`p-6 flex-1`}>
       <View className="flex-row items-center justify-between">
         <Text className="text-lg font-bold text-white">Commandes</Text>
-        <FilterSelect text="Ajouter une catégorie" icon="plus" />
       </View>
       <View className="w-full mt-6">
         <DishCategories

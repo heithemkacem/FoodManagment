@@ -24,15 +24,29 @@ const CategoryManagementView = () => {
     dispatch(getCategories(setCategories, setIsLoading));
   }, []);
 
+  useEffect(() => {
+    if (isNewCategoryModalOpen === false) {
+      dispatch(getCategories(setCategories, setIsLoading));
+      setCategoryToUpdate({});
+    }
+  }, [isNewCategoryModalOpen]);
+
   return (
     <View className={`p-6 flex-1`}>
       <View className="flex-row items-center justify-between w-full">
-        <Text className="text-md font-bold text-white">Categories</Text>
+        <Text className="text-lg font-bold text-white">Categories</Text>
+        <TouchableOpacity
+          onPress={() => {
+            setIsNewCategoryModalOpen(true);
+          }}
+          className="items-center justify-center bg-[#3b3b52] p-1"
+        >
+          <MaterialCommunityIcons name="plus" size={20} color="#dff3dd" />
+        </TouchableOpacity>
       </View>
 
       <ScrollView>
-        <View className="flex-row flex-wrap justify-between mt-10">
-          {/* <AddNewDish setIsNewDishModalOpen={setIsNewDishModalOpen} /> */}
+        <View className="flex-row flex-wrap gap-4 mt-10">
           {isLoading ? (
             <View className="items-center justify-center flex-1">
               <ActivityIndicator

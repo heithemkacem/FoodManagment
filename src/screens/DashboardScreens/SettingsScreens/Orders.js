@@ -2,14 +2,21 @@ import React, { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import FilterSelect from "../../../components/buttons/FilterSelect";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrders } from "../../../_actions/logicHandlerActions/Actions";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { colors } from "../../../components/colors";
+import {
+  DeleteOrder,
+  getOrders,
+} from "../../../_actions/logicHandlerActions/Actions";
 const OrdersView = () => {
   const dispatch = useDispatch();
   const [orders, setOrders] = useState([]);
   useEffect(() => {
     dispatch(getOrders(setOrders));
   }, []);
-
+  const handleDelete = (id) => {
+    dispatch(DeleteOrder(id));
+  };
   return (
     <View className=" h-[86%] p-5">
       <View className="flex-row items-center justify-between">
@@ -19,6 +26,7 @@ const OrdersView = () => {
       <View className="border-lightGray flex-row items-center justify-between pb-3 mt-6 mb-6 border-b-2">
         <Text className="text-md font-bold text-white">Client</Text>
         <Text className="text-md font-bold text-white">Status</Text>
+        <Text className="text-md font-bold text-white">Delete</Text>
       </View>
 
       {orders.map((item, index) => (
@@ -27,7 +35,7 @@ const OrdersView = () => {
           key={item._id}
         >
           <Text className="font-bold text-sm text-white">
-            {item.client_name}
+            {item.client_name ? item.client_name : "Client"}
           </Text>
 
           {item.status === 1 ? (
@@ -39,6 +47,16 @@ const OrdersView = () => {
               <Text className="text-center text-[#50D1AA] ">Completed</Text>
             </TouchableOpacity>
           )}
+          <TouchableOpacity
+            activeOpacity={0.9}
+            onPress={() => handleDelete(item._id)}
+          >
+            <MaterialCommunityIcons
+              name="delete"
+              size={20}
+              color={colors.primary}
+            />
+          </TouchableOpacity>
         </View>
       ))}
     </View>

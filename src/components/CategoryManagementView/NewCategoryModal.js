@@ -26,7 +26,6 @@ const newCategorySchema = Yup.object().shape({
 
 const NewCategoryModal = ({ setIsNewCategoryModalOpen, categoryToUpdate }) => {
   const createUpdateCategory = async (values, setSubmitting) => {
-    console.log(values);
     try {
       const res = await axios.post(
         `${API_URL}/${
@@ -123,7 +122,6 @@ const NewCategoryModal = ({ setIsNewCategoryModalOpen, categoryToUpdate }) => {
             initialValues={{ cat_name: categoryToUpdate?.cat_name || "" }}
             validationSchema={newCategorySchema}
             onSubmit={(values, { setSubmitting }) => {
-              console.log("values");
               createUpdateCategory(values, setSubmitting);
             }}
           >

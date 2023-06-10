@@ -41,7 +41,6 @@ const NewDishModal = ({
   setDishToUpdate,
 }) => {
   const [image, setImage] = useState(null);
-  console.log(dishToUpdate);
 
   const createUpdateDish = async (values, setSubmitting) => {
     try {

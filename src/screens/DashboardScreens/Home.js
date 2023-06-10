@@ -29,7 +29,7 @@ const Home = ({ navigation }) => {
 
   const handleOrderNow = (dish) => {
     const newOrders = [...orders];
-    const index = newOrders.findIndex((order) => order.id == dish.id);
+    const index = newOrders.findIndex((order) => order._id == dish._id);
     if (index == -1) {
       newOrders.push({ ...dish, quantity: 1 });
     } else {

@@ -12,7 +12,6 @@ const MyImagePicker = ({ setImage, image }) => {
 
   const permisionFunction = async () => {
     const imagePermission = await ImagePicker.getMediaLibraryPermissionsAsync();
-    console.log(imagePermission.status);
 
     setGalleryPermission(imagePermission.status === "granted");
 

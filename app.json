@@ -13,14 +13,15 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ukps.FoodManagment"
     },
     "android": {
-      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#343434"
-      }
+      },
+      "package": "com.ukps.FoodManagment"
     },
     "web": {
       "favicon": "./src/assets/favicon.png"

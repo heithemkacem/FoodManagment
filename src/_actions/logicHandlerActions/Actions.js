@@ -113,7 +113,6 @@ export const ForgotPasswordAction =
 
 export const ResetPasswordAction =
   (values, setSubmitting, moveTo, route, navigation) => async (dispatch) => {
-    console.log(values);
     try {
       const { data } = await axios.post(`${API_URL}/resetPassword`, values);
       const { success, message } = data;
@@ -162,8 +161,25 @@ export const getCategories =
 export const getOrders = (setOrders) => async (dispatch) => {
   try {
     const { data } = await axios.post(`${API_URL}/getOrders`);
-    console.log(data.order);
     setOrders(data.order);
+  } catch (error) {
+    Toast.show({
+      type: "error",
+      text1: "Erreur",
+      text2: error.message,
+    });
+  }
+};
+export const DeleteOrder = (id) => async (dispatch) => {
+  try {
+    const res = await axios.post(`${API_URL}/deleteOrder`, {
+      id_order: id,
+    });
+    Toast.show({
+      type: "success",
+      text1: "Succès",
+      text2: "Order supprimé avec succès",
+    });
   } catch (error) {
     Toast.show({
       type: "error",
@@ -192,11 +208,10 @@ export const CreateOrder =
     try {
       const { data } = await axios.post(`${API_URL}/createOrder`, {
         id_dishes: orders,
-        total: total,
+        total_price: total,
       });
       const { success, message } = data;
       if (success === true) {
-        setSubmitting(false);
         Toast.show({
           type: "success",
           text1: "Succès",

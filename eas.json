@@ -1,6 +1,10 @@
 {
   "build": {
+    "production": {
+      "channel": "production"
+    },
     "preview": {
+      "channel": "staging",
       "android": {
         "buildType": "apk"
       }
@@ -12,7 +16,6 @@
     },
     "preview3": {
       "developmentClient": true
-    },
-    "production": {}
+    }
   }
 }

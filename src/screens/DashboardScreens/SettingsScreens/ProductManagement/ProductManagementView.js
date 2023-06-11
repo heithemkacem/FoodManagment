@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, ActivityIndicator } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import DishCategories from "../dishCategories/DishCategories";
-import AddNewDish from "../buttons/AddNewDish";
-import DishConfig from "../dishConfiguration/DishConfig";
-import useDishes from "../../util/hooks/useDishes";
-import FilterSelect from "../buttons/FilterSelect";
-import { colors } from "../colors";
+import DishCategories from "../../../../components/dishCategories/DishCategories";
+import AddNewDish from "../../../../components/buttons/AddNewDish";
+import DishConfig from "../../../../components/dishConfiguration/DishConfig";
+import useDishes from "../../../../util/hooks/useDishes";
+import { colors } from "../../../../components/colors";
 import NewDishModal from "./NewDishModal";
 const ProductManagementView = () => {
   const {

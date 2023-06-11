@@ -5,17 +5,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "../../../components/colors";
 import {
+  ChangeStatus,
   DeleteOrder,
   getOrders,
 } from "../../../_actions/logicHandlerActions/Actions";
 const OrdersView = () => {
   const dispatch = useDispatch();
   const [orders, setOrders] = useState([]);
+  const [update, setUpdate] = useState(0);
   useEffect(() => {
     dispatch(getOrders(setOrders));
-  }, []);
+  }, [orders]);
   const handleDelete = (id) => {
     dispatch(DeleteOrder(id));
+  };
+  const handleChange = (id, status) => {
+    dispatch(ChangeStatus(id, status));
   };
   return (
     <View className=" h-[86%] p-5">
@@ -35,16 +40,24 @@ const OrdersView = () => {
           key={item._id}
         >
           <Text className="font-bold text-sm text-white">
-            {item.client_name ? item.client_name : "Client"}
+            {item.client_name ? item.client_name : `Client#${index + 1}`}
           </Text>
 
           {item.status === 1 ? (
-            <TouchableOpacity className="font-bold text-sm text-yellow bg-[#503A3A] px-5 py-1 rounded-full w-fit">
-              <Text className="text-center text-[#FFB572]">Pending</Text>
+            <TouchableOpacity
+              className="font-bold text-sm text-yellow bg-[#503A3A] px-5 py-1 rounded-full w-fit"
+              onPress={() => handleChange(item._id, 0)}
+            >
+              <Text className="text-center text-[#FFB572]">En attente</Text>
             </TouchableOpacity>
           ) : (
             <TouchableOpacity className="font-bold text-lg text-yellow bg-[#324C4F] px-5 py-1 rounded-full w-fit ">
-              <Text className="text-center text-[#50D1AA] ">Completed</Text>
+              <Text
+                onPress={() => handleChange(item._id, 1)}
+                className="text-center text-[#50D1AA] "
+              >
+                Complete{" "}
+              </Text>
             </TouchableOpacity>
           )}
           <TouchableOpacity

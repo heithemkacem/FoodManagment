@@ -12,7 +12,7 @@ const Main = ({ navigation }) => {
   useEffect(() => {
     dispatch(getOrdersWithStatus(setOrdersPendingLength, 1));
     dispatch(getOrdersWithStatus(setOrdersLength, 0));
-  }, []);
+  });
   return (
     <Layout
       navigation={navigation}

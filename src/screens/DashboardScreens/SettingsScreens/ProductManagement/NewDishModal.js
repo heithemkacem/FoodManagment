@@ -1,13 +1,13 @@
 import Animated, { FadeInDown, FadeOutDown } from "react-native-reanimated";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import StyledTextInput from "../inputs/StyledTextInput";
+import StyledTextInput from "../../../../components/inputs/StyledTextInput";
 import { Formik } from "formik";
-import RegularButton from "../buttons/RegularButton";
+import RegularButton from "../../../../components/buttons/RegularButton";
 import { ActivityIndicator, Image } from "react-native";
 import * as Yup from "yup";
-import { colors } from "../colors";
-
+import { colors } from "../../../../components/colors";
+import DropDownPicker from "react-native-dropdown-picker";
 import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
@@ -19,11 +19,13 @@ import {
   Pressable,
   ScrollView,
 } from "react-native";
-import MyImagePicker from "../myImagePicker/MyImagePicker";
+import MyImagePicker from "../../../../components/myImagePicker/MyImagePicker";
 import Toast from "react-native-toast-message";
 
-import { API_URL } from "../../util/consts";
+import { API_URL } from "../../../../util/consts";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { getCategories } from "../../../../_actions/logicHandlerActions/Actions";
 
 const newDishSchema = Yup.object().shape({
   name: Yup.string()
@@ -41,6 +43,13 @@ const NewDishModal = ({
   setDishToUpdate,
 }) => {
   const [image, setImage] = useState(null);
+  const [categories, setCategories] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCategories(setCategories, setIsLoading));
+  }, []);
 
   const createUpdateDish = async (values, setSubmitting) => {
     try {
@@ -143,7 +152,13 @@ const NewDishModal = ({
             initialValues={
               dishToUpdate._id
                 ? dishToUpdate
-                : { name: "", price: 0, description: "" }
+                : {
+                    name: "",
+                    price: "0",
+                    description: "",
+                    image: image,
+                    category: "",
+                  }
             }
             validationSchema={newDishSchema}
             onSubmit={(values, { setSubmitting }) => {
@@ -198,6 +213,22 @@ const NewDishModal = ({
                       style={{ marginBottom: 25 }}
                       value={values.description}
                       errors={touched.description && errors.description}
+                    />
+                    <DropDownPicker
+                      items={categories.map((category) => ({
+                        label: category.cat_name,
+                        value: category.cat_name,
+                      }))}
+                      defaultValue={values.category}
+                      style={{
+                        backgroundColor: colors.primary,
+                      }}
+                      itemStyle={{ justifyContent: "flex-start" }}
+                      dropDownStyle={{ backgroundColor: colors.primary }}
+                      onChangeItem={(item) =>
+                        handleChange("category")(item.value)
+                      }
+                      placeholder="Choisir une category"
                     />
                   </View>
                 </ScrollView>

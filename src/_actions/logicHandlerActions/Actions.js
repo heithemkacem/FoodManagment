@@ -188,6 +188,40 @@ export const DeleteOrder = (id) => async (dispatch) => {
     });
   }
 };
+export const ChangeStatus = (id, status) => async (dispatch) => {
+  try {
+    const res = await axios.post(`${API_URL}/confirmOrder`, {
+      id_order: id,
+      status: status,
+    });
+
+    Toast.show({
+      type: "success",
+      text1: "Succès",
+      text2: "Order status changee avec succès",
+    });
+  } catch (error) {
+    Toast.show({
+      type: "error",
+      text1: "Erreur",
+      text2: error.message,
+    });
+  }
+};
+export const uploadImage = (base64, setImage) => async (dispatch) => {
+  try {
+    const { data } = await axios.post(`${API_URL}/uploadImage`, {
+      image: base64,
+    });
+    setImage(data.image);
+  } catch (error) {
+    Toast.show({
+      type: "error",
+      text1: "Erreur",
+      text2: error.message,
+    });
+  }
+};
 export const getOrdersWithStatus =
   (setOrdersLength, status) => async (dispatch) => {
     try {

@@ -10,7 +10,7 @@ const Orders = ({ navigation }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getOrders(setOrders));
-  }, []);
+  }, [orders]);
   return (
     <Layout navigation={navigation} headerTitle="Votre commandes " date={true}>
       <View>
@@ -28,14 +28,17 @@ const Orders = ({ navigation }) => {
         {orders?.map((item, index) => (
           <View
             className="flex-row justify-between items-center mb-6 "
-            key={item._id}
+            key={index}
           >
             <Text className="font-bold text-xl text-white">
               {item.client_name}
             </Text>
             <Text className="font-bold text-sm text-lightGray ">
-              {item.id_dishes?.map((dish) => (
-                <Text className="font-bold text-sm text-lightGray   ">
+              {item.id_dishes?.map((dish, index) => (
+                <Text
+                  key={index}
+                  className="font-bold text-sm text-lightGray   "
+                >
                   {dish.name} ,
                 </Text>
               ))}

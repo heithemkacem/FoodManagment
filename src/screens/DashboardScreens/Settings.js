@@ -7,7 +7,7 @@ import AboutUsView from "./SettingsScreens/AboutUs";
 import NotificationsView from "./SettingsScreens/NotificationScreen";
 import OrdersView from "./SettingsScreens/Orders";
 import SecurityView from "./SettingsScreens/SecuirityView";
-import ProductManagementView from "../../components/ProductManagement/ProductManagementView";
+import ProductManagementView from "./SettingsScreens/ProductManagement/ProductManagementView";
 import CategoryManagementView from "../../components/CategoryManagementView/CategoryManagementView";
 //translate all the text to french
 const Settings = ({ navigation }) => {

@@ -18,7 +18,7 @@ const RowContainer = styled.View`
 const InputField = styled.TextInput`
   padding-left: 65px;
   padding-right: 65px;
-  font-size: 14;
+  font-size: 14px;
   color: ${white};
   border-width: 2px;
 `;

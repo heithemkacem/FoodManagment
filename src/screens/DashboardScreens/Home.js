@@ -9,12 +9,11 @@ import {
 } from "react-native";
 import Layout from "../../components/layout/Layout";
 import DishCategories from "../../components/dishCategories/DishCategories";
-import FilterSelect from "../../components/buttons/FilterSelect";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import OrdersView from "../../components/ordersView/OrdersView";
 import { colors } from "../../components/colors";
 import useDishes from "../../util/hooks/useDishes";
-
+import * as Print from "expo-print";
 const Home = ({ navigation }) => {
   const {
     dishes,
@@ -36,6 +35,16 @@ const Home = ({ navigation }) => {
       newOrders[index].quantity++;
     }
     setOrders(newOrders);
+  };
+  const handlePrintTicket = async () => {
+    const ticketHTML = `<html><body><h1>Restaurant Order Ticket</h1><p>${orders}</p></body></html>`;
+
+    try {
+      const { uri } = await Print.printToFileAsync({ html: ticketHTML });
+      await Print.printAsync({ uri });
+    } catch (error) {
+      console.error("Failed to print ticket:", error);
+    }
   };
   return (
     <>
@@ -124,6 +133,7 @@ const Home = ({ navigation }) => {
           orders={orders}
           setOrders={setOrders}
           setIsOrdersViewOpen={setIsOrdersViewOpen}
+          handlePrintTicket={handlePrintTicket}
         />
       )}
     </>

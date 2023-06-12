@@ -9,12 +9,9 @@ import ResetPassword from "../screens/ResetPassword";
 import { colors } from "../components/colors";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { HeaderBackButton } from "@react-navigation/elements";
 import { Pressable, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 //!Redux modules import
-import store from "../_actions/store";
-import { Logout } from "../_actions/logicHandlerActions/Actions";
 import { useSelector } from "react-redux";
 import Home from "../screens/DashboardScreens/Home";
 import Orders from "../screens/DashboardScreens/Orders";

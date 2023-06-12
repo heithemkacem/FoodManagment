@@ -1,6 +1,5 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useDispatch } from "react-redux";
 import { getCategories } from "../../_actions/logicHandlerActions/Actions";
 

@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  ActivityIndicator,
-  Touchable,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, ActivityIndicator, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { useDispatch } from "react-redux";
 import { getCategories } from "../../_actions/logicHandlerActions/Actions";

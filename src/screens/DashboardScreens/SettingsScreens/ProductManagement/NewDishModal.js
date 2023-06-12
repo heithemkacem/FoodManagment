@@ -4,21 +4,17 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import StyledTextInput from "../../../../components/inputs/StyledTextInput";
 import { Formik } from "formik";
 import RegularButton from "../../../../components/buttons/RegularButton";
-import { ActivityIndicator, Image } from "react-native";
+import { ActivityIndicator } from "react-native";
 import * as Yup from "yup";
 import { colors } from "../../../../components/colors";
 import DropDownPicker from "react-native-dropdown-picker";
 import React, { useState, useEffect } from "react";
 import {
-  StyleSheet,
   View,
-  ToastAndroid,
-  TouchableHighlight,
   Text,
   TouchableOpacity,
   Pressable,
   ScrollView,
-  FlatList,
 } from "react-native";
 import MyImagePicker from "../../../../components/myImagePicker/MyImagePicker";
 import Toast from "react-native-toast-message";

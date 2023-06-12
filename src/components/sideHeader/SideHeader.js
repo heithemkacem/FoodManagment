@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Pressable, Text } from "react-native";
 import styled from "styled-components/native";
-import { ScreenHeight } from "../shared";
 import { AntDesign } from "@expo/vector-icons";
 import { colors } from "../colors";
 import { moveTo } from "../../util/moveTo";

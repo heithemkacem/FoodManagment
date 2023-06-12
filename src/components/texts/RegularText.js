@@ -7,7 +7,7 @@ const RegularText = (props) => {
   return (
     <Text
       {...props}
-      style={{ fontSize: 15, color: props.color ? props.color : white }}
+      style={{ fontSize: 13, color: props.color ? props.color : white }}
     >
       {props.children}
     </Text>

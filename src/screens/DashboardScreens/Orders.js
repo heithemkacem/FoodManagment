@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import Layout from "../../components/layout/Layout";
-import FilterSelect from "../../components/buttons/FilterSelect";
 import { useDispatch } from "react-redux";
 import { getOrders } from "../../_actions/logicHandlerActions/Actions";
 import { ScrollView } from "react-native-gesture-handler";

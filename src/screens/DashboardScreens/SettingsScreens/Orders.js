@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity } from "react-native";
-import FilterSelect from "../../../components/buttons/FilterSelect";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "../../../components/colors";
 import {

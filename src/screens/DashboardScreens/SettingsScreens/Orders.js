@@ -27,7 +27,6 @@ const OrdersView = () => {
     <View className=" h-[86%] p-5">
       <View className="flex-row items-center justify-between">
         <Text className="text-xl font-bold text-white">Commandes</Text>
-        <FilterSelect text="Filtre " icon="filter" />
       </View>
       <View className="border-lightGray flex-row items-center justify-between pb-3 mt-6 mb-6 border-b-2">
         <Text className="text-md font-bold text-white">Client</Text>

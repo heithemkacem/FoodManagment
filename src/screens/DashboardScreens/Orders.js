@@ -17,7 +17,6 @@ const Orders = ({ navigation }) => {
       <View>
         <View className="flex-row justify-between items-center">
           <Text className="font-bold text-xl text-white">Les commandes</Text>
-          <FilterSelect text="Filtre" icon="filter" />
         </View>
         <View className="flex-row justify-between items-center border-b-2 border-lightGray mt-6 pb-3 mb-6">
           <Text className="font-bold text-lg text-white ">Client</Text>

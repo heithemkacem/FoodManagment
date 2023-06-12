@@ -68,7 +68,6 @@ const Home = ({ navigation }) => {
               </View>
             </TouchableOpacity>
           </View>
-          <FilterSelect text="Filter" icon="filter" />
         </View>
 
         <ScrollView className="">

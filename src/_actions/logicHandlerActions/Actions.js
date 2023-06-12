@@ -164,6 +164,8 @@ export const getCategoriesForFormik = (setItems) => async (dispatch) => {
       response.data.categories.map((category) => ({
         label: category.cat_name,
         value: category.cat_name,
+        //add an other value to the object
+        id: category._id,
       }))
     );
   } catch (error) {

@@ -54,6 +54,7 @@ const NewDishModal = ({
   useEffect(() => {
     dispatch(getCategoriesForFormik(setItems));
   }, []);
+
   const createUpdateDish = async (values, setSubmitting) => {
     try {
       const formData = new FormData();
@@ -66,7 +67,7 @@ const NewDishModal = ({
       // formData.append("image", image);
       const res = await axios.post(
         `${API_URL}/${dishToUpdate?._id ? "UpdateDish" : `createDish`}`,
-        formData
+        values
       );
       Toast.show({
         type: "success",
@@ -162,12 +163,15 @@ const NewDishModal = ({
                     description: "",
                     image: "",
                     category: "",
+                    cat_id: "",
                   }
             }
             validationSchema={newDishSchema}
             onSubmit={(values, { setSubmitting }) => {
               values.category = value;
               values.image = image;
+              values.cat_id = items.find((item) => item.value === value).id;
+              console.log(values);
               createUpdateDish(values, setSubmitting);
             }}
           >

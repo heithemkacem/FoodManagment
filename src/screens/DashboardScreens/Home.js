@@ -37,7 +37,6 @@ const Home = ({ navigation }) => {
     }
     setOrders(newOrders);
   };
-
   return (
     <>
       <Layout

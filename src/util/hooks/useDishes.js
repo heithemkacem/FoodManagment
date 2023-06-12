@@ -12,7 +12,6 @@ export const useDishes = () => {
 
   const [query, setQuery] = useState("");
   const [allDishes, setAllDishes] = useState([]);
-
   useEffect(() => {
     const newDishes = allDishes.filter((dish) => {
       if (!selectedCategoryId)
@@ -30,7 +29,7 @@ export const useDishes = () => {
 
   useEffect(() => {
     getDishes();
-  }, [dishes]);
+  }, []);
 
   const getDishes = async () => {
     setIsLoading(true);

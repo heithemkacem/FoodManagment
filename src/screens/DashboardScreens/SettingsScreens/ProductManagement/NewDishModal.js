@@ -18,6 +18,7 @@ import {
   TouchableOpacity,
   Pressable,
   ScrollView,
+  FlatList,
 } from "react-native";
 import MyImagePicker from "../../../../components/myImagePicker/MyImagePicker";
 import Toast from "react-native-toast-message";
@@ -25,7 +26,10 @@ import Toast from "react-native-toast-message";
 import { API_URL } from "../../../../util/consts";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { getCategories } from "../../../../_actions/logicHandlerActions/Actions";
+import {
+  getCategories,
+  getCategoriesForFormik,
+} from "../../../../_actions/logicHandlerActions/Actions";
 
 const newDishSchema = Yup.object().shape({
   name: Yup.string()
@@ -43,23 +47,23 @@ const NewDishModal = ({
   setDishToUpdate,
 }) => {
   const [image, setImage] = useState(null);
-  const [categories, setCategories] = React.useState([]);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([]);
   const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(getCategories(setCategories, setIsLoading));
+    dispatch(getCategoriesForFormik(setItems));
   }, []);
-
   const createUpdateDish = async (values, setSubmitting) => {
     try {
       const formData = new FormData();
       formData.append("name", values.name);
       formData.append("price", values.price);
       formData.append("description", values.description);
+      formData.append("category", values.category);
+      formData.append("image", values.image);
       if (dishToUpdate?._id) formData.append("id", dishToUpdate._id);
       // formData.append("image", image);
-
       const res = await axios.post(
         `${API_URL}/${dishToUpdate?._id ? "UpdateDish" : `createDish`}`,
         formData
@@ -109,7 +113,7 @@ const NewDishModal = ({
       <Animated.View
         entering={FadeInDown.duration(300)}
         exiting={FadeOutDown.duration(300)}
-        className="rounded-2xl absolute h-full max-h-[700px] bottom-4 right-4 left-4 max-w-[500px] p-8 bg-black"
+        className="rounded-2xl absolute h-full  bottom-4 right-4 left-4 max-w-[500px] p-4 bg-black"
         style={{
           shadowColor: "rgba(192, 132, 252,0.2)",
           shadowOffset: {
@@ -147,7 +151,7 @@ const NewDishModal = ({
           </TouchableOpacity>
         </View>
 
-        <View className="flex-1 mt-10">
+        <View className="flex-1 mt-10 ">
           <Formik
             initialValues={
               dishToUpdate._id
@@ -156,12 +160,14 @@ const NewDishModal = ({
                     name: "",
                     price: "0",
                     description: "",
-                    image: image,
+                    image: "",
                     category: "",
                   }
             }
             validationSchema={newDishSchema}
             onSubmit={(values, { setSubmitting }) => {
+              values.category = value;
+              values.image = image;
               createUpdateDish(values, setSubmitting);
             }}
           >
@@ -174,9 +180,27 @@ const NewDishModal = ({
               errors,
               touched,
             }) => (
-              <>
-                <MyImagePicker setImage={setImage} image={image} />
-
+              <View className="flex-col w-full h-full justify-between  ">
+                <View className="">
+                  <MyImagePicker setImage={setImage} image={image} />
+                </View>
+                <View className="z-50 mt-5 ">
+                  <DropDownPicker
+                    open={open}
+                    value={value}
+                    items={items}
+                    setOpen={setOpen}
+                    setValue={setValue}
+                    setItems={setItems}
+                    theme="DARK"
+                    multiple={false}
+                    mode="BADGE"
+                    badgeDotColors={colors.primary}
+                    style={{
+                      backgroundColor: colors.lightblack,
+                    }}
+                  />
+                </View>
                 <ScrollView className="my-8">
                   <View className="">
                     <StyledTextInput
@@ -214,33 +238,19 @@ const NewDishModal = ({
                       value={values.description}
                       errors={touched.description && errors.description}
                     />
-                    <DropDownPicker
-                      items={categories.map((category) => ({
-                        label: category.cat_name,
-                        value: category.cat_name,
-                      }))}
-                      defaultValue={values.category}
-                      style={{
-                        backgroundColor: colors.primary,
-                      }}
-                      itemStyle={{ justifyContent: "flex-start" }}
-                      dropDownStyle={{ backgroundColor: colors.primary }}
-                      onChangeItem={(item) =>
-                        handleChange("category")(item.value)
-                      }
-                      placeholder="Choisir une category"
-                    />
                   </View>
+                  {!isSubmitting && (
+                    <RegularButton onPress={handleSubmit}>
+                      Valider
+                    </RegularButton>
+                  )}
+                  {isSubmitting && (
+                    <RegularButton disabled={true}>
+                      <ActivityIndicator size="small" color={colors.white} />
+                    </RegularButton>
+                  )}
                 </ScrollView>
-                {!isSubmitting && (
-                  <RegularButton onPress={handleSubmit}>Valider</RegularButton>
-                )}
-                {isSubmitting && (
-                  <RegularButton disabled={true}>
-                    <ActivityIndicator size="small" color={colors.white} />
-                  </RegularButton>
-                )}
-              </>
+              </View>
             )}
           </Formik>
         </View>

@@ -157,7 +157,23 @@ export const getCategories =
     }
     setIsLoading(false);
   };
-
+export const getCategoriesForFormik = (setItems) => async (dispatch) => {
+  try {
+    const response = await axios.post(`${API_URL}/getcategory`);
+    setItems(
+      response.data.categories.map((category) => ({
+        label: category.cat_name,
+        value: category.cat_name,
+      }))
+    );
+  } catch (error) {
+    Toast.show({
+      type: "error",
+      text1: "Erreur",
+      text2: error.message,
+    });
+  }
+};
 export const getOrders = (setOrders) => async (dispatch) => {
   try {
     const { data } = await axios.post(`${API_URL}/getOrders`);

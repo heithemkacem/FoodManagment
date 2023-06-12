@@ -40,7 +40,7 @@ const MyImagePicker = ({ setImage, image }) => {
 
   return (
     <TouchableOpacity
-      className="bg-lightblack items-center justify-center w-24 h-24 mx-auto overflow-hidden rounded-full"
+      className="bg-lightblack items-center justify-center w-16 h-16 mx-auto overflow-hidden rounded-full"
       style={{
         shadowColor: "rgba(192, 132, 252,0.2)",
         shadowOffset: {

@@ -30,7 +30,7 @@ export const useDishes = () => {
 
   useEffect(() => {
     getDishes();
-  }, []);
+  }, [dishes]);
 
   const getDishes = async () => {
     setIsLoading(true);

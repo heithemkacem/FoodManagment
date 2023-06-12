@@ -281,6 +281,39 @@ export const CreateOrder =
     }
   };
 
+export const ResetPasswordActionFromDashboard =
+  (values, setSubmitting) => async (dispatch) => {
+    try {
+      const { data } = await axios.post(`${API_URL}/updatePassword`, {
+        password: values.password,
+        newpassword: values.newpassword,
+        email: values.email,
+      });
+      const { success, message } = data;
+      if (success === false) {
+        setSubmitting(false);
+        Toast.show({
+          type: "error",
+          text1: "Erreur",
+          text2: message,
+        });
+      } else if (success === true) {
+        setSubmitting(false);
+        Toast.show({
+          type: "success",
+          text1: "Succès",
+          text2: message,
+        });
+      }
+    } catch (error) {
+      setSubmitting(false);
+      Toast.show({
+        type: "error",
+        text1: "Erreur",
+        text2: error.message,
+      });
+    }
+  };
 //?Redux Actions
 //!Logout User
 export const Logout = () => async (dispatch) => {

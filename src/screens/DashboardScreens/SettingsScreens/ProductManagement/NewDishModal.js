@@ -171,7 +171,6 @@ const NewDishModal = ({
               values.category = value;
               values.image = image;
               values.cat_id = items.find((item) => item.value === value).id;
-              console.log(values);
               createUpdateDish(values, setSubmitting);
             }}
           >

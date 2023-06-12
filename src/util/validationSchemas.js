@@ -55,7 +55,7 @@ export const ResetSchemaDashboard = Yup.object().shape({
     .min(8, "Votre mot de passe doit contenir au moins 8 caractères")
     .max(24, "Votre mot de passe doit contenir au plus 24 caractères"),
   confirmNewPassword: Yup.string().oneOf(
-    [Yup.ref("newPassword"), null],
+    [Yup.ref("newpassword"), null],
     "Mot de passe non identique"
   ),
 });

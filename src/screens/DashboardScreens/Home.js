@@ -36,6 +36,10 @@ const Home = ({ navigation }) => {
     }
     setOrders(newOrders);
   };
+  const total = orders.reduce((acc, order) => {
+    return acc + order.price * order.quantity;
+  }, 0);
+  const [clientMoney, setClientMoney] = useState(0);
   const handlePrintTicket = async () => {
     //ticket html template contain the order details and the total price of the order
     const ticketHTML = `
@@ -52,18 +56,23 @@ const Home = ({ navigation }) => {
         )}
       </div>
       <div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-        <p style="font-size: 1rem; font-weight: bold;">Total</p>
-        <p style="font-size: 1rem; font-weight: bold;">${orders.reduce(
-          (acc, order) => acc + order.price * order.quantity,
-          0
-        )} DT</p>
+        <p style="font-size: 1rem; font-weight: bold;">Totale</p>
+        <p style="font-size: 1rem; font-weight: bold;"> ${total} DT</p>
       </div>
+      <div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+      <p style="font-size: 1rem; font-weight: bold;">Retourner en DT</p>
+      <p style="font-size: 1rem; font-weight: bold;">${
+        clientMoney - total
+      } DT</p>
+    </div>
     </div>
   `;
 
     try {
       const { uri } = await Print.printToFileAsync({ html: ticketHTML });
       await Print.printAsync({ uri });
+      setIsOrdersViewOpen(false);
+      setOrders([]);
     } catch (error) {
       console.error("Failed to print ticket:", error);
     }
@@ -121,7 +130,7 @@ const Home = ({ navigation }) => {
                     {dish.name}
                   </Text>
                   <Text className="mt-2 text-center text-white">
-                    ${dish.price}
+                    {dish.price} DT
                   </Text>
                   {/* <Text className="text-lightGray mt-1 text-center">
                   {dish.numberAvailable} available
@@ -156,6 +165,7 @@ const Home = ({ navigation }) => {
           setOrders={setOrders}
           setIsOrdersViewOpen={setIsOrdersViewOpen}
           handlePrintTicket={handlePrintTicket}
+          setClientMoney={setClientMoney}
         />
       )}
     </>

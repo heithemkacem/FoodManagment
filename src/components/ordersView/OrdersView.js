@@ -19,6 +19,7 @@ const OrdersView = ({
   setOrders,
   setIsOrdersViewOpen,
   handlePrintTicket,
+  setClientMoney,
 }) => {
   const dispatch = useDispatch();
   const total = orders
@@ -145,6 +146,14 @@ const OrdersView = ({
         </ScrollView>
 
         <View className="mt-auto">
+          <TextInput
+            placeholder="Argent du client"
+            placeholderTextColor={"#8d9195"}
+            className="bg-input h-14 w-full px-3 text-white rounded-lg"
+            onChangeText={(text) => {
+              setClientMoney(text);
+            }}
+          />
           <View className="flex-row items-center justify-between mt-4">
             <Text className="text-lg font-bold text-white">Total</Text>
             <Text className="text-lg font-bold text-white">${total}</Text>

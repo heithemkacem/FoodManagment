@@ -26,13 +26,9 @@ export const useDishes = ({ routeName = null }) => {
     setDishes(newDishes);
   }, [selectedCategoryId, query]);
 
-<<<<<<< HEAD
   let dependecies = [];
   if (routeName) dependecies.push(routeName);
 
-=======
-  //get dishes from api  whenever the user navigates to the dishes screen or when the user changes the selected category
->>>>>>> 20978615aadbf6ad547a72d9e8e3f51706e0356e
   useEffect(() => {
     getDishes();
   }, dependecies);

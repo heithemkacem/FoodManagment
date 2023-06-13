@@ -13,13 +13,11 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import OrdersView from "../../components/ordersView/OrdersView";
 import { colors } from "../../components/colors";
 import useDishes from "../../util/hooks/useDishes";
-import * as Print from "expo-print";
 import { Notifications } from "expo-notifications";
 import { useRoute } from "@react-navigation/native";
 
 const Home = ({ navigation }) => {
   const routeName = useRoute().name;
-  console.log(routeName);
   const {
     dishes,
     isLoading,
@@ -46,45 +44,7 @@ const Home = ({ navigation }) => {
   const total = orders.reduce((acc, order) => {
     return acc + order.price * order.quantity;
   }, 0);
-  const [clientMoney, setClientMoney] = useState(0);
-  const handlePrintTicket = async () => {
-    //ticket html template contain the order details and the total price of the order
-    const ticketHTML = `
-    <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-      <h1 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Ticket</h1>
-      <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-        ${orders?.map(
-          (order) => `
-          <div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-            <p style="font-size: 1rem; font-weight: bold;">${order.name}</p>
-            <p style="font-size: 1rem; font-weight: bold;">${order.quantity}</p>
-          </div>
-        `
-        )}
-      </div>
-      <div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-        <p style="font-size: 1rem; font-weight: bold;">Totale</p>
-        <p style="font-size: 1rem; font-weight: bold;"> ${total} DT</p>
-      </div>
-      <div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-      <p style="font-size: 1rem; font-weight: bold;">Retourner en DT</p>
-      <p style="font-size: 1rem; font-weight: bold;">${
-        clientMoney - total
-      } DT</p>
-    </div>
-    </div>
-  `;
 
-    try {
-      const { uri } = await Print.printToFileAsync({ html: ticketHTML });
-      await Print.printAsync({ uri });
-
-      setIsOrdersViewOpen(false);
-      setOrders([]);
-    } catch (error) {
-      console.error("Failed to print ticket:", error);
-    }
-  };
   return (
     <>
       <Layout
@@ -172,8 +132,6 @@ const Home = ({ navigation }) => {
           orders={orders}
           setOrders={setOrders}
           setIsOrdersViewOpen={setIsOrdersViewOpen}
-          handlePrintTicket={handlePrintTicket}
-          setClientMoney={setClientMoney}
         />
       )}
     </>

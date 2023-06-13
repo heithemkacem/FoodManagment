@@ -42,7 +42,7 @@ const Home = ({ navigation }) => {
     <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
       <h1 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Ticket</h1>
       <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-        ${orders.map(
+        ${orders?.map(
           (order) => `
           <div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
             <p style="font-size: 1rem; font-weight: bold;">${order.name}</p>

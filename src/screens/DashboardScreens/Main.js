@@ -4,15 +4,16 @@ import Layout from "../../components/layout/Layout";
 import { View } from "react-native";
 import { useDispatch } from "react-redux";
 import { getOrdersWithStatus } from "../../_actions/logicHandlerActions/Actions";
-
+import { useIsFocused } from "@react-navigation/native";
 const Main = ({ navigation }) => {
+  const isFocused = useIsFocused();
   const dispatch = useDispatch();
   const [ordersLength, setOrdersLength] = useState(0);
   const [ordersPendingLength, setOrdersPendingLength] = useState(0);
   useEffect(() => {
     dispatch(getOrdersWithStatus(setOrdersPendingLength, 1));
     dispatch(getOrdersWithStatus(setOrdersLength, 0));
-  });
+  }, [isFocused]);
   return (
     <Layout
       navigation={navigation}

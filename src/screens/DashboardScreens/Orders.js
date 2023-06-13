@@ -4,13 +4,15 @@ import Layout from "../../components/layout/Layout";
 import { useDispatch } from "react-redux";
 import { getOrders } from "../../_actions/logicHandlerActions/Actions";
 import { ScrollView } from "react-native-gesture-handler";
+import { useIsFocused } from "@react-navigation/native";
 //translate all the text to french
 const Orders = ({ navigation }) => {
+  const isFocused = useIsFocused();
   const [orders, setOrders] = useState([]);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getOrders(setOrders));
-  }, [orders]);
+  }, [isFocused]);
   return (
     <Layout navigation={navigation} headerTitle="Votre commandes " date={true}>
       <View>

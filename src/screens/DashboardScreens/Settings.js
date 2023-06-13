@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Pressable, Text, View } from "react-native";
 import Layout from "../../components/layout/Layout";
 import { AntDesign } from "@expo/vector-icons";

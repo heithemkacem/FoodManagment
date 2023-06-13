@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Toast } from "react-native-toast-message";
 import { API_URL } from "../consts";
 
-export const useDishes = ({ routeName = null }) => {
+export const useDishes = ({ isFocused }) => {
   const [dishes, setDishes] = useState([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
 
@@ -26,12 +26,9 @@ export const useDishes = ({ routeName = null }) => {
     setDishes(newDishes);
   }, [selectedCategoryId, query]);
 
-  let dependecies = [];
-  if (routeName) dependecies.push(routeName);
-
   useEffect(() => {
     getDishes();
-  }, dependecies);
+  }, [isFocused]);
 
   const getDishes = async () => {
     setIsLoading(true);

@@ -14,7 +14,12 @@ import { colors } from "../colors";
 import { CreateOrder } from "../../_actions/logicHandlerActions/Actions";
 import { useDispatch } from "react-redux";
 
-const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
+const OrdersView = ({
+  orders,
+  setOrders,
+  setIsOrdersViewOpen,
+  handlePrintTicket,
+}) => {
   const dispatch = useDispatch();
   const total = orders
     .reduce((acc, order) => acc + order.price * order.quantity, 0)
@@ -149,7 +154,13 @@ const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
             className="bg-primary p-4 mt-4 rounded-lg"
             onPress={() => {
               dispatch(
-                CreateOrder(setIsOrdersViewOpen, setOrders, orders, total)
+                CreateOrder(
+                  setIsOrdersViewOpen,
+                  setOrders,
+                  orders,
+                  total,
+                  handlePrintTicket
+                )
               );
             }}
           >

@@ -18,14 +18,14 @@ const RowContainer = styled.View`
 const InputField = styled.TextInput`
   padding-left: 65px;
   padding-right: 65px;
-  font-size: 14;
+  font-size: 14px;
   color: ${white};
   border-width: 2px;
 `;
 
 const LeftIcon = styled.View`
   position: absolute;
-  top: 45px;
+  top: 35px;
   left: 15px;
   z-index: 1;
   border-right-width: 2px;
@@ -34,7 +34,7 @@ const LeftIcon = styled.View`
 `;
 const RightIcon = styled.TouchableOpacity`
   position: absolute;
-  top: 45px;
+  top: 35px;
   right: 15px;
   z-index: 1;
 `;
@@ -70,7 +70,7 @@ const StyledTextInput = ({ icon, label, isPassword, errors, ...props }) => {
           ...props?.style,
           borderRadius: 8,
           borderColor: errors ? "red" : secondary,
-          height: props.multiline ? 100 : 60,
+          height: props.multiline ? 100 : 40,
         }}
         secureTextEntry={isPassword && hidePassword}
       />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import MainContainer from "../components/containers/MainContainer";
 import StyledTextInput from "../components/inputs/StyledTextInput";
 import { Formik } from "formik";

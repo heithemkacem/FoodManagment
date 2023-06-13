@@ -9,12 +9,11 @@ import {
 } from "react-native";
 import Layout from "../../components/layout/Layout";
 import DishCategories from "../../components/dishCategories/DishCategories";
-import FilterSelect from "../../components/buttons/FilterSelect";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import OrdersView from "../../components/ordersView/OrdersView";
 import { colors } from "../../components/colors";
 import useDishes from "../../util/hooks/useDishes";
-
+import * as Print from "expo-print";
 const Home = ({ navigation }) => {
   const {
     dishes,
@@ -37,7 +36,38 @@ const Home = ({ navigation }) => {
     }
     setOrders(newOrders);
   };
+  const handlePrintTicket = async () => {
+    //ticket html template contain the order details and the total price of the order
+    const ticketHTML = `
+    <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+      <h1 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Ticket</h1>
+      <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        ${orders?.map(
+          (order) => `
+          <div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+            <p style="font-size: 1rem; font-weight: bold;">${order.name}</p>
+            <p style="font-size: 1rem; font-weight: bold;">${order.quantity}</p>
+          </div>
+        `
+        )}
+      </div>
+      <div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+        <p style="font-size: 1rem; font-weight: bold;">Total</p>
+        <p style="font-size: 1rem; font-weight: bold;">${orders.reduce(
+          (acc, order) => acc + order.price * order.quantity,
+          0
+        )} DT</p>
+      </div>
+    </div>
+  `;
 
+    try {
+      const { uri } = await Print.printToFileAsync({ html: ticketHTML });
+      await Print.printAsync({ uri });
+    } catch (error) {
+      console.error("Failed to print ticket:", error);
+    }
+  };
   return (
     <>
       <Layout
@@ -69,7 +99,6 @@ const Home = ({ navigation }) => {
               </View>
             </TouchableOpacity>
           </View>
-          <FilterSelect text="Filter" icon="filter" />
         </View>
 
         <ScrollView className="">
@@ -126,6 +155,7 @@ const Home = ({ navigation }) => {
           orders={orders}
           setOrders={setOrders}
           setIsOrdersViewOpen={setIsOrdersViewOpen}
+          handlePrintTicket={handlePrintTicket}
         />
       )}
     </>

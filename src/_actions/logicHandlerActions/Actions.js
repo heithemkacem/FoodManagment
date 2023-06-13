@@ -157,7 +157,25 @@ export const getCategories =
     }
     setIsLoading(false);
   };
-
+export const getCategoriesForFormik = (setItems) => async (dispatch) => {
+  try {
+    const response = await axios.post(`${API_URL}/getcategory`);
+    setItems(
+      response.data.categories.map((category) => ({
+        label: category.cat_name,
+        value: category.cat_name,
+        //add an other value to the object
+        id: category._id,
+      }))
+    );
+  } catch (error) {
+    Toast.show({
+      type: "error",
+      text1: "Erreur",
+      text2: error.message,
+    });
+  }
+};
 export const getOrders = (setOrders) => async (dispatch) => {
   try {
     const { data } = await axios.post(`${API_URL}/getOrders`);
@@ -188,6 +206,40 @@ export const DeleteOrder = (id) => async (dispatch) => {
     });
   }
 };
+export const ChangeStatus = (id, status) => async (dispatch) => {
+  try {
+    const res = await axios.post(`${API_URL}/confirmOrder`, {
+      id_order: id,
+      status: status,
+    });
+
+    Toast.show({
+      type: "success",
+      text1: "Succès",
+      text2: "Order status changee avec succès",
+    });
+  } catch (error) {
+    Toast.show({
+      type: "error",
+      text1: "Erreur",
+      text2: error.message,
+    });
+  }
+};
+export const uploadImage = (base64, setImage) => async (dispatch) => {
+  try {
+    const { data } = await axios.post(`${API_URL}/uploadImage`, {
+      image: base64,
+    });
+    setImage(data.image);
+  } catch (error) {
+    Toast.show({
+      type: "error",
+      text1: "Erreur",
+      text2: error.message,
+    });
+  }
+};
 export const getOrdersWithStatus =
   (setOrdersLength, status) => async (dispatch) => {
     try {
@@ -204,7 +256,8 @@ export const getOrdersWithStatus =
     }
   };
 export const CreateOrder =
-  (setIsOrdersViewOpen, setOrders, orders, total) => async (dispatch) => {
+  (setIsOrdersViewOpen, setOrders, orders, total, handlePrintTicket) =>
+  async (dispatch) => {
     try {
       const { data } = await axios.post(`${API_URL}/createOrder`, {
         id_dishes: orders,
@@ -217,6 +270,7 @@ export const CreateOrder =
           text1: "Succès",
           text2: message,
         });
+        handlePrintTicket();
       }
       setIsOrdersViewOpen(false);
       setOrders([]);
@@ -229,6 +283,39 @@ export const CreateOrder =
     }
   };
 
+export const ResetPasswordActionFromDashboard =
+  (values, setSubmitting) => async (dispatch) => {
+    try {
+      const { data } = await axios.post(`${API_URL}/updatePassword`, {
+        password: values.password,
+        newpassword: values.newpassword,
+        email: values.email,
+      });
+      const { success, message } = data;
+      if (success === false) {
+        setSubmitting(false);
+        Toast.show({
+          type: "error",
+          text1: "Erreur",
+          text2: message,
+        });
+      } else if (success === true) {
+        setSubmitting(false);
+        Toast.show({
+          type: "success",
+          text1: "Succès",
+          text2: message,
+        });
+      }
+    } catch (error) {
+      setSubmitting(false);
+      Toast.show({
+        type: "error",
+        text1: "Erreur",
+        text2: error.message,
+      });
+    }
+  };
 //?Redux Actions
 //!Logout User
 export const Logout = () => async (dispatch) => {

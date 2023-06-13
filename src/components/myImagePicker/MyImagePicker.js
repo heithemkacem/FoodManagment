@@ -2,8 +2,11 @@ import { Image, ToastAndroid, TouchableOpacity } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import React, { useState, useEffect } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { uploadImage } from "../../_actions/logicHandlerActions/Actions";
+import { useDispatch } from "react-redux";
 
 const MyImagePicker = ({ setImage, image }) => {
+  const dispatch = useDispatch();
   const [galleryPermission, setGalleryPermission] = useState(null);
 
   const setToastMsg = (msg) => {
@@ -28,14 +31,16 @@ const MyImagePicker = ({ setImage, image }) => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       quality: 1,
+      base64: true,
     });
-
-    setImage(result.assets[0]);
+    if (result.canceled === false) {
+      dispatch(uploadImage(result.assets[0].base64, setImage));
+    }
   };
 
   return (
     <TouchableOpacity
-      className="bg-lightblack items-center justify-center w-24 h-24 mx-auto overflow-hidden rounded-full"
+      className="bg-lightblack items-center justify-center w-16 h-16 mx-auto overflow-hidden rounded-full"
       style={{
         shadowColor: "rgba(192, 132, 252,0.2)",
         shadowOffset: {
@@ -48,7 +53,7 @@ const MyImagePicker = ({ setImage, image }) => {
       onPress={pick}
     >
       {image?.uri ? (
-        <Image className="w-full h-full" source={{ uri: image.uri }} />
+        <Image className="w-full h-full" source={{ uri: image }} />
       ) : (
         <MaterialCommunityIcons name="image-plus" size={24} color="white" />
       )}

@@ -13,7 +13,7 @@ const IconBg = styled.View`
   }}
   width: ${ScreenHeight * 0.15}px;
   height: ${ScreenHeight * 0.15}px;
-  border-radius: ${ScreenHeight * 0.2};
+  border-radius: ${ScreenHeight * 0.2}px;
   justify-content: center;
   align-items: center;
   align-self: center;

@@ -16,9 +16,9 @@ import useDishes from "../../util/hooks/useDishes";
 import { Notifications } from "expo-notifications";
 import { useRoute } from "@react-navigation/native";
 import { UPLOAD_URL } from "../../util/consts";
-
+import { useIsFocused } from "@react-navigation/native";
 const Home = ({ navigation }) => {
-  const routeName = useRoute().name;
+  const isFocused = useIsFocused();
   const {
     dishes,
     isLoading,
@@ -26,7 +26,7 @@ const Home = ({ navigation }) => {
     selectedCategoryId,
     setSelectedCategoryId,
   } = useDishes({
-    routeName,
+    isFocused,
   });
 
   const [orders, setOrders] = useState([]);

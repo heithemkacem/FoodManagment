@@ -9,13 +9,15 @@ import {
   getOrders,
 } from "../../../_actions/logicHandlerActions/Actions";
 import { ScrollView } from "react-native-gesture-handler";
+import { useIsFocused } from "@react-navigation/native";
 const OrdersView = () => {
+  const isFocused = useIsFocused();
   const dispatch = useDispatch();
   const [orders, setOrders] = useState([]);
   const [update, setUpdate] = useState(0);
   useEffect(() => {
     dispatch(getOrders(setOrders));
-  }, [orders]);
+  }, [isFocused]);
   const handleDelete = (id) => {
     dispatch(DeleteOrder(id));
   };

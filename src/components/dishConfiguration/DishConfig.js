@@ -2,15 +2,20 @@ import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { View, Text, Pressable, Image, TouchableOpacity } from "react-native";
 import { colors } from "../colors";
+import { UPLOAD_URL } from "../../util/consts";
 
 const DishConfig = ({ dish, index, handleClick }) => {
   return (
     <Pressable className=" w-[44%] h-60  border-lightGray border rounded-lg mb-5">
       <View key={index} className=" items-center w-full h-full">
-        <Image
-          source={{ uri: dish.image }}
-          className=" w-20 h-20 mt-2 rounded-md"
-        />
+        {dish.image ? (
+          <Image
+            source={{ uri: `${UPLOAD_URL}/${dish.image}` }}
+            className=" w-20 h-20 mt-2 rounded-md"
+          />
+        ) : (
+          <View className="w-20 h-20 mt-2 rounded-md bg-lightGray" />
+        )}
         <Text className="text-md mt-2 font-bold text-center text-white">
           {dish.name}
         </Text>

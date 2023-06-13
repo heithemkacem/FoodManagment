@@ -15,6 +15,7 @@ import { CreateOrder } from "../../_actions/logicHandlerActions/Actions";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import * as Print from "expo-print";
+import { UPLOAD_URL } from "../../util/consts";
 
 const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
   const dispatch = useDispatch();
@@ -113,7 +114,7 @@ const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
                   <View className="flex-row justify-between">
                     <View className="flex-row gap-4">
                       <Image
-                        source={{ uri: order.image }}
+                        source={{ uri: `${UPLOAD_URL}/${order.image}` }}
                         className="w-14 h-14 rounded-md"
                       />
 

@@ -15,6 +15,7 @@ import { colors } from "../../components/colors";
 import useDishes from "../../util/hooks/useDishes";
 import { Notifications } from "expo-notifications";
 import { useRoute } from "@react-navigation/native";
+import { UPLOAD_URL } from "../../util/consts";
 
 const Home = ({ navigation }) => {
   const routeName = useRoute().name;
@@ -91,7 +92,7 @@ const Home = ({ navigation }) => {
                   className="rounded-2xl items-center p-6 bg-lightblack min-w-[250px] pt-[90px]"
                 >
                   <Image
-                    source={{ uri: dish.image }}
+                    source={{ uri: `${UPLOAD_URL}/${dish.image}` }}
                     className="w-36 h-36 absolute -translate-y-16 rounded-md"
                   />
                   <Text className="text-lg text-center text-white">

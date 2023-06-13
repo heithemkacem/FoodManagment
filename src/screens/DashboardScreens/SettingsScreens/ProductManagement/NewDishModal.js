@@ -69,14 +69,32 @@ const NewDishModal = ({
       formData.append("name", values.name);
       formData.append("price", values.price);
       formData.append("description", values.description);
-      formData.append("category", values.category);
-      formData.append("image", values.image);
+      console.log(image);
+      if (image) {
+        const fileName = image.uri.split("/").pop();
+        const match = /\.(\w+)$/.exec(fileName);
+        const type = match ? `image/${match[1]}` : `image`;
+        formData.append("image", {
+          uri: image.uri,
+          name: fileName,
+          type: type,
+          // uri: Platform.OS === "android" ? image.uri : image.uri.replace("file://", ""),
+        });
+      }
+      formData.append("cat_id", selectedCategoryId);
+      console.log(formData);
       if (dishToUpdate?._id) formData.append("id", dishToUpdate._id);
-      // formData.append("image", image);
-      const res = await axios.post(
-        `${API_URL}/${dishToUpdate?._id ? "UpdateDish" : `createDish`}`,
-        values
-      );
+
+      const config = {
+        method: "POST",
+        url: `${API_URL}/${dishToUpdate?._id ? "UpdateDish" : `createDish`}`,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        data: formData,
+      };
+
+      const res = await axios(config);
       Toast.show({
         type: "success",
         text1: "Succès",
@@ -84,6 +102,7 @@ const NewDishModal = ({
       });
       setIsNewDishModalOpen(false);
     } catch (error) {
+      console.log(error);
       Toast.show({
         type: "error",
         text1: "Erreur",
@@ -190,7 +209,11 @@ const NewDishModal = ({
             }) => (
               <View className="flex-col w-full h-full justify-between  ">
                 <View className="">
-                  <MyImagePicker setImage={setImage} image={image} />
+                  <MyImagePicker
+                    setImage={setImage}
+                    image={image}
+                    currentImage={dishToUpdate?.image}
+                  />
                 </View>
                 <View className="z-50 mt-5 ">
                   <DropDownPicker

@@ -209,7 +209,10 @@ const NewDishModal = ({
                     }}
                   />
                 </View>
-                <ScrollView className="my-8">
+                <ScrollView
+                  className="my-8"
+                  showsVerticalScrollIndicator={false}
+                >
                   <View className="">
                     <StyledTextInput
                       icon="food"

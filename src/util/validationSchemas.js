@@ -35,7 +35,7 @@ export const LoginSchema = Yup.object().shape({
 });
 //!Reset Password Schema
 export const ResetSchema = Yup.object().shape({
-  newpassword: Yup.string()
+  newPassword: Yup.string()
     .required("Mot de passe requis")
     .min(8, "Your password must be at least 8 characters")
     .max(24, "Your password must be at most 24 characters"),

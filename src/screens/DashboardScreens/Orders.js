@@ -23,7 +23,10 @@ const Orders = ({ navigation }) => {
           <Text className="font-bold text-lg text-white">Total payment</Text>
           <Text className="font-bold text-lg text-white">Status</Text>
         </View>
-        <ScrollView className="h-[80%] w-full">
+        <ScrollView
+          className="h-[80%] w-full"
+          showsVerticalScrollIndicator={false}
+        >
           {orders?.map((item, index) => (
             <View
               className="flex-row justify-between items-center mb-6 "

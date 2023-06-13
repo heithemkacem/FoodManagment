@@ -32,7 +32,10 @@ const OrdersView = () => {
         <Text className="text-md font-bold text-white">Status</Text>
         <Text className="text-md font-bold text-white">Delete</Text>
       </View>
-      <ScrollView className="h-[88%] w-full">
+      <ScrollView
+        className="h-[88%] w-full"
+        showsVerticalScrollIndicator={false}
+      >
         {orders.map((item, index) => (
           <View
             className=" flex-row items-center justify-between mb-6 w-full "

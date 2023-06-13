@@ -39,7 +39,7 @@ const CategoryManagementView = () => {
         </TouchableOpacity>
       </View>
 
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View className="flex-row flex-wrap gap-4 mt-10">
           {isLoading ? (
             <View className="items-center justify-center flex-1">

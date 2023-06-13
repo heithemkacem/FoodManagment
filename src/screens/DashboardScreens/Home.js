@@ -111,7 +111,7 @@ const Home = ({ navigation }) => {
           </View>
         </View>
 
-        <ScrollView className="">
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View className="gap-x-8 gap-y-24 flex-row flex-wrap mt-10">
             {isLoading ? (
               <View className="flex-1 justify-center items-center">

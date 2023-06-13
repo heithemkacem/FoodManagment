@@ -19,7 +19,7 @@ const SecurityView = () => {
       <Text className="text-primary self-start text-lg font-bold text-center p-5">
         Changez votre mot de passe:
       </Text>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View className="w-[90%] pl-5 ">
           <Formik
             initialValues={{

@@ -27,6 +27,7 @@ export const useDishes = () => {
     setDishes(newDishes);
   }, [selectedCategoryId, query]);
 
+  //get dishes from api  whenever the user navigates to the dishes screen or when the user changes the selected category
   useEffect(() => {
     getDishes();
   }, []);

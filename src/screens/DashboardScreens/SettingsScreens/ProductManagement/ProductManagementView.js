@@ -40,7 +40,7 @@ const ProductManagementView = () => {
           smallText={true}
         />
       </View>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View className="flex-row flex-wrap justify-between mt-10">
           <AddNewDish setIsNewDishModalOpen={setIsNewDishModalOpen} />
           {isLoading ? (

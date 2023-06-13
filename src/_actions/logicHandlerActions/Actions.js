@@ -95,8 +95,9 @@ export const ForgotPasswordAction =
           text2: message,
         });
         setSubmitting(false);
-        moveTo(navigation, "Login", {
-          email: credentials.email,
+        moveTo(navigation, "ResetPassword", {
+          email: data.userInfo.email,
+          id: data.userInfo.UserID,
         });
       }
     } catch (error) {
@@ -112,9 +113,13 @@ export const ForgotPasswordAction =
 //! Reset Password Action
 
 export const ResetPasswordAction =
-  (values, setSubmitting, moveTo, route, navigation) => async (dispatch) => {
+  (values, setSubmitting, route, moveTo, navigation) => async (dispatch) => {
     try {
-      const { data } = await axios.post(`${API_URL}/resetPassword`, values);
+      const { data } = await axios.post(`${API_URL}/resetPassword`, {
+        password: values.newPassword,
+        email: route.params.email,
+      });
+      console.log(data);
       const { success, message } = data;
       if (success === false) {
         setSubmitting(false);
@@ -310,6 +315,74 @@ export const ResetPasswordActionFromDashboard =
       }
     } catch (error) {
       setSubmitting(false);
+      Toast.show({
+        type: "error",
+        text1: "Erreur",
+        text2: error.message,
+      });
+    }
+  };
+export const VerifyOTPlModifyPasswordAction =
+  (code, route, setPinReady) => async (dispatch) => {
+    console.log(code);
+    try {
+      const { id } = route.params;
+      const { data } = await axios.post(`${API_URL}/verify-modify-password`, {
+        otp: code,
+        id: id,
+      });
+      console.log(data);
+      const { success, message } = data;
+      if (success == false) {
+        setPinReady(false);
+        Toast.show({
+          type: "error",
+          text1: "Erreur",
+          text2: message,
+        });
+      } else if (success === true) {
+        setPinReady(true);
+        Toast.show({
+          type: "success",
+          text1: "Succès",
+          text2: message,
+        });
+      }
+    } catch (error) {
+      setPinReady(false);
+      Toast.show({
+        type: "error",
+        text1: "Erreur",
+        text2: error.message,
+      });
+    }
+  };
+export const ResendModifyPasswordOTP =
+  (route, setResendStatus) => async (dispatch) => {
+    try {
+      const { email, id } = route.params;
+      const { data } = await axios.post(`${API_URL}/resendOTP`, {
+        id: id,
+        email: email,
+      });
+      const { success, message } = data;
+      if (success === false) {
+        setResendStatus("Failed");
+        Toast.show({
+          type: "error",
+          text1: "Erreur",
+          text2: message,
+        });
+      } else if (success === true) {
+        setResendStatus("Sent");
+        Toast.show({
+          type: "success",
+          text1: "Succès",
+          text2: message,
+        });
+      }
+    } catch (error) {
+      setResendStatus("Failed");
       Toast.show({
         type: "error",
         text1: "Erreur",

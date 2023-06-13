@@ -62,7 +62,7 @@ const OrdersView = ({
             Price
           </Text>
         </View>
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View className="mt-4 space-y-8">
             {orders.map((order, i) => (
               <View key={i} className="flex-row justify-between">

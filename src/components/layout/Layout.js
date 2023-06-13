@@ -6,6 +6,7 @@ import Header from "../header/Header";
 const ScreenContainer = styled.View`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   height: 100%;
   width: 100%;
 `;
@@ -14,6 +15,8 @@ const Container = styled.View`
   width: 85%;
   background-color: ${colors.lightblack};
   flex-direction: column;
+  display: flex;
+  justify-content: space-between;
 `;
 const SideBarContainer = styled.View`
   height: 100%;
@@ -27,9 +30,9 @@ const StyledView = styled.View`
   padding: 20px;
 `;
 const MainContainer = styled.View`
-  height: 90%;
+  height: 80%;
   width: 100%;
-  padding: 20px;
+  border-radius: 40px;
 `;
 const MainView = styled.View`
   height: 100%;

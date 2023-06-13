@@ -1,17 +1,12 @@
 import React from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  TextInput,
-} from "react-native";
+import { StyleSheet, View, TouchableOpacity, TextInput } from "react-native";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import styled from "styled-components/native";
 import { colors } from "../colors";
 const Container = styled.View`
   display: flex;
+  position: relative;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;

@@ -4,8 +4,9 @@ import React, { useState, useEffect } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { uploadImage } from "../../_actions/logicHandlerActions/Actions";
 import { useDispatch } from "react-redux";
+import { UPLOAD_URL } from "../../util/consts";
 
-const MyImagePicker = ({ setImage, image }) => {
+const MyImagePicker = ({ setImage, image, currentImage }) => {
   const dispatch = useDispatch();
   const [galleryPermission, setGalleryPermission] = useState(null);
 
@@ -29,13 +30,18 @@ const MyImagePicker = ({ setImage, image }) => {
 
   const pick = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      quality: 1,
-      base64: true,
+      title: "Choisir une image",
+      type: "library",
+      options: {
+        selectionLimit: 1,
+        mediaType: "photo",
+        includeBase64: false,
+      },
+      // mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      // quality: 1,
     });
-    if (result.canceled === false) {
-      dispatch(uploadImage(result.assets[0].base64, setImage));
-    }
+    console.log(result.assets[0]);
+    setImage(result.assets[0]);
   };
 
   return (
@@ -53,7 +59,12 @@ const MyImagePicker = ({ setImage, image }) => {
       onPress={pick}
     >
       {image?.uri ? (
-        <Image className="w-full h-full" source={{ uri: image }} />
+        <Image className="w-full h-full" source={{ uri: image.uri }} />
+      ) : currentImage ? (
+        <Image
+          className="w-full h-full"
+          source={{ uri: `${UPLOAD_URL}/${currentImage}` }}
+        />
       ) : (
         <MaterialCommunityIcons name="image-plus" size={24} color="white" />
       )}

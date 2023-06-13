@@ -7,7 +7,10 @@ import DishConfig from "../../../../components/dishConfiguration/DishConfig";
 import useDishes from "../../../../util/hooks/useDishes";
 import { colors } from "../../../../components/colors";
 import NewDishModal from "./NewDishModal";
+import { useRoute } from "@react-navigation/native";
+
 const ProductManagementView = () => {
+  const routeName = useRoute().name;
   const {
     dishes,
     isLoading,
@@ -15,7 +18,9 @@ const ProductManagementView = () => {
     selectedCategoryId,
     setSelectedCategoryId,
     getDishes,
-  } = useDishes();
+  } = useDishes({
+    routeName,
+  });
 
   const [isNewDishModalOpen, setIsNewDishModalOpen] = useState(false);
 

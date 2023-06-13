@@ -13,18 +13,62 @@ import Animated, { FadeInRight, FadeOutRight } from "react-native-reanimated";
 import { colors } from "../colors";
 import { CreateOrder } from "../../_actions/logicHandlerActions/Actions";
 import { useDispatch } from "react-redux";
+import { useState } from "react";
+import * as Print from "expo-print";
+import { UPLOAD_URL } from "../../util/consts";
 
-const OrdersView = ({
-  orders,
-  setOrders,
-  setIsOrdersViewOpen,
-  handlePrintTicket,
-  setClientMoney,
-}) => {
+const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
   const dispatch = useDispatch();
+  const [paymentMethod, setPaymentMethod] = useState("cash");
+  const [clientMoney, setClientMoney] = useState(0);
+
   const total = orders
     .reduce((acc, order) => acc + order.price * order.quantity, 0)
     .toFixed(2);
+
+  const handlePrintTicket = async () => {
+    //ticket html template contain the order details and the total price of the order
+    const ticketHTML = `
+      <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <h1 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Ticket</h1>
+        <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+          ${orders?.map(
+            (order) => `
+            <div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+              <p style="font-size: 1rem; font-weight: bold;">${order.name}</p>
+              <p style="font-size: 1rem; font-weight: bold;">${order.quantity}</p>
+            </div>
+          `
+          )}
+        </div>
+        <div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+        <p style="font-size: 1rem; font-weight: bold;">Méthode de paiement</p>
+        <p style="font-size: 1rem; font-weight: bold;"> ${paymentMethod}</p>
+      </div>
+
+        <div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+          <p style="font-size: 1rem; font-weight: bold;">Totale</p>
+          <p style="font-size: 1rem; font-weight: bold;"> ${total} DT</p>
+        </div>
+        <div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+        <p style="font-size: 1rem; font-weight: bold;">Retourner en DT</p>
+        <p style="font-size: 1rem; font-weight: bold;">${
+          clientMoney - total
+        } DT</p>
+      </div>
+      </div>
+    `;
+
+    try {
+      const { uri } = await Print.printToFileAsync({ html: ticketHTML });
+      await Print.printAsync({ uri });
+
+      setIsOrdersViewOpen(false);
+      setOrders([]);
+    } catch (error) {
+      console.error("Failed to print ticket:", error);
+    }
+  };
   return (
     <>
       <Pressable
@@ -70,7 +114,7 @@ const OrdersView = ({
                   <View className="flex-row justify-between">
                     <View className="flex-row gap-4">
                       <Image
-                        source={{ uri: order.image }}
+                        source={{ uri: `${UPLOAD_URL}/${order.image}` }}
                         className="w-14 h-14 rounded-md"
                       />
 
@@ -146,10 +190,45 @@ const OrdersView = ({
         </ScrollView>
 
         <View className="mt-auto">
+          <View className="flex-row mb-4 items-center justify-between">
+            <Text className="text-lg font-bold text-white">
+              Méthode de paiement
+            </Text>
+            <View className="flex-row items-center">
+              <TouchableOpacity
+                activeOpacity={0.9}
+                onPress={() => setPaymentMethod("cash")}
+                className={`${
+                  paymentMethod === "cash" ? "bg-primary" : "bg-lightGray/10"
+                } items-center justify-center w-14 h-14 rounded-lg`}
+              >
+                <MaterialCommunityIcons
+                  name="cash"
+                  size={24}
+                  color={paymentMethod === "cash" ? "white" : colors.primary}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                activeOpacity={0.9}
+                onPress={() => setPaymentMethod("card")}
+                className={`${
+                  paymentMethod === "card" ? "bg-primary" : "bg-lightGray/10"
+                } items-center justify-center w-14 h-14 rounded-lg ml-4`}
+              >
+                <MaterialCommunityIcons
+                  name="credit-card"
+                  size={24}
+                  color={paymentMethod === "card" ? "white" : colors.primary}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+
           <TextInput
+            keyboardType="numeric"
             placeholder="Argent du client"
             placeholderTextColor={"#8d9195"}
-            className="bg-input h-14 w-full px-3 text-white rounded-lg"
+            className="bg-input h-14 w-full px-3 text-white rounded-lg mb-4"
             onChangeText={(text) => {
               setClientMoney(text);
             }}
@@ -162,6 +241,10 @@ const OrdersView = ({
             activeOpacity={0.9}
             className="bg-primary p-4 mt-4 rounded-lg"
             onPress={() => {
+              if (!clientMoney)
+                return alert("Veuillez entrer l'argent du client");
+              if (clientMoney < total)
+                return alert("L'argent du client est insuffisant");
               dispatch(
                 CreateOrder(
                   setIsOrdersViewOpen,

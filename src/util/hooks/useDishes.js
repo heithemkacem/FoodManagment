@@ -1,10 +1,9 @@
-import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Toast } from "react-native-toast-message";
 import { API_URL } from "../consts";
 
-export const useDishes = () => {
+export const useDishes = ({ routeName = null }) => {
   const [dishes, setDishes] = useState([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
 
@@ -27,10 +26,12 @@ export const useDishes = () => {
     setDishes(newDishes);
   }, [selectedCategoryId, query]);
 
-  //get dishes from api  whenever the user navigates to the dishes screen or when the user changes the selected category
+  let dependecies = [];
+  if (routeName) dependecies.push(routeName);
+
   useEffect(() => {
     getDishes();
-  }, []);
+  }, dependecies);
 
   const getDishes = async () => {
     setIsLoading(true);

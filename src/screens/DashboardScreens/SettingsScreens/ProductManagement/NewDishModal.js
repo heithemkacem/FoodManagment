@@ -1,4 +1,8 @@
-import Animated, { FadeInDown, FadeOutDown } from "react-native-reanimated";
+import Animated, {
+  FadeInDown,
+  FadeOutDown,
+  set,
+} from "react-native-reanimated";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import StyledTextInput from "../../../../components/inputs/StyledTextInput";
@@ -44,27 +48,53 @@ const NewDishModal = ({
 }) => {
   const [image, setImage] = useState(null);
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
-  const [items, setItems] = useState([]);
+
+  const [selectedCategoryId, setSelectedCategoryId] = useState(null);
+  const [categories, setCategories] = useState([]);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getCategoriesForFormik(setItems));
+    dispatch(getCategoriesForFormik(setCategories));
   }, []);
+  useEffect(() => {
+    const _category = categories.find(
+      (category) => category.id === dishToUpdate?.cat_id
+    );
+    setSelectedCategoryId(_category?.value);
+  }, [categories]);
 
   const createUpdateDish = async (values, setSubmitting) => {
+    values.cat_id = selectedCategoryId;
     try {
       const formData = new FormData();
       formData.append("name", values.name);
       formData.append("price", values.price);
       formData.append("description", values.description);
-      formData.append("category", values.category);
-      formData.append("image", values.image);
+      console.log(image);
+      if (image) {
+        const fileName = image.uri.split("/").pop();
+        const match = /\.(\w+)$/.exec(fileName);
+        const type = match ? `image/${match[1]}` : `image`;
+        formData.append("image", {
+          uri: image.uri,
+          name: fileName,
+          type: type,
+          // uri: Platform.OS === "android" ? image.uri : image.uri.replace("file://", ""),
+        });
+      }
+      formData.append("cat_id", selectedCategoryId);
+      console.log(formData);
       if (dishToUpdate?._id) formData.append("id", dishToUpdate._id);
-      // formData.append("image", image);
-      const res = await axios.post(
-        `${API_URL}/${dishToUpdate?._id ? "UpdateDish" : `createDish`}`,
-        values
-      );
+
+      const config = {
+        method: "POST",
+        url: `${API_URL}/${dishToUpdate?._id ? "UpdateDish" : `createDish`}`,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        data: formData,
+      };
+
+      const res = await axios(config);
       Toast.show({
         type: "success",
         text1: "Succès",
@@ -72,6 +102,7 @@ const NewDishModal = ({
       });
       setIsNewDishModalOpen(false);
     } catch (error) {
+      console.log(error);
       Toast.show({
         type: "error",
         text1: "Erreur",
@@ -164,9 +195,6 @@ const NewDishModal = ({
             }
             validationSchema={newDishSchema}
             onSubmit={(values, { setSubmitting }) => {
-              values.category = value;
-              values.image = image;
-
               createUpdateDish(values, setSubmitting);
             }}
           >
@@ -181,16 +209,20 @@ const NewDishModal = ({
             }) => (
               <View className="flex-col w-full h-full justify-between  ">
                 <View className="">
-                  <MyImagePicker setImage={setImage} image={image} />
+                  <MyImagePicker
+                    setImage={setImage}
+                    image={image}
+                    currentImage={dishToUpdate?.image}
+                  />
                 </View>
                 <View className="z-50 mt-5 ">
                   <DropDownPicker
                     open={open}
-                    value={value}
-                    items={items}
+                    value={selectedCategoryId}
+                    items={categories}
                     setOpen={setOpen}
-                    setValue={setValue}
-                    setItems={setItems}
+                    setValue={setSelectedCategoryId}
+                    setItems={setCategories}
                     theme="DARK"
                     multiple={false}
                     mode="BADGE"

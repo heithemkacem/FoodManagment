@@ -166,6 +166,7 @@ export const getCategoriesForFormik = (setItems) => async (dispatch) => {
         value: category.cat_name,
         //add an other value to the object
         id: category._id,
+        key: category._id,
       }))
     );
   } catch (error) {

@@ -166,7 +166,7 @@ const NewDishModal = ({
             onSubmit={(values, { setSubmitting }) => {
               values.category = value;
               values.image = image;
-              values.cat_id = items.find((item) => item.value === value).id;
+
               createUpdateDish(values, setSubmitting);
             }}
           >
@@ -228,8 +228,6 @@ const NewDishModal = ({
                       icon="food"
                       label={"Description du plat"}
                       placeholder={"Entrer la description du plat"}
-                      numberOfLines={4}
-                      multiline={true}
                       autoCapitalize="none"
                       onChangeText={handleChange("description")}
                       onBlur={handleBlur("description")}

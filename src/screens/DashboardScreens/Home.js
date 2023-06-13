@@ -14,6 +14,7 @@ import OrdersView from "../../components/ordersView/OrdersView";
 import { colors } from "../../components/colors";
 import useDishes from "../../util/hooks/useDishes";
 import * as Print from "expo-print";
+import { Notifications } from "expo-notifications";
 const Home = ({ navigation }) => {
   const {
     dishes,
@@ -69,8 +70,13 @@ const Home = ({ navigation }) => {
   `;
 
     try {
+      Notifications.sendNotification({
+        title: "Nouvelle commande!",
+        body: `Nouvelle commande a ete cree.`,
+      });
       const { uri } = await Print.printToFileAsync({ html: ticketHTML });
       await Print.printAsync({ uri });
+
       setIsOrdersViewOpen(false);
       setOrders([]);
     } catch (error) {

@@ -15,14 +15,20 @@ import { colors } from "../../components/colors";
 import useDishes from "../../util/hooks/useDishes";
 import * as Print from "expo-print";
 import { Notifications } from "expo-notifications";
+import { useRoute } from "@react-navigation/native";
+
 const Home = ({ navigation }) => {
+  const routeName = useRoute().name;
+  console.log(routeName);
   const {
     dishes,
     isLoading,
     setQuery,
     selectedCategoryId,
     setSelectedCategoryId,
-  } = useDishes();
+  } = useDishes({
+    routeName,
+  });
 
   const [orders, setOrders] = useState([]);
   const [isOrdersViewOpen, setIsOrdersViewOpen] = useState(false);

@@ -163,7 +163,7 @@ export const getCategoriesForFormik = (setItems) => async (dispatch) => {
     setItems(
       response.data.categories.map((category) => ({
         label: category.cat_name,
-        value: category.cat_name,
+        value: category._id,
         //add an other value to the object
         id: category._id,
         key: category._id,

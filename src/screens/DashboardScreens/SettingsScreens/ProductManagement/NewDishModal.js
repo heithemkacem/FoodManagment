@@ -1,4 +1,8 @@
-import Animated, { FadeInDown, FadeOutDown } from "react-native-reanimated";
+import Animated, {
+  FadeInDown,
+  FadeOutDown,
+  set,
+} from "react-native-reanimated";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import StyledTextInput from "../../../../components/inputs/StyledTextInput";
@@ -44,14 +48,22 @@ const NewDishModal = ({
 }) => {
   const [image, setImage] = useState(null);
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
-  const [items, setItems] = useState([]);
+
+  const [selectedCategoryId, setSelectedCategoryId] = useState(null);
+  const [categories, setCategories] = useState([]);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getCategoriesForFormik(setItems));
+    dispatch(getCategoriesForFormik(setCategories));
   }, []);
+  useEffect(() => {
+    const _category = categories.find(
+      (category) => category.id === dishToUpdate?.cat_id
+    );
+    setSelectedCategoryId(_category?.value);
+  }, [categories]);
 
   const createUpdateDish = async (values, setSubmitting) => {
+    values.cat_id = selectedCategoryId;
     try {
       const formData = new FormData();
       formData.append("name", values.name);
@@ -164,9 +176,6 @@ const NewDishModal = ({
             }
             validationSchema={newDishSchema}
             onSubmit={(values, { setSubmitting }) => {
-              values.category = value;
-              values.image = image;
-
               createUpdateDish(values, setSubmitting);
             }}
           >
@@ -186,11 +195,11 @@ const NewDishModal = ({
                 <View className="z-50 mt-5 ">
                   <DropDownPicker
                     open={open}
-                    value={value}
-                    items={items}
+                    value={selectedCategoryId}
+                    items={categories}
                     setOpen={setOpen}
-                    setValue={setValue}
-                    setItems={setItems}
+                    setValue={setSelectedCategoryId}
+                    setItems={setCategories}
                     theme="DARK"
                     multiple={false}
                     mode="BADGE"

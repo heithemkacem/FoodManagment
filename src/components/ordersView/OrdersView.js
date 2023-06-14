@@ -9,7 +9,12 @@ import {
 } from "react-native";
 import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import Animated, { FadeInRight, FadeOutRight } from "react-native-reanimated";
+import Animated, {
+  FadeInRight,
+  FadeOutRight,
+  FadeIn,
+  FadeOut,
+} from "react-native-reanimated";
 import { colors } from "../colors";
 import { CreateOrder } from "../../_actions/logicHandlerActions/Actions";
 import { useDispatch } from "react-redux";
@@ -21,6 +26,8 @@ const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
   const dispatch = useDispatch();
   const [paymentMethod, setPaymentMethod] = useState("cash");
   const [clientMoney, setClientMoney] = useState(0);
+
+  const [isClientMoneyModalOpen, setIsClientMoneyModalOpen] = useState(false);
 
   const total = orders
     .reduce((acc, order) => acc + order.price * order.quantity, 0)
@@ -50,12 +57,18 @@ const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
           <p style="font-size: 1rem; font-weight: bold;">Totale</p>
           <p style="font-size: 1rem; font-weight: bold;"> ${total} DT</p>
         </div>
-        <div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-        <p style="font-size: 1rem; font-weight: bold;">Retourner en DT</p>
-        <p style="font-size: 1rem; font-weight: bold;">${
-          clientMoney - total
-        } DT</p>
-      </div>
+   ${
+     clientMoney ? (
+       <div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+         <p style="font-size: 1rem; font-weight: bold;">Retourner en DT</p>
+         <p style="font-size: 1rem; font-weight: bold;">
+           ${clientMoney - total} DT
+         </p>
+       </div>
+     ) : (
+       ""
+     )
+   }
       </div>
     `;
 
@@ -69,6 +82,30 @@ const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
       console.error("Failed to print ticket:", error);
     }
   };
+
+  const handleVerifyOrder = () => {
+    if (!clientMoney && paymentMethod === "cash")
+      return alert("Veuillez entrer l'argent du client");
+    if (
+      parseFloat(clientMoney) < parseFloat(total) &&
+      paymentMethod === "cash"
+    ) {
+      return alert("L'argent du client est insuffisant");
+    }
+
+    if (paymentMethod === "cash") setIsClientMoneyModalOpen(true);
+    else
+      dispatch(
+        CreateOrder(
+          setIsOrdersViewOpen,
+          setOrders,
+          orders,
+          total,
+          handlePrintTicket
+        )
+      );
+  };
+
   return (
     <>
       <Pressable
@@ -190,7 +227,7 @@ const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
         </ScrollView>
 
         <View className="mt-auto">
-          <View className="flex-row mb-4 items-center justify-between">
+          <View className="flex-row items-center justify-between mb-4">
             <Text className="text-lg font-bold text-white">
               Méthode de paiement
             </Text>
@@ -224,15 +261,17 @@ const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
             </View>
           </View>
 
-          <TextInput
-            keyboardType="numeric"
-            placeholder="Argent du client"
-            placeholderTextColor={"#8d9195"}
-            className="bg-input h-14 w-full px-3 text-white rounded-lg mb-4"
-            onChangeText={(text) => {
-              setClientMoney(text);
-            }}
-          />
+          {paymentMethod === "cash" && (
+            <TextInput
+              keyboardType="numeric"
+              placeholder="Argent du client"
+              placeholderTextColor={"#8d9195"}
+              className="bg-input h-14 w-full px-3 mb-4 text-white rounded-lg"
+              onChangeText={(text) => {
+                setClientMoney(text);
+              }}
+            />
+          )}
           <View className="flex-row items-center justify-between mt-4">
             <Text className="text-lg font-bold text-white">Total</Text>
             <Text className="text-lg font-bold text-white">${total}</Text>
@@ -241,19 +280,7 @@ const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
             activeOpacity={0.9}
             className="bg-primary p-4 mt-4 rounded-lg"
             onPress={() => {
-              if (!clientMoney)
-                return alert("Veuillez entrer l'argent du client");
-              if (clientMoney < total)
-                return alert("L'argent du client est insuffisant");
-              dispatch(
-                CreateOrder(
-                  setIsOrdersViewOpen,
-                  setOrders,
-                  orders,
-                  total,
-                  handlePrintTicket
-                )
-              );
+              handleVerifyOrder();
             }}
           >
             <Text className="text-lg font-bold text-center text-white">
@@ -262,6 +289,43 @@ const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
           </TouchableOpacity>
         </View>
       </Animated.View>
+
+      {isClientMoneyModalOpen && (
+        <Animated.View
+          entering={FadeIn.duration(300)}
+          exiting={FadeOut.duration(300)}
+          className="bg-black/75 absolute top-0 bottom-0 left-0 right-0 items-center justify-center"
+        >
+          <View className="bg-lightblack justify-between p-10 rounded-lg">
+            <Text className="text-3xl text-white">
+              Retourner:{" "}
+              <Text className="text-primary text-3xl font-bold">
+                {clientMoney - total} DT
+              </Text>
+            </Text>
+            <TouchableOpacity
+              activeOpacity={0.9}
+              onPress={() => {
+                setIsClientMoneyModalOpen(false);
+                dispatch(
+                  CreateOrder(
+                    setIsOrdersViewOpen,
+                    setOrders,
+                    orders,
+                    total,
+                    handlePrintTicket
+                  )
+                );
+              }}
+              className="bg-primary p-4 mt-6 rounded-md"
+            >
+              <Text className="text-lg font-bold text-center text-white">
+                Imprimer
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </Animated.View>
+      )}
     </>
   );
 };

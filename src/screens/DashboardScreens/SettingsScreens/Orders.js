@@ -14,7 +14,6 @@ const OrdersView = () => {
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
   const [orders, setOrders] = useState([]);
-  const [update, setUpdate] = useState(0);
   useEffect(() => {
     dispatch(getOrders(setOrders));
   }, [isFocused]);

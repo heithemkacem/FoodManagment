@@ -196,14 +196,23 @@ export const getOrders = (setOrders) => async (dispatch) => {
 };
 export const DeleteOrder = (id) => async (dispatch) => {
   try {
-    const res = await axios.post(`${API_URL}/deleteOrder`, {
+    const { data } = await axios.post(`${API_URL}/deleteOrder`, {
       id_order: id,
     });
-    Toast.show({
-      type: "success",
-      text1: "Succès",
-      text2: "Order supprimé avec succès",
-    });
+    const { message, success } = data;
+    if (success == true) {
+      Toast.show({
+        type: "success",
+        text1: "Succès",
+        text2: "Order supprimé avec succès",
+      });
+    } else {
+      Toast.show({
+        type: "error",
+        text1: "Erreur",
+        text2: message,
+      });
+    }
   } catch (error) {
     Toast.show({
       type: "error",

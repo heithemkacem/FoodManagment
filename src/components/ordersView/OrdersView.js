@@ -41,54 +41,46 @@ const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
     );
     const tva = totalPrice * 0.05;
     const totalWithTVA = totalPrice + tva;
+    // Format the date to be like this: 2021-05-31
+    const date = new Date();
+    const formattedDate = `${date.getFullYear()}-${
+      date.getMonth() + 1
+    }-${date.getDate()}`;
 
-    // Generate the ticket HTML
     const ticketHTML = `
-        <div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-          <p style="font-size: 1rem; font-weight: bold;">${new Date().toLocaleString()}</p>
-          <hr style="border: 1px solid black; margin: 1rem 0;">
-        </div>
-        
-        <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-          <h1 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Ticket</h1>
-          <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-            ${orders
-              ?.map(
-                (order) => `
-                  <div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-                    <p style="font-size: 1rem; font-weight: bold;">${
-                      order.name
-                    }</p>
-                    <p style="font-size: 1rem; font-weight: bold;">${
-                      order.quantity
-                    }</p>
-                    <p style="font-size: 1rem; font-weight: bold;">${
-                      order.price
-                    } DT</p>
-                    <p style="font-size: 1rem; font-weight: bold;">${
-                      order.price * order.quantity
-                    } DT</p>
-                  </div>
-                `
-              )
-              .join("")}
-          </div>
-          <div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-            <p style="font-size: 1rem; font-weight: bold;">TVA (5%)</p>
-            <p style="font-size: 1rem; font-weight: bold;">${tva.toFixed(
-              2
-            )} DT</p>
-            <hr style="border: 1px solid black; margin: 1rem 0;">
-          </div>
-          <div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-            <p style="font-size: 1rem; font-weight: bold;">Totale (avec TVA)</p>
-            <p style="font-size: 1rem; font-weight: bold;">${totalWithTVA.toFixed(
-              2
-            )} DT</p>
-          </div>
-        </div>
-      `;
-
+    <div style="width: 300px; padding: 10px; border: 1px solid #000;">
+      <h1 style="text-align: center; font-size: 1.2rem; font-weight: bold; margin: 0 0 10px;">Ticket</h1>
+      <p style="font-size: 0.8rem; text-align: right; margin: 0 0 10px;">Date: ${formattedDate}</p>
+      <div style="margin-bottom: 10px;">
+        ${orders
+          ?.map(
+            (order) => `
+              <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                <p style="font-size: 0.9rem; margin: 0;">${order.name}</p>
+                <p style="font-size: 0.9rem; margin: 0;">${order.quantity}</p>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                <p style="font-size: 0.8rem; margin: 0 0 0 20px;">Price per item:</p>
+                <p style="font-size: 0.8rem; margin: 0;">${order.price} DT</p>
+              </div>
+              <hr style="border: none; border-top: 1px dashed #000; margin: 5px 0;">
+            `
+          )
+          .join("")}
+      </div>
+      <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+        <p style="font-size: 0.8rem; margin: 0;">TVA (5%):</p>
+        <p style="font-size: 0.8rem; margin: 0;">${tva.toFixed(2)} DT</p>
+      </div>
+      <hr style="border: none; border-top: 1px dashed #000; margin: 5px 0;">
+      <div style="display: flex; justify-content: space-between;">
+        <p style="font-size: 0.9rem; margin: 0; font-weight: bold;">Total (Including TVA):</p>
+        <p style="font-size: 0.9rem; margin: 0; font-weight: bold;">${totalWithTVA.toFixed(
+          2
+        )} DT</p>
+      </div>
+    </div>
+  `;
     try {
       const { uri } = await Print.printToFileAsync({ html: ticketHTML });
       await Print.printAsync({ uri });
@@ -285,6 +277,11 @@ const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
               placeholderTextColor={"#8d9195"}
               className="bg-input h-14 w-full px-3 mb-4 text-white rounded-lg"
               onChangeText={(text) => {
+                //if the text is not a number show alert
+                if (isNaN(text)) {
+                  alert("Veuillez entrer un nombre valide");
+                  return;
+                }
                 setClientMoney(text);
               }}
             />

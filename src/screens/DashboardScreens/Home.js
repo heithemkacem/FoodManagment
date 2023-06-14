@@ -28,7 +28,6 @@ const Home = ({ navigation }) => {
   } = useDishes({
     isFocused,
   });
-
   const [orders, setOrders] = useState([]);
   const [isOrdersViewOpen, setIsOrdersViewOpen] = useState(false);
 
@@ -82,7 +81,7 @@ const Home = ({ navigation }) => {
         <ScrollView showsVerticalScrollIndicator={false}>
           <View className="gap-x-8 gap-y-24 flex-row flex-wrap mt-10">
             {isLoading ? (
-              <View className="flex-1 justify-center items-center">
+              <View className="items-center justify-center flex-1">
                 <ActivityIndicator size="large" color={colors.primary} />
               </View>
             ) : (

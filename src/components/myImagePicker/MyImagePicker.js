@@ -40,7 +40,6 @@ const MyImagePicker = ({ setImage, image, currentImage }) => {
       // mediaTypes: ImagePicker.MediaTypeOptions.Images,
       // quality: 1,
     });
-    console.log(result.assets[0]);
     setImage(result.assets[0]);
   };
 

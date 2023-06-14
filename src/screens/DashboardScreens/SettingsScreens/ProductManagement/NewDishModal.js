@@ -69,7 +69,6 @@ const NewDishModal = ({
       formData.append("name", values.name);
       formData.append("price", values.price);
       formData.append("description", values.description);
-      console.log(image);
       if (image) {
         const fileName = image.uri.split("/").pop();
         const match = /\.(\w+)$/.exec(fileName);
@@ -82,7 +81,6 @@ const NewDishModal = ({
         });
       }
       formData.append("cat_id", selectedCategoryId);
-      console.log(formData);
       if (dishToUpdate?._id) formData.append("id", dishToUpdate._id);
 
       const config = {
@@ -102,7 +100,6 @@ const NewDishModal = ({
       });
       setIsNewDishModalOpen(false);
     } catch (error) {
-      console.log(error);
       Toast.show({
         type: "error",
         text1: "Erreur",
@@ -199,6 +196,7 @@ const NewDishModal = ({
                 alert("Veuillez choisir une catégorie");
                 setSubmitting(false);
               }
+              createUpdateDish(values, setSubmitting);
             }}
           >
             {({

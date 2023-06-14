@@ -119,7 +119,6 @@ export const ResetPasswordAction =
         password: values.newPassword,
         email: route.params.email,
       });
-      console.log(data);
       const { success, message } = data;
       if (success === false) {
         setSubmitting(false);
@@ -333,14 +332,12 @@ export const ResetPasswordActionFromDashboard =
   };
 export const VerifyOTPlModifyPasswordAction =
   (code, route, setPinReady) => async (dispatch) => {
-    console.log(code);
     try {
       const { id } = route.params;
       const { data } = await axios.post(`${API_URL}/verify-modify-password`, {
         otp: code,
         id: id,
       });
-      console.log(data);
       const { success, message } = data;
       if (success == false) {
         setPinReady(false);

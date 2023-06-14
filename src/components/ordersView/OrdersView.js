@@ -34,43 +34,60 @@ const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
     .toFixed(2);
 
   const handlePrintTicket = async () => {
-    //ticket html template contain the order details and the total price of the order
-    const ticketHTML = `
-      <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-        <h1 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Ticket</h1>
-        <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-          ${orders?.map(
-            (order) => `
-            <div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-              <p style="font-size: 1rem; font-weight: bold;">${order.name}</p>
-              <p style="font-size: 1rem; font-weight: bold;">${order.quantity}</p>
-            </div>
-          `
-          )}
-        </div>
-        <div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-        <p style="font-size: 1rem; font-weight: bold;">Méthode de paiement</p>
-        <p style="font-size: 1rem; font-weight: bold;"> ${paymentMethod}</p>
-      </div>
+    // Calculate the total price including TVA
+    const totalPrice = orders.reduce(
+      (acc, order) => acc + order.price * order.quantity,
+      0
+    );
+    const tva = totalPrice * 0.05;
+    const totalWithTVA = totalPrice + tva;
 
+    // Generate the ticket HTML
+    const ticketHTML = `
         <div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-          <p style="font-size: 1rem; font-weight: bold;">Totale</p>
-          <p style="font-size: 1rem; font-weight: bold;"> ${total} DT</p>
+          <p style="font-size: 1rem; font-weight: bold;">${new Date().toLocaleString()}</p>
+          <hr style="border: 1px solid black; margin: 1rem 0;">
         </div>
-   ${
-     clientMoney ? (
-       <div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
-         <p style="font-size: 1rem; font-weight: bold;">Retourner en DT</p>
-         <p style="font-size: 1rem; font-weight: bold;">
-           ${clientMoney - total} DT
-         </p>
-       </div>
-     ) : (
-       ""
-     )
-   }
-      </div>
-    `;
+        
+        <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+          <h1 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">Ticket</h1>
+          <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            ${orders
+              ?.map(
+                (order) => `
+                  <div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+                    <p style="font-size: 1rem; font-weight: bold;">${
+                      order.name
+                    }</p>
+                    <p style="font-size: 1rem; font-weight: bold;">${
+                      order.quantity
+                    }</p>
+                    <p style="font-size: 1rem; font-weight: bold;">${
+                      order.price
+                    } DT</p>
+                    <p style="font-size: 1rem; font-weight: bold;">${
+                      order.price * order.quantity
+                    } DT</p>
+                  </div>
+                `
+              )
+              .join("")}
+          </div>
+          <div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+            <p style="font-size: 1rem; font-weight: bold;">TVA (5%)</p>
+            <p style="font-size: 1rem; font-weight: bold;">${tva.toFixed(
+              2
+            )} DT</p>
+            <hr style="border: 1px solid black; margin: 1rem 0;">
+          </div>
+          <div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+            <p style="font-size: 1rem; font-weight: bold;">Totale (avec TVA)</p>
+            <p style="font-size: 1rem; font-weight: bold;">${totalWithTVA.toFixed(
+              2
+            )} DT</p>
+          </div>
+        </div>
+      `;
 
     try {
       const { uri } = await Print.printToFileAsync({ html: ticketHTML });

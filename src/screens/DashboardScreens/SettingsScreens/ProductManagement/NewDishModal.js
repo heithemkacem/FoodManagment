@@ -188,14 +188,17 @@ const NewDishModal = ({
                     name: "",
                     price: "0",
                     description: "",
-                    image: "",
-                    category: "",
-                    cat_id: "",
                   }
             }
             validationSchema={newDishSchema}
             onSubmit={(values, { setSubmitting }) => {
-              createUpdateDish(values, setSubmitting);
+              if (image == null) {
+                alert("Veuillez choisir une image");
+                setSubmitting(false);
+              } else if (selectedCategoryId == null) {
+                alert("Veuillez choisir une catégorie");
+                setSubmitting(false);
+              }
             }}
           >
             {({

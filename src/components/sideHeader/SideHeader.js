@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, Text } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import styled from "styled-components/native";
 import { AntDesign } from "@expo/vector-icons";
 import { colors } from "../colors";
@@ -8,16 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSideBarMenu } from "../../_actions/logicHandlerActions/Actions";
 import { Logout } from "../../_actions/logicHandlerActions/Actions";
 const { white, primary } = colors;
-const Container = styled.View`
-  background-color: ${colors.black};
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 25px;
-`;
+
 const ListContainer = styled.View`
   display: flex;
   flex-direction: column;
@@ -67,7 +58,7 @@ const SideHeader = ({ navigation }) => {
   const dispatch = useDispatch();
   const ListItemsList = useSelector((state) => state.sidebar.SideBarState);
   return (
-    <Container>
+    <View className="rounded-br-[16px] border-tr-[16px] justify-between flex-1 bg-black">
       <ListContainer>
         {ListItemsList?.map((item, index) => {
           return (
@@ -109,7 +100,7 @@ const SideHeader = ({ navigation }) => {
           </ListItem>
         </ListItemContainer>
       </LogoutContainer>
-    </Container>
+    </View>
   );
 };
 

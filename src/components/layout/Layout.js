@@ -3,16 +3,19 @@ import SideHeader from "../sideHeader/SideHeader";
 import styled from "styled-components/native";
 import { colors } from "../colors";
 import Header from "../header/Header";
+import OrdersView from "../ordersView/OrdersView";
+import { SafeAreaView } from "react-native-web";
 const ScreenContainer = styled.View`
   display: flex;
   flex-direction: row;
+  gap: 24px;
   justify-content: space-between;
   height: 100%;
   width: 100%;
 `;
 const Container = styled.View`
   height: 100%;
-  width: 85%;
+  flex: 1;
   background-color: ${colors.lightblack};
   flex-direction: column;
   display: flex;
@@ -20,25 +23,20 @@ const Container = styled.View`
 `;
 const SideBarContainer = styled.View`
   height: 100%;
-  width: 100px;
+  width: 80px;
 `;
 
 const StyledView = styled.View`
-  height: 10%;
   background-color: ${colors.lightblack};
   width: 100%;
   padding: 20px;
 `;
-const MainContainer = styled.View`
-  height: 80%;
-  width: 100%;
-  border-radius: 40px;
-`;
+
 const MainView = styled.View`
-  height: 100%;
+  flex: 1;
   width: 100%;
   background-color: ${colors.black};
-  border-radius: 10px;
+  border-radius: 16px;
   padding: 40px;
 `;
 
@@ -48,8 +46,12 @@ const Layout = ({
   date,
   children,
   searchBar,
-  style,
+  style = {},
   setQuery,
+  isOrdersViewOpen,
+  orders = [],
+  setOrders = () => {},
+  setIsOrdersViewOpen = () => {},
 }) => {
   return (
     <ScreenContainer>
@@ -65,10 +67,15 @@ const Layout = ({
             searchBar={searchBar}
           />
         </StyledView>
-        <MainContainer>
-          <MainView>{children}</MainView>
-        </MainContainer>
+        <MainView style={style}>{children}</MainView>
       </Container>
+      {isOrdersViewOpen && (
+        <OrdersView
+          orders={orders}
+          setOrders={setOrders}
+          setIsOrdersViewOpen={setIsOrdersViewOpen}
+        />
+      )}
     </ScreenContainer>
   );
 };

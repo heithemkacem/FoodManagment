@@ -10,10 +10,8 @@ const Container = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 100px;
   width: 100%;
   background-color: ${colors.lightblack};
-  padding: 0 10px;
 `;
 const TextContainer = styled.View`
   display: flex;

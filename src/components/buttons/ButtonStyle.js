@@ -21,9 +21,7 @@ const ButtonStyle = ({ color, ...props }) => {
       onPress={props.onPress}
       style={{ borderRadius: "20px" }}
     >
-      <RegularText style={[{ color: white, ...props?.textStyle }]}>
-        {props.children}
-      </RegularText>
+      <RegularText>{props.children}</RegularText>
     </ButtonView>
   );
 };

@@ -1,17 +1,13 @@
 import React from "react";
-import { colors } from "../colors";
 import SmallText from "../texts/SmallText";
 import { Pressable } from "react-native";
-const { white } = colors;
 
 const PressableText = (props) => {
   return (
     <Pressable {...props} onPress={props.onPress}>
       <SmallText
+        className="text-md text-white text-start font-bold"
         style={{
-          color: white,
-          fontWeight: 600,
-          textAlign: "left",
           ...props.style,
         }}
       >

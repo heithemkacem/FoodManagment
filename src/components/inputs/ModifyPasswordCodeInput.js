@@ -4,46 +4,18 @@ import styled from "styled-components/native";
 import { colors } from "../colors";
 import { useDispatch } from "react-redux";
 import { VerifyOTPlModifyPasswordAction } from "./../../_actions/logicHandlerActions/Actions";
+import { Pressable, Text, TextInput, View } from "react-native";
 const { primary, white } = colors;
-const StyledCodeSection = styled.View`
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  margin-vertical: 35px;
-  ${(props) => {
-    return props.pinReady ? "opacity: 0.3;" : "opacity: 1;";
-  }}
-`;
-const CodeInputContainer = styled.Pressable`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 70%;
-`;
-
-const HiddenTextInput = styled.TextInput`
-  position: absolute;
-  opacity: 0;
-  width: 1px;
-  height: 1px;
-`;
 const CodeInputText = styled.View`
   min-width: 15px;
   padding: 12px;
   border-bottom-width: 3px;
   border-color: ${primary};
 `;
-const CodeInputInText = styled.Text`
-  font-size: 22px;
-  font-weight: bold;
-  text-align: center;
-  color: ${white};
-`;
+
 const CodeInputFocuced = styled(CodeInputText)`
   border-color: ${primary};
 `;
-
 const CodeInput = ({
   route,
   code,
@@ -92,18 +64,31 @@ const CodeInput = ({
 
     return (
       <StyledCodeInput key={index}>
-        <CodeInputInText>{digit}</CodeInputInText>
+        <Text className="text-xl font-bold text-center text-white">
+          {digit}
+        </Text>
       </StyledCodeInput>
     );
   };
 
   return (
-    <StyledCodeSection pinReady={pinReady}>
-      <CodeInputContainer onPress={handleOnPress}>
+    <View
+      className={
+        "flex-row w-full items-center justify-center my-[35px]" + pinReady
+          ? "opacity-30"
+          : "opacity-100"
+      }
+      pinReady={pinReady}
+    >
+      <Pressable
+        className="w-[70%] flex-row justify-between"
+        onPress={handleOnPress}
+      >
         {codeDigitsArray.map(toCodeDigitInput)}
-      </CodeInputContainer>
+      </Pressable>
 
-      <HiddenTextInput
+      <TextInput
+        className="absolute opacity-0 w-[1px] h-[1px]"
         keyboardType="number-pad"
         returnKeyType="done"
         textContentType="oneTimeCode"
@@ -113,8 +98,8 @@ const CodeInput = ({
         onChangeText={setCode}
         maxLength={maxLength}
         onSubmitEditing={handleOnSubmitEditing}
-      ></HiddenTextInput>
-    </StyledCodeSection>
+      ></TextInput>
+    </View>
   );
 };
 

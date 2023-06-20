@@ -1,44 +1,8 @@
 import React from "react";
 import SideHeader from "../sideHeader/SideHeader";
-import styled from "styled-components/native";
-import { colors } from "../colors";
 import Header from "../header/Header";
 import OrdersView from "../ordersView/OrdersView";
-import { SafeAreaView } from "react-native-web";
-const ScreenContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  gap: 24px;
-  justify-content: space-between;
-  height: 100%;
-  width: 100%;
-`;
-const Container = styled.View`
-  height: 100%;
-  flex: 1;
-  background-color: ${colors.lightblack};
-  flex-direction: column;
-  display: flex;
-  justify-content: space-between;
-`;
-const SideBarContainer = styled.View`
-  height: 100%;
-  width: 80px;
-`;
-
-const StyledView = styled.View`
-  background-color: ${colors.lightblack};
-  width: 100%;
-  padding: 20px;
-`;
-
-const MainView = styled.View`
-  flex: 1;
-  width: 100%;
-  background-color: ${colors.black};
-  border-radius: 16px;
-  padding: 40px;
-`;
+import { View } from "react-native";
 
 const Layout = ({
   navigation,
@@ -54,21 +18,26 @@ const Layout = ({
   setIsOrdersViewOpen = () => {},
 }) => {
   return (
-    <ScreenContainer>
-      <SideBarContainer>
+    <View className="flex-row gap-[24px] justify-between h-full w-full ">
+      <View className="h-full w-[80px]">
         <SideHeader navigation={navigation} />
-      </SideBarContainer>
-      <Container>
-        <StyledView>
+      </View>
+      <View className="h-full flex-1 bg-lightblack flex-col justify-between">
+        <View className="bg-lightblack w-full p-[20px]">
           <Header
             headerTitle={headerTitle}
             date={date}
             setQuery={setQuery}
             searchBar={searchBar}
           />
-        </StyledView>
-        <MainView style={style}>{children}</MainView>
-      </Container>
+        </View>
+        <View
+          className="flex-1 w-full bg-black rounded-md p-[40px]"
+          style={style}
+        >
+          {children}
+        </View>
+      </View>
       {isOrdersViewOpen && (
         <OrdersView
           orders={orders}
@@ -76,7 +45,7 @@ const Layout = ({
           setIsOrdersViewOpen={setIsOrdersViewOpen}
         />
       )}
-    </ScreenContainer>
+    </View>
   );
 };
 

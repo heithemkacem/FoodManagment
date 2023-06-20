@@ -1,14 +1,17 @@
 //!This container give a row flex display of his childrens and space evently them
 import React from "react";
+import { View } from "react-native";
 import styled from "styled-components/native";
-const StyledView = styled.View`
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-top: 15px;
-`;
+
 const RowContainer = (props) => {
-  return <StyledView {...props}>{props.children}</StyledView>;
+  return (
+    <View
+      {...props}
+      className="flex-row justify-evenly items-center mt-[15px] "
+    >
+      {props.children}
+    </View>
+  );
 };
 
 export default RowContainer;

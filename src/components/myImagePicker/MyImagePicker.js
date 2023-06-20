@@ -2,7 +2,6 @@ import { Image, ToastAndroid, TouchableOpacity } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import React, { useState, useEffect } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { uploadImage } from "../../_actions/logicHandlerActions/Actions";
 import { useDispatch } from "react-redux";
 import { UPLOAD_URL } from "../../util/consts";
 

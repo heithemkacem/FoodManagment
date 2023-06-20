@@ -240,20 +240,7 @@ export const ChangeStatus = (id, status) => async (dispatch) => {
     });
   }
 };
-export const uploadImage = (base64, setImage) => async (dispatch) => {
-  try {
-    const { data } = await axios.post(`${API_URL}/uploadImage`, {
-      image: base64,
-    });
-    setImage(data.image);
-  } catch (error) {
-    Toast.show({
-      type: "error",
-      text1: "Erreur",
-      text2: error.message,
-    });
-  }
-};
+
 export const getOrdersWithStatus =
   (setOrdersLength, status) => async (dispatch) => {
     try {

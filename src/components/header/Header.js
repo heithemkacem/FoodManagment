@@ -1,53 +1,16 @@
 import React from "react";
-import { StyleSheet, View, TouchableOpacity, TextInput } from "react-native";
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  TextInput,
+  Text,
+} from "react-native";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import styled from "styled-components/native";
 import { colors } from "../colors";
-const Container = styled.View`
-  display: flex;
-  position: relative;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  background-color: ${colors.lightblack};
-`;
-const TextContainer = styled.View`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
-  width: 75%;
-`;
-const TextTitle = styled.Text`
-  font-size: 21px;
-  font-weight: bold;
-  color: ${colors.white};
-  align-self: flex-start;
-`;
-const DateContainer = styled.Text`
-  font-size: 16px;
-  color: ${colors.white};
-  align-self: flex-start;
-`;
-const SearchBarContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
-  width: 25%;
-`;
-const SearchContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  background-color: ${colors.input};
-  height: 40px;
-  width: 100%;
-`;
+
 const Header = ({ headerTitle, date, searchBar, setQuery }) => {
   const [value, setValue] = React.useState("");
   const handleOnChangeText = (text) => {
@@ -56,17 +19,21 @@ const Header = ({ headerTitle, date, searchBar, setQuery }) => {
   };
 
   return (
-    <Container>
-      <TextContainer>
-        <TextTitle>{headerTitle}</TextTitle>
+    <View className="flex-row relative justify-between items-center bg-lightblack w-full">
+      <View className="flex-col justify-between items-center p-3 w-[75%]  ">
+        <Text className="text-lg font-bold text-white self-start  w-[70%]   ">
+          {headerTitle}
+        </Text>
         {date ? (
-          <DateContainer>{new Date().toDateString()}</DateContainer>
+          <Text className="text-md text-white self-start ">
+            {new Date().toDateString()}
+          </Text>
         ) : null}
-      </TextContainer>
+      </View>
       {searchBar ? (
-        <SearchBarContainer>
+        <View className="flex-row justify-between items-center">
           <View style={styles.container}>
-            <SearchContainer>
+            <View className="flex-row justify-between w-full h-[40px] bg-input">
               <View style={styles.vwSearch}>
                 <MaterialCommunityIcons
                   name="search-web"
@@ -96,11 +63,11 @@ const Header = ({ headerTitle, date, searchBar, setQuery }) => {
               ) : (
                 <View style={styles.vwClear} />
               )}
-            </SearchContainer>
+            </View>
           </View>
-        </SearchBarContainer>
+        </View>
       ) : null}
-    </Container>
+    </View>
   );
 };
 const styles = StyleSheet.create({

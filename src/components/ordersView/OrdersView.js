@@ -5,16 +5,10 @@ import {
   Image,
   TextInput,
   ScrollView,
-  Pressable,
 } from "react-native";
 import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import Animated, {
-  FadeInRight,
-  FadeOutRight,
-  FadeIn,
-  FadeOut,
-} from "react-native-reanimated";
+
 import { colors } from "../colors";
 import { CreateOrder } from "../../_actions/logicHandlerActions/Actions";
 import { useDispatch } from "react-redux";
@@ -26,8 +20,6 @@ const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
   const dispatch = useDispatch();
   const [paymentMethod, setPaymentMethod] = useState("cash");
   const [clientMoney, setClientMoney] = useState(0);
-
-  const [isClientMoneyModalOpen, setIsClientMoneyModalOpen] = useState(false);
 
   const total = orders
     .reduce((acc, order) => acc + order.price * order.quantity, 0)
@@ -100,10 +92,7 @@ const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
       paymentMethod === "cash"
     ) {
       return alert("L'argent du client est insuffisant");
-    }
-
-    if (paymentMethod === "cash") setIsClientMoneyModalOpen(true);
-    else
+    } else
       dispatch(
         CreateOrder(
           setIsOrdersViewOpen,
@@ -116,11 +105,10 @@ const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
   };
 
   return (
-    <View className="rounded-2xl flex-[0.4] h-full p-8 bg-black">
+    <View className="rounded-2xl flex-[0.9] h-full p-8 bg-black">
       <View className="flex-row items-center justify-between">
         <Text className="text-3xl font-bold text-white">Commandes</Text>
       </View>
-
       <View className="border-lightGray/10 flex-row pb-3 mt-10 border-b">
         <Text className="flex-1 text-2xl font-semibold text-white">Item</Text>
         <Text className="text-2xl font-semibold text-white">Qty</Text>
@@ -216,7 +204,7 @@ const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
 
       <View className="mt-auto">
         <View className="flex-row items-center justify-between mb-4">
-          <Text className="text-lg font-bold text-white">
+          <Text className="text-sm font-bold text-white">
             Méthode de paiement
           </Text>
           <View className="flex-row items-center">
@@ -225,11 +213,11 @@ const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
               onPress={() => setPaymentMethod("cash")}
               className={`${
                 paymentMethod === "cash" ? "bg-primary" : "bg-lightGray/10"
-              } items-center justify-center w-14 h-14 rounded-lg`}
+              } items-center justify-center w-10 h-10 rounded-lg`}
             >
               <MaterialCommunityIcons
                 name="cash"
-                size={24}
+                size={18}
                 color={paymentMethod === "cash" ? "white" : colors.primary}
               />
             </TouchableOpacity>
@@ -238,11 +226,11 @@ const OrdersView = ({ orders, setOrders, setIsOrdersViewOpen }) => {
               onPress={() => setPaymentMethod("card")}
               className={`${
                 paymentMethod === "card" ? "bg-primary" : "bg-lightGray/10"
-              } items-center justify-center w-14 h-14 rounded-lg ml-4`}
+              } items-center justify-center w-10 h-10 rounded-lg ml-4`}
             >
               <MaterialCommunityIcons
                 name="credit-card"
-                size={24}
+                size={18}
                 color={paymentMethod === "card" ? "white" : colors.primary}
               />
             </TouchableOpacity>

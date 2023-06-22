@@ -10,11 +10,8 @@ import {
 import Layout from "../../components/layout/Layout";
 import DishCategories from "../../components/dishCategories/DishCategories";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import OrdersView from "../../components/ordersView/OrdersView";
 import { colors } from "../../components/colors";
 import useDishes from "../../util/hooks/useDishes";
-import { Notifications } from "expo-notifications";
-import { useRoute } from "@react-navigation/native";
 import { UPLOAD_URL } from "../../util/consts";
 import { useIsFocused } from "@react-navigation/native";
 const Home = ({ navigation }) => {
@@ -66,6 +63,7 @@ const Home = ({ navigation }) => {
         isOrdersViewOpen={isOrdersViewOpen}
         orders={orders}
         setIsOrdersViewOpen={setIsOrdersViewOpen}
+        setOrders={setOrders}
       >
         <View className="flex-1">
           <DishCategories
@@ -74,7 +72,7 @@ const Home = ({ navigation }) => {
           />
           <View className="flex-row justify-between mt-10">
             <View className="flex-row items-center">
-              <Text className="text-3xl font-bold text-white">
+              <Text className="text-xl font-bold text-white">
                 Choisissez des plats
               </Text>
               <TouchableOpacity

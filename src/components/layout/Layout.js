@@ -3,19 +3,19 @@ import SideHeader from "../sideHeader/SideHeader";
 import Header from "../header/Header";
 import OrdersView from "../ordersView/OrdersView";
 import { View } from "react-native";
-
+import { set } from "react-native-reanimated";
 const Layout = ({
   navigation,
   headerTitle,
   date,
   children,
   searchBar,
-  style = {},
+  style,
   setQuery,
   isOrdersViewOpen,
-  orders = [],
-  setOrders = () => {},
-  setIsOrdersViewOpen = () => {},
+  orders,
+  setOrders,
+  setIsOrdersViewOpen,
 }) => {
   return (
     <View className="flex-row gap-[24px] justify-between h-full w-full ">

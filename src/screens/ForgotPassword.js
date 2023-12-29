@@ -3,7 +3,7 @@ import MainContainer from "../components/containers/MainContainer";
 import StyledTextInput from "../components/inputs/StyledTextInput";
 import { Formik } from "formik";
 import RegularButton from "../components/buttons/RegularButton";
-import { ActivityIndicator, ScrollView } from "react-native";
+import { ActivityIndicator, ScrollView, View } from "react-native";
 import { colors } from "../components/colors";
 import IconHeader from "../components/icons/IconHeader";
 import BigText from "../components/texts/BigText";

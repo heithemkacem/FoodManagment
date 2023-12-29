@@ -1,66 +1,25 @@
 //!This is the input coponents of all forms
 import React, { useState } from "react";
-import { View, Text } from "react-native";
-import styled from "styled-components/native";
+import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { colors } from "../colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import SmallText from "./../texts/SmallText";
 
-const { white, secondary, primary, lightGray, black, lightblack } = colors;
-
-const RowContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  position: relative;
-  top: -18px;
-`;
-const InputField = styled.TextInput`
-  padding-left: 65px;
-  padding-right: 65px;
-  font-size: 14px;
-  color: ${white};
-  border-width: 2px;
-`;
-
-const LeftIcon = styled.View`
-  position: absolute;
-  top: 35px;
-  left: 15px;
-  z-index: 1;
-  border-right-width: 2px;
-  border-color: ${secondary};
-  padding-right: 10px;
-`;
-const RightIcon = styled.TouchableOpacity`
-  position: absolute;
-  top: 35px;
-  right: 15px;
-  z-index: 1;
-`;
+const { secondary, primary, lightGray, lightblack } = colors;
 
 const StyledTextInput = ({ icon, label, isPassword, errors, ...props }) => {
   const [hidePassword, setHidePassword] = useState(true);
 
   return (
     <View>
-      <LeftIcon>
+      <View className="absolute top-[30px] left-[15px]   pr-[10px]  z-30">
         <MaterialCommunityIcons name={icon} size={18} color={primary} />
-      </LeftIcon>
+      </View>
 
-      <SmallText
-        style={{
-          fontWeight: "600",
-          marginBottom: 5,
-          color: white,
-          textAlign: "left",
-          fontSize: 13,
-        }}
-      >
-        {label}
-      </SmallText>
+      <SmallText>{label}</SmallText>
 
-      <InputField
+      <TextInput
+        className="border-2 text-white text-sm pr-[65px] pl-[65px]"
         {...props}
         placeholderTextColor={lightGray}
         style={{
@@ -79,15 +38,16 @@ const StyledTextInput = ({ icon, label, isPassword, errors, ...props }) => {
         //if there is an error show the error message and the icon of error message
         errors && (
           //show text that contain the error message
-          <RowContainer>
+          <View className="relative top-[-18px] flex-row justify-between">
             <Text className="font-semibold text-red-600 text-sm">{errors}</Text>
             <MaterialCommunityIcons name="alert-circle" size={18} color="red" />
-          </RowContainer>
+          </View>
         )
       }
 
       {isPassword && (
-        <RightIcon
+        <TouchableOpacity
+          className="absolute top-[30px] right-[15px] z-30"
           onPress={() => {
             setHidePassword(!hidePassword);
           }}
@@ -97,7 +57,7 @@ const StyledTextInput = ({ icon, label, isPassword, errors, ...props }) => {
             size={18}
             color={primary}
           ></MaterialCommunityIcons>
-        </RightIcon>
+        </TouchableOpacity>
       )}
     </View>
   );

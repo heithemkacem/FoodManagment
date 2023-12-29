@@ -7,7 +7,11 @@ const RegularText = (props) => {
   return (
     <Text
       {...props}
-      style={{ fontSize: 13, color: props.color ? props.color : white }}
+      className={
+        props.color
+          ? `text-[${props.color}]`
+          : "text-white" + "text-md text-white text-start font-bold"
+      }
     >
       {props.children}
     </Text>

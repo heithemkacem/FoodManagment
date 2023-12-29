@@ -2,25 +2,18 @@
 import React from "react";
 import styled from "styled-components/native";
 import { ScreenHeight } from "../shared";
-import { Image } from "react-native";
-const IconBg = styled.View`
-  display: flex;
-  width: ${ScreenHeight * 0.15}px;
-  height: ${ScreenHeight * 0.13}px;
-  justify-content: center;
-  align-items: center;
-  align-self: center;
-`;
-const StyledPressable = styled.Pressable`
-  align-self: center;
-`;
+import { Image, Pressable } from "react-native";
+
 const ImgComponent = ({ src, ...props }) => {
   return (
-    <StyledPressable {...props} onPress={props.onPress}>
-      <IconBg style={{ ...props.style }}>
+    <Pressable className="self-center " {...props} onPress={props.onPress}>
+      <View
+        className=" flex-row w-[15%] h-[13%] justify-center items-center self-center"
+        style={{ ...props.style }}
+      >
         <Image style={{ width: 100, height: 100 }} source={src} />
-      </IconBg>
-    </StyledPressable>
+      </View>
+    </Pressable>
   );
 };
 
